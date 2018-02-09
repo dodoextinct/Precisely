@@ -72,3 +72,4 @@ public class SavedEventsAdapter extends RecyclerView.Adapter<SavedEventsAdapter.
     }
 }
 
+
