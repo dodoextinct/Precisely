@@ -23,5 +23,6 @@ Think of it as 'Spotify for Opportunities'
   
 # Authors  
 - [Pankaj Baranwal](https://github.com/Pankaj-Baranwal/)  
+- [Hitesh Gautam](https://github.com/Hiteshgautam01/)
   
 Precisely and all of its code and content is owned and managed by Wayne Ventures Private Limited.
