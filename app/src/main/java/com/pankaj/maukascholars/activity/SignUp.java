@@ -56,7 +56,7 @@ public class SignUp extends AppCompatActivity {
     CallbackManager callbackManager;
     RelativeLayout loading;
     ProgressView progress;
-    MyVideoView videoview;
+//    MyVideoView videoview;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,17 +70,17 @@ public class SignUp extends AppCompatActivity {
     private void setDimension() {
         // Adjust the size of the video
         // so it fits on the screen
-        videoview = findViewById(R.id.videoView);
+//        videoview = findViewById(R.id.videoView);
 //        videoview.setAudioFocusRequest(AUDIOFOCUS_NONE);
-        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.o_o_gif);
-        videoview.setVideoURI(uri);
-        videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.setLooping(true);
-            }
-        });
-        videoview.start();
+//        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.pricesilybg);
+//        videoview.setVideoURI(uri);
+//        videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//            @Override
+//            public void onPrepared(MediaPlayer mediaPlayer) {
+//                mediaPlayer.setLooping(true);
+//            }
+//        });
+//        videoview.start();
     }
 
     // setupGoogle()

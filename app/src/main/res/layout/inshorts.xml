@@ -26,7 +26,8 @@
             android:rotation="90"
             />
     </RelativeLayout>
-<com.pankaj.maukascholars.holders.VerticalViewPager android:id="@+id/verticleViewPager"
+<com.pankaj.maukascholars.holders.VerticalViewPager
+    android:id="@+id/verticleViewPager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
