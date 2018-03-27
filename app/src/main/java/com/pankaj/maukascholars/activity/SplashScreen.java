@@ -135,10 +135,15 @@ public class SplashScreen extends AppCompatActivity {
                     try {
                         if (response.contains("[\""))
                             response = response.substring(response.indexOf("[\""));
+                        String filter_text = response.substring(0, response.indexOf("]")+1);
+                        String filter_image_url = response.substring(response.indexOf("]")+2);
                         Constants.filters.clear();
-                        JSONArray jA = new JSONArray(response);
-                        for (int i = 0; i < jA.length(); i++){
-                            Constants.filters.add(jA.getString(i));
+                        Constants.filters_image_urls.clear();
+                        JSONArray jA_text = new JSONArray(filter_text);
+                        JSONArray jA_url = new JSONArray(filter_image_url);
+                        for (int i = 0; i < jA_text.length(); i++){
+                            Constants.filters.add(jA_text.getString(i));
+                            Constants.filters_image_urls.add(jA_url.getString(i));
                         }
 //                        if (sp.contains(key)) {
 //                            try {

@@ -20,11 +20,13 @@ import java.util.List;
 public class FiltersAdapter extends RecyclerView.Adapter<FiltersViewHolder> {
 
     private List<String> FILTER_IDS = new ArrayList<>();
+    private List<String> FILTER_URLS = new ArrayList<>();
     public FiltersViewHolder fvH;
 
     private Context mContext;
-    public FiltersAdapter(Context context, List<String> FILTER_IDS) {
+    public FiltersAdapter(Context context, List<String> FILTER_IDS, List<String> FILTER_URLS) {
         this.FILTER_IDS = FILTER_IDS;
+        this.FILTER_URLS = FILTER_URLS;
         mContext = context;
     }
 
@@ -39,7 +41,7 @@ public class FiltersAdapter extends RecyclerView.Adapter<FiltersViewHolder> {
 
     @Override
     public void onBindViewHolder(final FiltersViewHolder holder, final int position) {
-        holder.bindTo(FILTER_IDS.get(position), position);
+        holder.bindTo(FILTER_IDS.get(position), FILTER_URLS.get(position), position, mContext);
     }
 
     @Override
