@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SplashScreen"
+            android:name=".social.UserProfileActivity"
             android:theme="@style/NoActionAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,6 +54,7 @@
         <activity android:name=".activity.VerticalViewPagerActivity"/>
         <activity android:name=".activity.VerticalViewPagerWithPageAdapterActivity"/>
         <activity android:name=".util.alarm.AlarmActivity" />
+        <activity android:name=".activity.SplashScreen" />
     </application>
 
 </manifest>
