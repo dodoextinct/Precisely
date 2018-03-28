@@ -136,7 +136,7 @@ public class SplashScreen extends AppCompatActivity {
                         if (response.contains("[\""))
                             response = response.substring(response.indexOf("[\""));
                         String filter_text = response.substring(0, response.indexOf("]")+1);
-                        String filter_image_url = response.substring(response.indexOf("]")+2);
+                        String filter_image_url = response.substring(response.indexOf("]")+1);
                         Constants.filters.clear();
                         Constants.filters_image_urls.clear();
                         JSONArray jA_text = new JSONArray(filter_text);

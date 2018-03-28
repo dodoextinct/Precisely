@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import static com.pankaj.maukascholars.util.Constants.filters;
+import static com.pankaj.maukascholars.util.Constants.filters_image_urls;
 import static com.pankaj.maukascholars.util.Constants.key;
 
 public class Filters extends AppCompatActivity {
@@ -89,7 +90,10 @@ public class Filters extends AppCompatActivity {
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setAlignItems(AlignItems.STRETCH);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter adapter = new FiltersAdapter(this, filters);
+//        recyclerView.getRecycledViewPool().setMaxRecycledViews(0, 0);
+
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.Adapter adapter = new FiltersAdapter(this, filters, filters_image_urls);
         recyclerView.setAdapter(adapter);
     }
 
