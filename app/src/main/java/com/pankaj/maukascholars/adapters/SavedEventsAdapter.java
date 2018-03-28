@@ -7,24 +7,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pankaj.maukascholars.R;
-import com.pankaj.maukascholars.fragments.SavedFragment.OnListFragmentInteractionListener;
 import com.pankaj.maukascholars.util.EventDetails;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link EventDetails} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class SavedEventsAdapter extends RecyclerView.Adapter<SavedEventsAdapter.ViewHolder> {
 
     private final List<EventDetails> mValues;
-    private final OnListFragmentInteractionListener mListener;
 
-    public SavedEventsAdapter(List<EventDetails> items, OnListFragmentInteractionListener listener) {
+    public SavedEventsAdapter(List<EventDetails> items) {
         mValues = items;
-        mListener = listener;
     }
 
     @Override
@@ -43,9 +35,7 @@ public class SavedEventsAdapter extends RecyclerView.Adapter<SavedEventsAdapter.
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+
             }
         });
     }

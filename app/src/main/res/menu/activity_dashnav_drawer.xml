@@ -4,32 +4,34 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_filters_activity"
             android:icon="@drawable/ic_filter_list_black_24dp"
             android:title="Filters" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_saved_activity"
             android:icon="@drawable/ic_star_black_24dp"
-            android:title="Saved/Starred Opportunities" />
+            android:title="Saved Opportunities" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_tablet_android_black_24dp"
-            android:title="About" />
+            android:id="@+id/nav_starred_activity"
+            android:icon="@drawable/ic_star_black_24dp"
+            android:title="Starred Opportunities" />
+
     </group>
 
-    <item android:title="Go out of the box">
+    <item android:title="Misc">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_tablet_android_black_24dp"
+                android:title="About Us" />
+            <item
+                android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_reply_black_24dp"
                 android:title="Logout" />
         </menu>
