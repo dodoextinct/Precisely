@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -135,10 +136,18 @@ public class SplashScreen extends AppCompatActivity {
                     try {
                         if (response.contains("[\""))
                             response = response.substring(response.indexOf("[\""));
+                        Log.e("Array 1", response);
+                        String filter_text = response.substring(0, response.indexOf("]")+1);
+                        String filter_image_url = response.substring(response.indexOf("]")+1);
+                        Log.e("Array 1", filter_text);
+                        Log.e("Array 1", filter_image_url);
                         Constants.filters.clear();
-                        JSONArray jA = new JSONArray(response);
-                        for (int i = 0; i < jA.length(); i++){
-                            Constants.filters.add(jA.getString(i));
+                        Constants.filters_image_urls.clear();
+                        JSONArray jA_text = new JSONArray(filter_text);
+                        JSONArray jA_url = new JSONArray(filter_image_url);
+                        for (int i = 0; i < jA_text.length(); i++){
+                            Constants.filters.add(jA_text.getString(i));
+                            Constants.filters_image_urls.add(jA_url.getString(i));
                         }
 //                        if (sp.contains(key)) {
 //                            try {
@@ -153,13 +162,13 @@ public class SplashScreen extends AppCompatActivity {
 //                            startActivity(intent);
 //                            finish();
 //                        }else{
-                            Intent intent = new Intent(SplashScreen.this, Filters.class);
-                            startActivity(intent);
-                            finish();
+                        Intent intent = new Intent(SplashScreen.this, DashnavActivity.class);
+                        startActivity(intent);
+                        finish();
 //                        }
                     } catch (JSONException e) {
                         Toast.makeText(SplashScreen.this, "Couldn't retrieve content. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
+                        Log.e("ERROR CONTENT", e.toString());
                     }
                 }else
                     Toast.makeText(SplashScreen.this, "Please Try Again after sometime", Toast.LENGTH_SHORT).show();

@@ -51,6 +51,7 @@ public class Constants {
 
 
     public static List<String> filters = new ArrayList<>();
+    public static List<String> filters_image_urls = new ArrayList<>();
 
     public static List<Integer> clickedFilters = new ArrayList<>();
 

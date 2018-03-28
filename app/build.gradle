@@ -60,6 +60,7 @@ dependencies {
 
     compile 'com.sdsmdg.harjot:rotatingtext:1.0.2'
 
+    compile 'com.github.varunest:sparkbutton:1.0.5'
 
 //    compile 'com.github.AndroidDeveloperLB:AutoFitTextView:4'
 //    compile 'com.github.ksoichiro:android-observablescrollview:1.5.0'

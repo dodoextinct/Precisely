@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pankaj.maukascholars.activity.About"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/logomauka123"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precisely"
+        android:layout_gravity="center"
+        android:textSize="30dp"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precisely is an intelligent opportunity curation app. A plethora of opportunities are available across all disciplines which can help young people grow and develop themselves but due to lack of visibility and targeted marketing very few people know about them and avail their benefits. This platform aims to connect the maximum number of youth and talent to any opportunity."
+        android:textAlignment="center"
+        android:padding="15dp"
+        android:textColor="#000000"
+        android:layout_marginTop="60dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GO TO OUR WEBSITE "
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp"/>
+
+
+</LinearLayout>

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import static com.pankaj.maukascholars.util.Constants.filters;
+import static com.pankaj.maukascholars.util.Constants.filters_image_urls;
 import static com.pankaj.maukascholars.util.Constants.key;
 
 public class Filters extends AppCompatActivity {
@@ -88,7 +90,8 @@ public class Filters extends AppCompatActivity {
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setAlignItems(AlignItems.STRETCH);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter adapter = new FiltersAdapter(this, filters);
+        Log.e("IMAGEURL LENGTH", filters_image_urls.toString());
+        RecyclerView.Adapter adapter = new FiltersAdapter(this, filters, filters_image_urls);
         recyclerView.setAdapter(adapter);
     }
 

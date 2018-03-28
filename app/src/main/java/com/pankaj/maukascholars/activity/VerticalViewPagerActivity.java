@@ -1,12 +1,15 @@
 package com.pankaj.maukascholars.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -27,6 +30,9 @@ import com.pankaj.maukascholars.util.EventDetails;
 import com.pankaj.maukascholars.util.alarm.ScheduleAlarm;
 import com.pankaj.maukascholars.util.alarm.databasehandling.DBManipulation;
 import com.rey.material.widget.ProgressView;
+import com.varunest.sparkbutton.SparkButton;
+import com.varunest.sparkbutton.SparkButtonBuilder;
+import com.varunest.sparkbutton.SparkEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +59,7 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
     RelativeLayout loading;
     ProgressView progress;
     VerticalViewPager verticalViewPager;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,48 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         progress.start();
         loading.setVisibility(View.VISIBLE);
         getData();
+
+
+
+//        SparkButton button = new SparkButtonBuilder(context)
+//                .setActiveImage(R.drawable.ic_star_black_24dp)
+//                .setInactiveImage(R.drawable.ic_star_border_black_24dp)
+//                .setPrimaryColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+//                .setSecondaryColor(ContextCompat.getColor(context, R.color.colorAccent))
+//                .build();
+//
+//        final int position = verticalViewPager.getCurrentItem();
+//
+//        button.setEventListener(new SparkEventListener(){
+////            @Override
+////            void onEvent(ImageView button, boolean buttonState) {
+////                if (buttonState) {
+////                    starEvent(position);
+////                } else {
+////                    starEvent(position);
+////                }
+////            }
+//
+//            @Override
+//            public void onEvent(ImageView button, boolean buttonState) {
+//                    if (buttonState) {
+//                        starEvent(position);
+//                    } else {
+//                        starEvent(position);
+//                    }
+//            }
+//
+//            @Override
+//            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
+//
+//            }
+//
+//            @Override
+//            public void onEventAnimationStart(ImageView button, boolean buttonState) {
+//
+//            }
+//        });
+
     }
 
     private void init() {
