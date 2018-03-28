@@ -21,7 +21,7 @@ import android.view.MenuItem;
 import com.google.android.gms.auth.api.Auth;
 import com.pankaj.maukascholars.R;
 
-public class DashnavActivity extends AppCompatActivity
+public class DashnavActivity extends Filters
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
@@ -86,7 +86,6 @@ public class DashnavActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
