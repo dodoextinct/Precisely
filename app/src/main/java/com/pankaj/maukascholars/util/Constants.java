@@ -14,6 +14,7 @@ public class Constants {
     public static String user_email = null;
     public static String user_id = null;
     public static String quote = "";
+    public static int count_nav_order = 1;
 
 
     public static String url_signup = "https://www.lithics.in/apis/mauka/signup.php";

@@ -25,7 +25,7 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView filter_image;
     private TextView filter_text;
-    private RelativeLayout ll_wrapper;
+    private LinearLayout ll_wrapper;
 
 
     public FiltersViewHolder(View itemView) {

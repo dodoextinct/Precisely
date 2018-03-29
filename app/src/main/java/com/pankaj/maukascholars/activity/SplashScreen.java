@@ -18,6 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.application.VolleyHandling;
 import com.pankaj.maukascholars.util.Constants;
+import com.pankaj.maukascholars.util.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -162,9 +163,7 @@ public class SplashScreen extends AppCompatActivity {
 //                            startActivity(intent);
 //                            finish();
 //                        }else{
-                        Intent intent = new Intent(SplashScreen.this, DashnavActivity.class);
-                        startActivity(intent);
-                        finish();
+                       loadActivity(Filters.class);
 //                        }
                     } catch (JSONException e) {
                         Toast.makeText(SplashScreen.this, "Couldn't retrieve content. Please try again!", Toast.LENGTH_SHORT).show();
@@ -188,5 +187,10 @@ public class SplashScreen extends AppCompatActivity {
         };
 
         VolleyHandling.getInstance().addToRequestQueue(request, "signin");
+    }
+
+    private void loadActivity(Class activity){
+        Utils.loadActivity(this, activity);
+        finish();
     }
 }

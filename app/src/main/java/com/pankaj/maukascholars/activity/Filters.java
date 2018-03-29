@@ -2,11 +2,8 @@ package com.pankaj.maukascholars.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +17,6 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.FiltersAdapter;
 import com.pankaj.maukascholars.util.Constants;
-import com.pankaj.maukascholars.util.MyVideoView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,19 +25,16 @@ import static com.pankaj.maukascholars.util.Constants.filters;
 import static com.pankaj.maukascholars.util.Constants.filters_image_urls;
 import static com.pankaj.maukascholars.util.Constants.key;
 
-public class Filters extends AppCompatActivity {
+public class Filters extends BaseNavigationActivity {
 
-    ImageView proceed, account;
-    SharedPreferences sp;
-    SharedPreferences.Editor editor;
+    ImageView proceed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filters);
         setDimension();
-        sp = PreferenceManager.getDefaultSharedPreferences(Filters.this);
-        if (sp.contains(key)){
+        if (sp.contains(key)) {
             try {
                 JSONArray jO = new JSONArray(sp.getString(key, ""));
                 Constants.clickedFilters.clear();
@@ -52,25 +45,16 @@ public class Filters extends AppCompatActivity {
             }
         }
         proceed = findViewById(R.id.proceed);
-        account = findViewById(R.id.account);
 //        calendar = findViewById(R.id.calendar);
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Constants.clickedFilters.size()>0) {
-//                    Intent intent = new Intent(Filters.this, com.pankaj.maukascholars.activity.Cards.class);
+                if (Constants.clickedFilters.size() > 0) {
                     Intent intent = new Intent(Filters.this, VerticalViewPagerActivity.class);
                     startActivity(intent);
-                }else{
+                } else {
                     Toast.makeText(Filters.this, "Please select at least one filter!", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-        account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Filters.this, ProfileActivity.class);
-                startActivity(intent);
             }
         });
 //        calendar.setOnClickListener(new View.OnClickListener() {
@@ -115,8 +99,7 @@ public class Filters extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setDimension();
-        sp = PreferenceManager.getDefaultSharedPreferences(Filters.this);
-        if (sp.contains(key)){
+        if (sp.contains(key)) {
             try {
                 JSONArray jO = new JSONArray(sp.getString(key, ""));
                 Constants.clickedFilters.clear();
@@ -136,12 +119,10 @@ public class Filters extends AppCompatActivity {
         saveClickedToSharedPreferences();
     }
 
-    private void saveClickedToSharedPreferences(){
+    private void saveClickedToSharedPreferences() {
         JSONArray jO = new JSONArray();
         for (int i = 0; i < Constants.clickedFilters.size(); i++)
             jO.put(Constants.clickedFilters.get(i));
-
-        editor = sp.edit();
         editor.remove(key).apply();
         editor.putString(key, jO.toString());
         editor.apply();

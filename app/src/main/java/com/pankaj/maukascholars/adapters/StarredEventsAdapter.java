@@ -7,18 +7,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pankaj.maukascholars.R;
-import com.pankaj.maukascholars.fragments.StarredFragment;
 
 import java.util.List;
 
 public class StarredEventsAdapter extends RecyclerView.Adapter<StarredEventsAdapter.ViewHolder> {
 
     private final List<com.pankaj.maukascholars.util.EventDetails> mValues;
-    private final StarredFragment.OnListFragmentInteractionListener mListener;
 
-    public StarredEventsAdapter(List<com.pankaj.maukascholars.util.EventDetails> items, StarredFragment.OnListFragmentInteractionListener listener) {
+    public StarredEventsAdapter(List<com.pankaj.maukascholars.util.EventDetails> items) {
         mValues = items;
-        mListener = listener;
     }
 
     @Override
@@ -37,9 +34,7 @@ public class StarredEventsAdapter extends RecyclerView.Adapter<StarredEventsAdap
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+
             }
         });
     }
