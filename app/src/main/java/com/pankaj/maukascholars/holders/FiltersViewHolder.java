@@ -1,7 +1,12 @@
 package com.pankaj.maukascholars.holders;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +30,9 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView filter_image;
     private TextView filter_text;
-    private LinearLayout ll_wrapper;
-
+    private RelativeLayout ll_wrapper;
+    GradientDrawable border = new GradientDrawable();
+    GradientDrawable border2 = new GradientDrawable();
 
     public FiltersViewHolder(View itemView) {
         super(itemView);
@@ -34,17 +40,28 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
         filter_image = itemView.findViewById(R.id.filter_image);
         filter_text = itemView.findViewById(R.id.filter_text);
         ll_wrapper = itemView.findViewById(R.id.ll_filter_wrapper);
+        border.setColor(0xFFFFFFFF);
+        border.setStroke(14, 0xFF000000);
+        border2.setColor(0xFFFFFFFF);
+        border2.setStroke(14, 0xFFFFFFFF);
+
+
+
         ll_wrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (clickedFilters.contains(getAdapterPosition())){
                     clickedFilters.remove(Integer.valueOf(getAdapterPosition()));
-                    filter_text.setBackgroundColor(0xFFFFFFFF);
+//                    filter_text.setBackgroundColor(0xFFFFFFFF);
                     filter_text.setTextColor(0xFF000000);
+                    ll_wrapper.setBackground(border2);
+
                 }else{
                     clickedFilters.add(getAdapterPosition());
-                    filter_text.setBackgroundColor(0xFF000000);
+//                    filter_text.setBackgroundColor(0xFF000000);
                     filter_text.setTextColor(0xFFFFFFFF);
+                    ll_wrapper.setBackground(border);
+
                 }
             }
         });
@@ -61,8 +78,9 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
         Log.e("BINDING", filter);
         Picasso.with(ctx).load(url).fit().error(R.mipmap.j_bezos).into(filter_image);
         if (clickedFilters.contains(position)){
-            filter_text.setBackgroundColor(0xFF000000);
+//            filter_text.setBackgroundColor(0xFF000000);
             filter_text.setTextColor(0xFFFFFFFF);
+
         }
 
         filter_text.setText(filter);
