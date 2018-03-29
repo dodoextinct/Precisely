@@ -1,47 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    >
-    <RelativeLayout
-        android:id="@+id/wrapper_profile_toolbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        >
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:src="@mipmap/arrow"
-            android:layout_alignParentLeft="true"
-            android:paddingBottom="4dp"
-            />
-        <ImageView
-            android:id="@+id/follow"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:src="@mipmap/account"
-            android:layout_alignParentRight="true"
-            android:paddingBottom="4dp"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.7dp"
-            android:background="#6111"
-            android:layout_below="@+id/back"
-            />
-    </RelativeLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/wrapper_profile_toolbox"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingTop="4dp"-->
+        <!--android:paddingRight="4dp"-->
+        <!--android:paddingLeft="4dp"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+            <!--android:id="@+id/back"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:src="@mipmap/arrow"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:paddingBottom="4dp"-->
+            <!--/>-->
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.7dp"-->
+            <!--android:background="#6111"-->
+            <!--android:layout_below="@+id/back"-->
+            <!--/>-->
+    <!--</RelativeLayout>-->
     <ScrollView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_below="@+id/wrapper_profile_toolbox"
-        android:layout_marginTop="@dimen/small"
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_id_rl">
+
+                <Button
+                    android:layout_width="33dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/ic_arrow_back_black_24dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/profile_id"
+                    android:layout_alignBottom="@+id/profile_id"
+                    android:src="@drawable/bgbgbgb"
+                    android:layout_marginBottom="35dp"
+                    android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:id="@+id/profile_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
             <LinearLayout
                 android:id="@+id/wrapper_basic_info"
                 android:layout_width="wrap_content"
@@ -50,17 +70,25 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:layout_marginBottom="@dimen/small"
+                android:layout_marginTop="45dp"
+                android:layout_gravity="center"
                 >
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="86dp"
-                    android:layout_height="86dp"
-                    android:src="@mipmap/account"
-                    />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_account_circle_black_24dp"
+                    android:elevation="4dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pankaj Baranwal"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
+                    android:layout_marginTop="12dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
                     />
             </LinearLayout>
             <LinearLayout
@@ -69,6 +97,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_below="@+id/wrapper_basic_info"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
                 >
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -79,17 +109,50 @@
                         android:id="@+id/text_count_ops"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:text="30"
                         android:layout_centerHorizontal="true"
+                        android:textColor="#ffffff"
                         />
                     <TextView
                         android:id="@+id/text_hardcoded_ops"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="opportunities"
+                        android:text="Starred"
+                        android:textAlignment="center"
                         android:layout_below="@+id/text_count_ops"
                         android:layout_centerHorizontal="true"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    >
+                    <TextView
+                        android:id="@+id/text_count_saved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:text="11"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#ffffff"
+                        />
+                    <TextView
+                        android:id="@+id/text_hardcoded_saved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saved"
+                        android:layout_below="@+id/text_count_saved"
+                        android:layout_centerHorizontal="true"
+                        />
+                    <View
+                        android:layout_width="0.7dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/text_count_saved"
+                        android:layout_alignBottom="@+id/text_hardcoded_saved"
+                        android:background="#6111"
                         />
                 </RelativeLayout>
                 <RelativeLayout
@@ -101,9 +164,10 @@
                         android:id="@+id/text_count_followers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:text="7"
                         android:layout_centerHorizontal="true"
+                        android:textColor="#ffffff"
                         />
                     <TextView
                         android:id="@+id/text_hardcoded_followers"
@@ -130,15 +194,16 @@
                         android:id="@+id/text_count_following"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:text="506"
+                        android:textColor="#ffffff"
                         android:layout_centerHorizontal="true"
                         />
                     <TextView
                         android:id="@+id/text_hardcoded_following"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="following"
+                        android:text="Following"
                         android:layout_below="@+id/text_count_following"
                         android:layout_centerHorizontal="true"
                         />
@@ -151,32 +216,45 @@
                         />
                 </RelativeLayout>
             </LinearLayout>
-            <View
-                android:id="@+id/line_02"
-                android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:background="#6111"
-                android:layout_below="@+id/wrapper_user_activity_bar"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                />
 
-            <TextView
-                android:id="@+id/text_recent"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/line_02"
-                android:layout_centerHorizontal="true"
-                android:text="Recently Visited Opportunities"
-                android:textSize="24sp"
-                android:paddingTop="@dimen/small"
-                />
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/buttonbg"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="FOLLOW"
+                    android:textColor="#ffffff" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/profile_id_rl">
+
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_recent"
+                android:layout_gravity="center"
                 />
+
+            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
