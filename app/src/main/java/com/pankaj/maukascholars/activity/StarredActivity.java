@@ -13,6 +13,9 @@ import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListen
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.StarredEventsAdapter;
 import com.pankaj.maukascholars.database.DBHandler;
+import com.pankaj.maukascholars.util.EventDetails;
+
+import java.util.List;
 
 /**
  * Created by pankaj on 28/3/18.
@@ -21,6 +24,8 @@ import com.pankaj.maukascholars.database.DBHandler;
 public class StarredActivity extends BaseNavigationActivity {
 
     Toolbar mActionBarToolbar;
+    List<EventDetails> mItems;
+    RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,12 +39,13 @@ public class StarredActivity extends BaseNavigationActivity {
         RecyclerView recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DBHandler db = new DBHandler(this);
-        if (db.getAllStarredEvents().size() == 0) {
+        mItems = db.getAllStarredEvents();
+        if (mItems.size() == 0) {
             RelativeLayout empty_layout = findViewById(R.id.empty_layout);
             empty_layout.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
-            final RecyclerView.Adapter adapter = new StarredEventsAdapter(db.getAllStarredEvents());
+            final RecyclerView.Adapter adapter = new StarredEventsAdapter(mItems);
             recyclerView.setAdapter(adapter);
             SwipeableRecyclerViewTouchListener swipeTouchListener =
                     new SwipeableRecyclerViewTouchListener(recyclerView,
@@ -80,6 +86,8 @@ public class StarredActivity extends BaseNavigationActivity {
     }
 
     void deleteData(final int position) {
-
+        DBHandler db = new DBHandler(this);
+        db.deleteEvent(mItems.get(position).getId());
+        mItems.remove(position);
     }
 }

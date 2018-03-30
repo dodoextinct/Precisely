@@ -72,8 +72,7 @@
 
 
         <activity android:name=".activity.SignUp" />
-        <activity android:name=".activity.DashnavActivity" />
-         <activity android:name=".activity.Filters" />
+        <activity android:name=".activity.Filters" />
         <activity android:name=".activity.Cards" />
         <activity android:name=".activity.CalendarActivity" />
         <activity android:name=".activity.VerticalViewPagerActivity" />
