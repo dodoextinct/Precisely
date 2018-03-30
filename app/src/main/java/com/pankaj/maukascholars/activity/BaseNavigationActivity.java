@@ -114,7 +114,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         }
     }
 
-    private void loadActivity(Class activity) {
+    public void loadActivity(Class activity) {
         Utils.loadActivity(this, activity);
         finish();
     }

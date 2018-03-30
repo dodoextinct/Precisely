@@ -43,7 +43,6 @@ public class FiltersAdapter extends RecyclerView.Adapter<FiltersViewHolder> {
 
     @Override
     public void onBindViewHolder(final FiltersViewHolder holder, final int position) {
-        Log.e("OnBindViewHolder", position+"");
         holder.bindTo(FILTER_IDS.get(position), FILTER_URLS.get(position), position, mContext);
     }
 
