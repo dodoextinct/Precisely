@@ -1,9 +1,7 @@
 package com.pankaj.maukascholars.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +15,6 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.FiltersAdapter;
 import com.pankaj.maukascholars.util.Constants;
-import com.rey.material.widget.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +31,7 @@ public class Filters extends BaseNavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filters);
+        toolbar.setTitle("Filter Your Opportunities");
         setDimension();
         if (sp.contains(key)) {
             try {

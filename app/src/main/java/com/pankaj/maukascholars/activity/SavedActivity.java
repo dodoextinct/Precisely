@@ -23,7 +23,6 @@ import java.util.List;
 
 public class SavedActivity extends BaseNavigationActivity {
 
-    Toolbar mActionBarToolbar;
     List<EventDetails> mItems;
     RecyclerView.Adapter adapter;
 
@@ -31,10 +30,7 @@ public class SavedActivity extends BaseNavigationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        mActionBarToolbar = findViewById(R.id.toolbar);
-        mActionBarToolbar.setTitle("Saved Opportunities");
-        setSupportActionBar(mActionBarToolbar);
+        toolbar.setTitle("Saved Opportunities");
 
         RecyclerView recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

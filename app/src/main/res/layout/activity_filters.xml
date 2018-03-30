@@ -24,7 +24,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_dashnav"
-        app:menu="@menu/activity_dashnav_drawer" />
+        app:menu="@menu/precisely_nav_drawer" />
 
 
 

@@ -23,7 +23,6 @@ import java.util.List;
 
 public class StarredActivity extends BaseNavigationActivity {
 
-    Toolbar mActionBarToolbar;
     List<EventDetails> mItems;
     RecyclerView.Adapter adapter;
 
@@ -32,9 +31,7 @@ public class StarredActivity extends BaseNavigationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mActionBarToolbar = findViewById(R.id.toolbar);
-        mActionBarToolbar.setTitle("Starred Opportunities");
-        setSupportActionBar(mActionBarToolbar);
+        toolbar.setTitle("Starred Opportunities");
 
         RecyclerView recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

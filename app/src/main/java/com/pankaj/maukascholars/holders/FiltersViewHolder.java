@@ -75,7 +75,7 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindTo(String filter, String url, int position, Context ctx) {
-        Log.e("BINDING", filter);
+
         Picasso.with(ctx).load(url).fit().error(R.mipmap.j_bezos).into(filter_image);
         if (clickedFilters.contains(position)){
 //            filter_text.setBackgroundColor(0xFF000000);
@@ -84,6 +84,7 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
         }
 
         filter_text.setText(filter);
+        filter_text.setSelected(true);
         ViewGroup.LayoutParams lp = filter_text.getLayoutParams();
         if (lp instanceof FlexboxLayoutManager.LayoutParams) {
             FlexboxLayoutManager.LayoutParams flexboxLp = (FlexboxLayoutManager.LayoutParams) lp;

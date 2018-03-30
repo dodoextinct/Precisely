@@ -73,7 +73,6 @@
 
         <activity android:name=".activity.SignUp" />
         <activity android:name=".activity.Filters" />
-        <activity android:name=".activity.Cards" />
         <activity android:name=".activity.CalendarActivity" />
         <activity android:name=".activity.VerticalViewPagerActivity" />
         <activity android:name=".activity.VerticalViewPagerWithPageAdapterActivity" />

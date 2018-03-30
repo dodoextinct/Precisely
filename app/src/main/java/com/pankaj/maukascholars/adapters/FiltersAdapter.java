@@ -38,12 +38,10 @@ public class FiltersAdapter extends RecyclerView.Adapter<FiltersViewHolder> {
         .inflate(R.layout.item_filter, parent, false);
         fvH = new FiltersViewHolder(view);
         return fvH;
-
     }
 
     @Override
     public void onBindViewHolder(final FiltersViewHolder holder, final int position) {
-        Log.e("OnBindViewHolder", position+"");
         holder.bindTo(FILTER_IDS.get(position), FILTER_URLS.get(position), position, mContext);
     }
 

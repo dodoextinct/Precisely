@@ -1,5 +1,6 @@
 package com.pankaj.maukascholars.activity;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -22,10 +23,12 @@ import java.util.logging.Filter;
  * Created by pankaj on 28/3/18.
  */
 
+@SuppressLint("Registered")
 public class BaseNavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
     SharedPreferences sp;
     SharedPreferences.Editor editor;
+    Toolbar toolbar;
 
     @Override
     public void setContentView(int layoutResID) {
@@ -35,7 +38,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
 
     protected void onCreateDrawer() {
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
