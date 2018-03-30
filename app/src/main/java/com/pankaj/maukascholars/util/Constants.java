@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Constants {
 
-    public static String user_email = null;
+    public static String user_name = null;
     public static String user_id = null;
     public static String quote = "";
     public static int count_nav_order = 1;

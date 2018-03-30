@@ -327,7 +327,7 @@ public class Cards extends AppCompatActivity {
         private void composeEmail(int position) {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-            intent.putExtra(Intent.EXTRA_EMAIL, Constants.user_email);
+            intent.putExtra(Intent.EXTRA_EMAIL, Constants.user_name);
             intent.putExtra(Intent.EXTRA_SUBJECT, cards.get(position).getTitle());
             intent.putExtra(Intent.EXTRA_TEXT,  "Spot On Opportunities presents to you:\n\n" + cards.get(position).getLink() + "\n\n" + cards.get(position).getDescription());
             if (intent.resolveActivity(getPackageManager()) != null) {

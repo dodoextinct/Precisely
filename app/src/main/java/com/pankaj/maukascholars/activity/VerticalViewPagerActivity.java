@@ -115,8 +115,9 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
                             response = response.substring(response.indexOf("[[\""));
 //                        response = removeEscapeChars(response);
                         JSONArray jA = new JSONArray(response);
+                        //    0, 1, 2, 7, 12, 8, 13, 9
                         for (int i = 0; i < jA.length(); i++){
-                            mItems.add(new EventDetails(Integer.parseInt(jA.getJSONArray(i).get(0).toString()), jA.getJSONArray(i).get(1).toString(), jA.getJSONArray(i).get(2).toString(), jA.getJSONArray(i).get(3).toString(), jA.getJSONArray(i).get(4).toString(), jA.getJSONArray(i).get(5).toString(), jA.getJSONArray(i).get(6).toString(), jA.getJSONArray(i).get(7).toString()));
+                            mItems.add(new EventDetails(Integer.parseInt(jA.getJSONArray(i).get(0).toString()), jA.getJSONArray(i).get(1).toString(), jA.getJSONArray(i).get(2).toString(), jA.getJSONArray(i).get(7).toString(), jA.getJSONArray(i).get(12).toString(), jA.getJSONArray(i).get(8).toString(), jA.getJSONArray(i).get(13).toString(), jA.getJSONArray(i).get(9).toString()));
                         }
                         init();
                     } catch (JSONException e) {

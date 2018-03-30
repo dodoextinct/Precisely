@@ -2,8 +2,6 @@ package com.pankaj.maukascholars.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -35,7 +33,6 @@ import com.google.android.gms.tasks.Task;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.application.VolleyHandling;
 import com.pankaj.maukascholars.util.Constants;
-import com.pankaj.maukascholars.util.MyVideoView;
 import com.rey.material.widget.ProgressView;
 
 import org.json.JSONException;
@@ -144,18 +141,23 @@ public class SignUp extends AppCompatActivity {
                         if (response != null && response.getError() == null){
                             try {
                                 String user_id;
+                                if (response.getJSONObject().has("name")){
+                                    Constants.user_name = response.getJSONObject().getString("name");
+                                }else{
+                                    Constants.user_name = "Anonymous User";
+                                }
                                 if (response.getJSONObject().has("email")) {
-                                    Constants.user_email = response.getJSONObject().getString("email");
-                                    user_id = Constants.user_email;
+                                    user_id = response.getJSONObject().getString("email");
                                 }
                                 else {
-                                    Constants.user_email = null;
                                     user_id = response.getJSONObject().getString("id");
                                 }
                                 submitData(user_id);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                        }else{
+                            Toast.makeText(SignUp.this, "Couldn't submit response", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -181,15 +183,15 @@ public class SignUp extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Constants.user_email = account.getEmail();
-            submitData(account.getEmail());
+            Constants.user_name = account.getDisplayName();
+            submitData(account.getId());
         } catch (ApiException e) {
             Log.e("Google SignIn Error", e + "");
             Toast.makeText(this, "Google behaving weirdly!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    void submitData(final String username){
+    void submitData(final String user_id){
         loading = findViewById(R.id.progress_rl);
         progress = findViewById(R.id.progress);
         progress.start();
@@ -202,6 +204,7 @@ public class SignUp extends AppCompatActivity {
                     final SharedPreferences.Editor editor = sp.edit();
                     editor.putBoolean("signed_in", true);
                     editor.putString("user_id", response);
+                    editor.putString("user_name", Constants.user_name);
                     editor.apply();
                     Constants.user_id = response;
                     loading.setVisibility(View.GONE);
@@ -227,7 +230,8 @@ public class SignUp extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("user_name", username);
+                params.put("user_id", user_id);
+                params.put("user_name", Constants.user_name);
                 params.put("image", "Coming soon!");
                 return params;
             }

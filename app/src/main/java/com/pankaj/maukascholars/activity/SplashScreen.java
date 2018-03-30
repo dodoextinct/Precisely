@@ -41,6 +41,7 @@ public class SplashScreen extends AppCompatActivity {
                 tv.setText(Constants.quote);
             }
             Constants.user_id = sp.getString("user_id", null);
+            Constants.user_name = sp.getString("user_name", null);
             checkIfExists();
         }else {
             Intent intent = new Intent(SplashScreen.this, SignUp.class);

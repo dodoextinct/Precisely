@@ -37,6 +37,7 @@ public class EventDetails {
         this.link = link;
     }
 
+//    0, 1, 2, 7, 12, 8, 13, 9
     public EventDetails(int id, String title, String description, String deadline, String name, String image, String icon, String link){
         this.id = id;
         this.title = title;
