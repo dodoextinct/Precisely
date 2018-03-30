@@ -1,4 +1,4 @@
-package com.pankaj.maukascholars.activity;
+package com.pankaj.maukascholars.firebase;
 
 /**
  * Created by hitesh on 30/03/18.
@@ -19,6 +19,8 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
         //Getting registration token
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+        Log.e(getClass().getSimpleName(), refreshedToken);
 
         //Displaying token on logcat
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
