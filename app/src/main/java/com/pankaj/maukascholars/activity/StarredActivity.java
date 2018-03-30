@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -19,10 +20,17 @@ import com.pankaj.maukascholars.database.DBHandler;
 
 public class StarredActivity extends BaseNavigationActivity {
 
+    Toolbar mActionBarToolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        mActionBarToolbar = findViewById(R.id.toolbar);
+        mActionBarToolbar.setTitle("Starred Opportunities");
+        setSupportActionBar(mActionBarToolbar);
+
         RecyclerView recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DBHandler db = new DBHandler(this);

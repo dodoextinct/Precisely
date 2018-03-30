@@ -17,6 +17,7 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.FiltersAdapter;
 import com.pankaj.maukascholars.util.Constants;
+import com.rey.material.widget.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +28,7 @@ import static com.pankaj.maukascholars.util.Constants.key;
 
 public class Filters extends BaseNavigationActivity {
 
-    ImageView proceed;
+    FloatingActionButton proceed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
