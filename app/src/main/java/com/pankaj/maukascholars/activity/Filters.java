@@ -28,7 +28,7 @@ import static com.pankaj.maukascholars.util.Constants.key;
 
 public class Filters extends BaseNavigationActivity {
 
-    FloatingActionButton proceed;
+    ImageView proceed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

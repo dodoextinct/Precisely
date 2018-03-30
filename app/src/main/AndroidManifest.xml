@@ -44,6 +44,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <service
+            android:name=".activity.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:name=".activity.MyJobService" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/logomauka123" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+
         <activity android:name=".activity.SignUp" />
         <activity android:name=".activity.DashnavActivity" />
          <activity android:name=".activity.Filters" />
@@ -52,9 +71,10 @@
         <activity android:name=".activity.VerticalViewPagerActivity" />
         <activity android:name=".activity.VerticalViewPagerWithPageAdapterActivity" />
         <activity android:name=".util.alarm.AlarmActivity" />
-        <activity android:name=".activity.About"></activity>
+        <activity android:name=".activity.About" />
         <activity android:name=".activity.SavedActivity" />
         <activity android:name=".activity.StarredActivity" />
+        <activity android:name=".activity.firebase_activity"></activity>
     </application>
 
 </manifest>

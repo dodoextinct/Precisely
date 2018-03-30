@@ -42,7 +42,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.github.brnunes:swipeablerecyclerview:1.0.2'
 
-    compile 'com.google.android.gms:play-services-auth:11.6.0'
+    compile 'com.google.android.gms:play-services-auth:12.0.1'
     compile 'pub.devrel:easypermissions:0.3.0'
     compile 'com.google.api-client:google-api-client-android:1.23.0'
 
@@ -61,6 +61,11 @@ dependencies {
     compile 'com.sdsmdg.harjot:rotatingtext:1.0.2'
 
     compile 'com.github.varunest:sparkbutton:1.0.5'
+
+    compile 'com.firebase:firebase-jobdispatcher:0.7.0'
+    compile 'com.google.firebase:firebase-messaging:12.0.1'
+    compile 'com.google.firebase:firebase-core:12.0.1'
+
 
 //    compile 'com.github.AndroidDeveloperLB:AutoFitTextView:4'
 //    compile 'com.github.ksoichiro:android-observablescrollview:1.5.0'
