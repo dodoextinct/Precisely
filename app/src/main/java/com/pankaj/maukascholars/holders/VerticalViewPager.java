@@ -1,10 +1,14 @@
 package com.pankaj.maukascholars.holders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.pankaj.maukascholars.activity.CardOpen;
+import com.pankaj.maukascholars.util.EventDetails;
 
 /**
  * Project Name: 	<Visual Perception For The Visually Impaired>
@@ -14,6 +18,9 @@ import android.view.View;
  * Global Variables:	<>
  */
 public class VerticalViewPager extends ViewPager {
+    float startX, startY;
+    private int CLICK_ACTION_THRESHOLD = 10;
+    public EventDetails singleEventDetail;
 
     public VerticalViewPager(Context context) {
         super(context);
@@ -104,6 +111,27 @@ public class VerticalViewPager extends ViewPager {
     @Override
     public boolean onTouchEvent(MotionEvent ev)
     {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                startX = ev.getX();
+                startY = ev.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                float endX = ev.getX();
+                float endY = ev.getY();
+                if (isAClick(startX, endX, startY, endY)) {
+                    Intent intent = new Intent(getContext(), CardOpen.class);
+                    intent.putExtra("event", singleEventDetail);
+                    getContext().startActivity(intent);
+                }
+                break;
+        }
         return super.onTouchEvent(swapXY(ev));
+    }
+
+    private boolean isAClick(float startX, float endX, float startY, float endY) {
+        float differenceX = Math.abs(startX - endX);
+        float differenceY = Math.abs(startY - endY);
+        return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);
     }
 }

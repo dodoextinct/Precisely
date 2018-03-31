@@ -7,10 +7,10 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -77,6 +77,23 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         verticalViewPager = findViewById(R.id.verticleViewPager);
         VerticalPagerAdapter adapter = new VerticalPagerAdapter(this, mItems);
         verticalViewPager.setAdapter(adapter);
+        verticalViewPager.singleEventDetail = mItems.get(0);
+        verticalViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                verticalViewPager.singleEventDetail = mItems.get(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         LinearLayout share, star, save, send;
         share = findViewById(R.id.share);
         star = findViewById(R.id.star);
@@ -113,7 +130,7 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
                         JSONArray jA = new JSONArray(response);
                         //    0, 1, 2, 7, 12, 8, 13, 9
                         for (int i = 0; i < jA.length(); i++) {
-                            mItems.add(new EventDetails(Integer.parseInt(jA.getJSONArray(i).get(0).toString()), jA.getJSONArray(i).get(1).toString(), jA.getJSONArray(i).get(2).toString(), jA.getJSONArray(i).get(7).toString(), jA.getJSONArray(i).get(12).toString(), jA.getJSONArray(i).get(8).toString(), jA.getJSONArray(i).get(13).toString(), jA.getJSONArray(i).get(9).toString()));
+                            mItems.add(new EventDetails(Integer.parseInt(jA.getJSONArray(i).get(0).toString()), jA.getJSONArray(i).get(1).toString(), jA.getJSONArray(i).get(2).toString(), jA.getJSONArray(i).get(7).toString(), jA.getJSONArray(i).get(12).toString(), jA.getJSONArray(i).get(8).toString(), jA.getJSONArray(i).get(13).toString(), jA.getJSONArray(i).get(9).toString(), jA.getJSONArray(i).get(3).toString(), jA.getJSONArray(i).get(4).toString(), jA.getJSONArray(i).get(5).toString()));
                         }
                         init();
                     } catch (JSONException e) {

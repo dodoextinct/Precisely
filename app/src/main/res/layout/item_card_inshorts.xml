@@ -29,7 +29,6 @@
                     android:layout_height="250dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/abc"
                     android:padding="10dp"/>
             </LinearLayout>
 

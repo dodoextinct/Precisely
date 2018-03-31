@@ -31,6 +31,7 @@ public class VerticalPagerAdapter extends PagerAdapter {
     private Activity mContext;
     private LayoutInflater mLayoutInflater;
     private List<EventDetails> cards;
+    private EventDetails singleEventDetail;
     DisplayMetrics displayMetrics = new DisplayMetrics();
     int height;
     int width;
@@ -57,7 +58,9 @@ public class VerticalPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int i) {
+    public Object instantiateItem(ViewGroup container, int i)
+    {
+        singleEventDetail = cards.get(i);
         final View itemView = mLayoutInflater.inflate(R.layout.item_card_inshorts, container, false);
 //        cardView = itemView.findViewById(R.id.card_view);
         title = itemView.findViewById(R.id.event_title);
@@ -65,12 +68,11 @@ public class VerticalPagerAdapter extends PagerAdapter {
         name = itemView.findViewById(R.id.name_poster);
         deadline = itemView.findViewById(R.id.date_posted);
         event_image = itemView.findViewById(R.id.event_image);
-
-        title.setText(cards.get(i).getTitle());
-        description.setText(cards.get(i).getDescription());
-        name.setText(cards.get(i).getName());
-        Picasso.with(mContext).load(cards.get(i).getImage()).fit().error(R.mipmap.j_bezos).into(event_image);
-        String date = cards.get(i).getDeadline();
+        title.setText(singleEventDetail.getTitle());
+        description.setText(singleEventDetail.getDescription());
+        name.setText(singleEventDetail.getName());
+        Picasso.with(mContext).load(singleEventDetail.getImage()).fit().error(R.mipmap.j_bezos).into(event_image);
+        String date = singleEventDetail.getDeadline();
         String final_date ="Deadline: " + months[Integer.parseInt(date.substring(0, 2))-1] + "" + date.substring(2);
         deadline.setText(final_date);
         container.addView(itemView);
