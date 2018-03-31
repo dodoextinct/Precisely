@@ -41,7 +41,7 @@ public class SavedActivity extends BaseNavigationActivity {
             empty_layout.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
-            adapter = new SavedEventsAdapter(mItems);
+            adapter = new SavedEventsAdapter(mItems, this);
             recyclerView.setAdapter(adapter);
             SwipeableRecyclerViewTouchListener swipeTouchListener =
                     new SwipeableRecyclerViewTouchListener(recyclerView,

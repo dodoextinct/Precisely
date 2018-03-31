@@ -7,11 +7,9 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -32,9 +30,6 @@ import com.pankaj.maukascholars.util.EventDetails;
 import com.pankaj.maukascholars.util.alarm.ScheduleAlarm;
 import com.pankaj.maukascholars.util.alarm.databasehandling.DBManipulation;
 import com.rey.material.widget.ProgressView;
-import com.varunest.sparkbutton.SparkButton;
-import com.varunest.sparkbutton.SparkButtonBuilder;
-import com.varunest.sparkbutton.SparkEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,12 +52,12 @@ import java.util.TimeZone;
  */
 public class VerticalViewPagerActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private List<EventDetails> mItems = new ArrayList<>();
     RelativeLayout loading;
     ProgressView progress;
     VerticalViewPager verticalViewPager;
     Context context;
     BroadcastReceiver receiver = null;
+    private List<EventDetails> mItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +80,7 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         share = findViewById(R.id.share);
         star = findViewById(R.id.star);
         save = findViewById(R.id.save);
-        send= findViewById(R.id.stalk);
+        send = findViewById(R.id.stalk);
         share.setOnClickListener(this);
         star.setOnClickListener(this);
         save.setOnClickListener(this);
@@ -93,30 +88,30 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
 
         loading.setVisibility(View.GONE);
         progress.stop();
-        if (receiver==null) {
+        if (receiver == null) {
             IntentFilter filter = new IntentFilter("PreciselyReceiver");
             receiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                        getData();
+                    getData();
                 }
             };
             registerReceiver(receiver, filter);
         }
     }
 
-    void getData(){
+    void getData() {
         StringRequest request = new StringRequest(Request.Method.POST, Constants.url_event_details, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.length() > 0){
+                if (response.length() > 0) {
                     try {
                         if (response.contains("[[\""))
                             response = response.substring(response.indexOf("[[\""));
 //                        response = removeEscapeChars(response);
                         JSONArray jA = new JSONArray(response);
                         //    0, 1, 2, 7, 12, 8, 13, 9
-                        for (int i = 0; i < jA.length(); i++){
+                        for (int i = 0; i < jA.length(); i++) {
                             mItems.add(new EventDetails(Integer.parseInt(jA.getJSONArray(i).get(0).toString()), jA.getJSONArray(i).get(1).toString(), jA.getJSONArray(i).get(2).toString(), jA.getJSONArray(i).get(7).toString(), jA.getJSONArray(i).get(12).toString(), jA.getJSONArray(i).get(8).toString(), jA.getJSONArray(i).get(13).toString(), jA.getJSONArray(i).get(9).toString()));
                         }
                         init();
@@ -126,7 +121,7 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
                         Toast.makeText(VerticalViewPagerActivity.this, "ERRORORROROR", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     loading.setVisibility(View.GONE);
                     progress.stop();
                     Toast.makeText(VerticalViewPagerActivity.this, "Server is no longer speaking to you", Toast.LENGTH_SHORT).show();
@@ -139,12 +134,12 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
                 error.printStackTrace();
                 getData();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
+                Map<String, String> params = new HashMap<>();
                 JSONArray jO = new JSONArray();
-                for (int i = 0; i < Constants.clickedFilters.size(); i++){
+                for (int i = 0; i < Constants.clickedFilters.size(); i++) {
                     jO.put(Constants.filters.get(Constants.clickedFilters.get(i)));
                 }
                 params.put("id", Constants.user_id);
@@ -160,7 +155,7 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
     @Override
     public void onClick(View view) {
         int position = verticalViewPager.getCurrentItem();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.share:
                 share(position);
                 break;
@@ -211,9 +206,9 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
 
     private void starEvent(int position) {
         DBHandler db = new DBHandler(this);
-        if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getStarred() == 1){
+        if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getStarred() == 1) {
             Toast.makeText(this, "Already starred!", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             if (db.getEvent(mItems.get(position).getId()) != null)
                 mItems.get(position).setSaved(1);
             mItems.get(position).setStarred(1);
@@ -223,10 +218,9 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         }
     }
 
-    void scheduleReminder(String str_date, String title)
-    {
+    void scheduleReminder(String str_date, String title) {
         str_date += " 18:00:00";
-        try{
+        try {
             DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
             Date date = formatter.parse(str_date);
 
@@ -250,19 +244,17 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
             ScheduleAlarm obj = new ScheduleAlarm(getApplicationContext());
             obj.schedulealarm();
             Toast.makeText(getApplicationContext(), "Reminder scheduled successfully. " + str_date, Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e)
-        {
-            Log.e("Error",e.getMessage());
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
             Toast.makeText(this, "Unable to schedule alarms", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void saveEvent(int position) {
         DBHandler db = new DBHandler(this);
-        if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getSaved() == 1){
+        if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getSaved() == 1) {
             Toast.makeText(this, "Already saved!", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             if (db.getEvent(mItems.get(position).getId()) != null)
                 mItems.get(position).setStarred(1);
             mItems.get(position).setSaved(1);
@@ -271,4 +263,30 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter("PreciselyReceiver");
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                getData();
+            }
+        };
+        registerReceiver(receiver, filter);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (receiver!=null)
+        unregisterReceiver(receiver);
+    }
 }

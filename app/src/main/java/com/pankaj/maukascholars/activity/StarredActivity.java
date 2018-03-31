@@ -26,6 +26,7 @@ public class StarredActivity extends BaseNavigationActivity {
     List<EventDetails> mItems;
     RecyclerView.Adapter adapter;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class StarredActivity extends BaseNavigationActivity {
             empty_layout.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
-            final RecyclerView.Adapter adapter = new StarredEventsAdapter(mItems);
+            final RecyclerView.Adapter adapter = new StarredEventsAdapter(mItems, this);
             recyclerView.setAdapter(adapter);
             SwipeableRecyclerViewTouchListener swipeTouchListener =
                     new SwipeableRecyclerViewTouchListener(recyclerView,

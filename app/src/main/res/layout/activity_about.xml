@@ -59,18 +59,20 @@
                 android:layout_marginTop="60dp"/>
 
             <TextView
+                android:id="@+id/button_website"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GO TO OUR WEBSITE "
-                android:layout_gravity="center"
-                android:layout_marginTop="90dp"/>
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:background="@drawable/image_border"
+                android:padding="@dimen/activity_horizontal_margin"
+                />
 
 
         </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
-
-
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -80,6 +82,8 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_dashnav"
         app:menu="@menu/precisely_nav_drawer" />
+
+
 
 
 

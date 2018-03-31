@@ -1,6 +1,7 @@
 package com.pankaj.maukascholars.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -9,7 +10,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
@@ -29,6 +33,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
     SharedPreferences sp;
     SharedPreferences.Editor editor;
     Toolbar toolbar;
+    int id;
 
     @Override
     public void setContentView(int layoutResID) {
@@ -79,6 +84,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
             mDrawerLayout.closeDrawers();
             return true;
         } else if (id == R.id.nav_share) {
+            share();
             mDrawerLayout.closeDrawers();
             return true;
         } else if (id == R.id.nav_logout) {
@@ -121,4 +127,47 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         Utils.loadActivity(this, activity);
         finish();
     }
+
+    private void share() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! Download this cool opportunity curation app! \nIt is so much better than anything out there!\n\nhttps://goo.gl/59gpAa");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
 }
+
+/*
+
+private void open(int position) {
+        String url = mItems.get(position).getLink();
+        if (!url.startsWith("http://") && !url.startsWith("https://"))
+            url = "http://" + url;
+//        if (url.startsWith("https"))
+//            url = url.replace("https://", "http://");
+        CustomTabHelper mCustomTabHelper = new CustomTabHelper();
+        if (mCustomTabHelper.getPackageName(this).size() != 0) {
+            CustomTabsIntent customTabsIntent =
+                    new CustomTabsIntent.Builder()
+                            .build();
+            customTabsIntent.intent.setPackage(mCustomTabHelper.getPackageName(this).get(0));
+            customTabsIntent.launchUrl(this, Uri.parse(url));
+        } else {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        }
+//        LinkInWebViewFragment fragment = LinkInWebViewFragment.newInstance(url);
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.add(R.id.container, fragment).addToBackStack(fragment.getTag()).commit();
+//        Intent i = new Intent(Intent.ACTION_VIEW);
+//        i.setData(Uri.parse(url));
+//        startActivity(i);
+    }
+
+    private void share(int position) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! Found a great opportunity for you!\n" + mItems.get(position).getLink() + "\nThere are many more where this came from!\nVisit https://goo.gl/1RGidK now!");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+ */
