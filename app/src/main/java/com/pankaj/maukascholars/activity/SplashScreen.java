@@ -44,9 +44,7 @@ public class SplashScreen extends AppCompatActivity {
             Constants.user_name = sp.getString("user_name", null);
             checkIfExists();
         }else {
-            Intent intent = new Intent(SplashScreen.this, SignUp.class);
-            startActivity(intent);
-            finish();
+            loadActivity(SignUp.class);
         }
     }
 
@@ -64,9 +62,7 @@ public class SplashScreen extends AppCompatActivity {
                         SharedPreferences.Editor editor = sp.edit();
                         editor.remove("signed_in");
                         editor.apply();
-                        Intent intent = new Intent(SplashScreen.this, SignUp.class);
-                        startActivity(intent);
-                        finish();
+                        loadActivity(SignUp.class);
                     }
                 }else{
                     Toast.makeText(SplashScreen.this, "Couldn't verify ID. Please try again!", Toast.LENGTH_SHORT).show();
@@ -138,11 +134,8 @@ public class SplashScreen extends AppCompatActivity {
                     try {
                         if (response.contains("[\""))
                             response = response.substring(response.indexOf("[\""));
-                        Log.e("Array 1", response);
                         String filter_text = response.substring(0, response.indexOf("]")+1);
                         String filter_image_url = response.substring(response.indexOf("]")+1);
-                        Log.e("Array 1", filter_text);
-                        Log.e("Array 1", filter_image_url);
                         Constants.filters.clear();
                         Constants.filters_image_urls.clear();
                         JSONArray jA_text = new JSONArray(filter_text);
@@ -151,21 +144,7 @@ public class SplashScreen extends AppCompatActivity {
                             Constants.filters.add(jA_text.getString(i));
                             Constants.filters_image_urls.add(jA_url.getString(i));
                         }
-//                        if (sp.contains(key)) {
-//                            try {
-//                                JSONArray jO = new JSONArray(sp.getString(key, ""));
-//                                Constants.clickedFilters.clear();
-//                                for (int i = 0; i < jO.length(); i++)
-//                                    Constants.clickedFilters.add(jO.getInt(i));
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                            Intent intent = new Intent(SplashScreen.this, VerticalViewPagerActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                        }else{
                        loadActivity(Filters.class);
-//                        }
                     } catch (JSONException e) {
                         Toast.makeText(SplashScreen.this, "Couldn't retrieve content. Please try again!", Toast.LENGTH_SHORT).show();
                         Log.e("ERROR CONTENT", e.toString());

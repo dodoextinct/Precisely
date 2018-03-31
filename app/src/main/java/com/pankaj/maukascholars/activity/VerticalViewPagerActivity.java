@@ -10,6 +10,7 @@ import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -266,7 +267,9 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+        Intent intent = new Intent(this, Filters.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

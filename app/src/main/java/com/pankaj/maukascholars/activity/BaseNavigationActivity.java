@@ -65,6 +65,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         int id = item.getItemId();
 
         if (id == R.id.nav_filters_activity) {
+            Constants.count_nav_order = 1;
             loadActivity(Filters.class);
             mDrawerLayout.closeDrawers();
             return true;
@@ -123,7 +124,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         }
     }
 
-    private void loadActivity(Class activity) {
+    public void loadActivity(Class activity) {
         Utils.loadActivity(this, activity);
         finish();
     }

@@ -58,7 +58,6 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
 
                 }else{
                     clickedFilters.add(getAdapterPosition());
-//                    filter_text.setBackgroundColor(0xFF000000);
                     filter_text.setTextColor(0xFFFFFFFF);
                     ll_wrapper.setBackground(border);
 
@@ -75,12 +74,10 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindTo(String filter, String url, int position, Context ctx) {
-
         Picasso.with(ctx).load(url).fit().error(R.mipmap.j_bezos).into(filter_image);
         if (clickedFilters.contains(position)){
-//            filter_text.setBackgroundColor(0xFF000000);
             filter_text.setTextColor(0xFFFFFFFF);
-
+            ll_wrapper.setBackground(border);
         }
 
         filter_text.setText(filter);
