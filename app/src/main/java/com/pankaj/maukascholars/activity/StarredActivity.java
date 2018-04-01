@@ -13,6 +13,7 @@ import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListen
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.StarredEventsAdapter;
 import com.pankaj.maukascholars.database.DBHandler;
+import com.pankaj.maukascholars.util.Constants;
 import com.pankaj.maukascholars.util.EventDetails;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class StarredActivity extends BaseNavigationActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Constants.toolbar_title = "Starred Opportunities";
         setContentView(R.layout.activity_profile);
 
         toolbar.setTitle("Starred Opportunities");

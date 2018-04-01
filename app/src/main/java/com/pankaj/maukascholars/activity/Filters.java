@@ -32,8 +32,8 @@ public class Filters extends BaseNavigationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Constants.toolbar_title = "Filters";
         setContentView(R.layout.activity_filters);
-        toolbar.setTitle("Filter Your Opportunities");
         if (sp.contains(key)) {
             try {
                 JSONArray jO = new JSONArray(sp.getString(key, ""));
@@ -77,7 +77,6 @@ public class Filters extends BaseNavigationActivity {
         if (sp.contains(key)) {
             try {
                 JSONArray jO = new JSONArray(sp.getString(key, ""));
-                Log.e("ClickedFilter", jO.toString());
                 clickedFilters.clear();
                 for (int i = 0; i < jO.length(); i++)
                     clickedFilters.add(jO.getInt(i));

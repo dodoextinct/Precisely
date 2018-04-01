@@ -13,6 +13,7 @@ import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListen
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.SavedEventsAdapter;
 import com.pankaj.maukascholars.database.DBHandler;
+import com.pankaj.maukascholars.util.Constants;
 import com.pankaj.maukascholars.util.EventDetails;
 
 import java.util.List;
@@ -29,8 +30,8 @@ public class SavedActivity extends BaseNavigationActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Constants.toolbar_title = "Saved Opportunities";
         setContentView(R.layout.activity_profile);
-        toolbar.setTitle("Saved Opportunities");
 
         RecyclerView recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

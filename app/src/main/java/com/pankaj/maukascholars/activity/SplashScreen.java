@@ -147,7 +147,6 @@ public class SplashScreen extends AppCompatActivity {
                        loadActivity(Filters.class);
                     } catch (JSONException e) {
                         Toast.makeText(SplashScreen.this, "Couldn't retrieve content. Please try again!", Toast.LENGTH_SHORT).show();
-                        Log.e("ERROR CONTENT", e.toString());
                     }
                 }else
                     Toast.makeText(SplashScreen.this, "Please Try Again after sometime", Toast.LENGTH_SHORT).show();

@@ -20,7 +20,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         //Getting registration token
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
-        Log.e(getClass().getSimpleName(), refreshedToken);
 
         //Displaying token on logcat
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);

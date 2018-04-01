@@ -3,7 +3,9 @@ package com.pankaj.maukascholars.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -33,7 +35,6 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
     SharedPreferences sp;
     SharedPreferences.Editor editor;
     Toolbar toolbar;
-    int id;
 
     @Override
     public void setContentView(int layoutResID) {
@@ -42,8 +43,9 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
     }
 
     protected void onCreateDrawer() {
-
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(Constants.toolbar_title);
+
         setSupportActionBar(toolbar);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -58,6 +60,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         editor = sp.edit();
     }
 
+    @NonNull
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -93,6 +96,9 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
             logout();
             mDrawerLayout.closeDrawers();
             return true;
+        } else if (id == R.id.website_url){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.precisely.co.in"));
+            startActivity(browserIntent);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -137,38 +143,3 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         startActivity(sendIntent);
     }
 }
-
-/*
-
-private void open(int position) {
-        String url = mItems.get(position).getLink();
-        if (!url.startsWith("http://") && !url.startsWith("https://"))
-            url = "http://" + url;
-//        if (url.startsWith("https"))
-//            url = url.replace("https://", "http://");
-        CustomTabHelper mCustomTabHelper = new CustomTabHelper();
-        if (mCustomTabHelper.getPackageName(this).size() != 0) {
-            CustomTabsIntent customTabsIntent =
-                    new CustomTabsIntent.Builder()
-                            .build();
-            customTabsIntent.intent.setPackage(mCustomTabHelper.getPackageName(this).get(0));
-            customTabsIntent.launchUrl(this, Uri.parse(url));
-        } else {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-        }
-//        LinkInWebViewFragment fragment = LinkInWebViewFragment.newInstance(url);
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.container, fragment).addToBackStack(fragment.getTag()).commit();
-//        Intent i = new Intent(Intent.ACTION_VIEW);
-//        i.setData(Uri.parse(url));
-//        startActivity(i);
-    }
-
-    private void share(int position) {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! Found a great opportunity for you!\n" + mItems.get(position).getLink() + "\nThere are many more where this came from!\nVisit https://goo.gl/1RGidK now!");
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
-    }
- */

@@ -9,14 +9,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.pankaj.maukascholars.R;
+import com.pankaj.maukascholars.util.Constants;
 
 public class About extends BaseNavigationActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Constants.toolbar_title = "About Us";
         setContentView(R.layout.activity_about);
-        toolbar.setTitle("About Us");
         TextView gotowebsite = findViewById(R.id.button_website);
         gotowebsite.setOnClickListener(new View.OnClickListener() {
             @Override

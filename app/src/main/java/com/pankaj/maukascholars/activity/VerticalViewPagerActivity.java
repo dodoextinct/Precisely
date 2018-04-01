@@ -56,9 +56,11 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
     RelativeLayout loading;
     ProgressView progress;
     VerticalViewPager verticalViewPager;
-    Context context;
     BroadcastReceiver receiver = null;
     private List<EventDetails> mItems = new ArrayList<>();
+    private int page = 0;
+    VerticalPagerAdapter adapter;
+    boolean updating = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +71,14 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         progress.start();
         loading.setVisibility(View.VISIBLE);
         getData();
-
     }
+
+
 
     private void init() {
 
         verticalViewPager = findViewById(R.id.verticleViewPager);
-        VerticalPagerAdapter adapter = new VerticalPagerAdapter(this, mItems);
+        adapter = new VerticalPagerAdapter(this, mItems);
         verticalViewPager.setAdapter(adapter);
         verticalViewPager.singleEventDetail = mItems.get(0);
         verticalViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -87,6 +90,11 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
             @Override
             public void onPageSelected(int position) {
                 verticalViewPager.singleEventDetail = mItems.get(position);
+                if (position + 3> mItems.size() && !updating) {
+                    updating = true;
+                    page++;
+                    getData();
+                }
             }
 
             @Override
@@ -123,21 +131,25 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
             @Override
             public void onResponse(String response) {
                 if (response.length() > 0) {
+                    updating = false;
                     try {
                         if (response.contains("[[\""))
                             response = response.substring(response.indexOf("[[\""));
-//                        response = removeEscapeChars(response);
                         JSONArray jA = new JSONArray(response);
-                        //    0, 1, 2, 7, 12, 8, 13, 9
+                        //    0, 1, 2, 7, 12, 8, 13, 9, 3, 4, 5
                         for (int i = 0; i < jA.length(); i++) {
                             mItems.add(new EventDetails(Integer.parseInt(jA.getJSONArray(i).get(0).toString()), jA.getJSONArray(i).get(1).toString(), jA.getJSONArray(i).get(2).toString(), jA.getJSONArray(i).get(7).toString(), jA.getJSONArray(i).get(12).toString(), jA.getJSONArray(i).get(8).toString(), jA.getJSONArray(i).get(13).toString(), jA.getJSONArray(i).get(9).toString(), jA.getJSONArray(i).get(3).toString(), jA.getJSONArray(i).get(4).toString(), jA.getJSONArray(i).get(5).toString()));
                         }
-                        init();
+                        if (page == 0)
+                            init();
+                        else{
+                            adapter.cards = mItems;
+                            adapter.notifyDataSetChanged();
+                        }
                     } catch (JSONException e) {
                         loading.setVisibility(View.GONE);
                         progress.stop();
-                        Toast.makeText(VerticalViewPagerActivity.this, "ERRORORROROR", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
+                        Toast.makeText(VerticalViewPagerActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     loading.setVisibility(View.GONE);
@@ -161,7 +173,7 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
                     jO.put(Constants.filters.get(Constants.clickedFilters.get(i)));
                 }
                 params.put("id", Constants.user_id);
-                params.put("page", "0");
+                params.put("page", String.valueOf(page));
                 params.put("tags", jO.toString());
                 return params;
             }
@@ -184,7 +196,9 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
                 saveEvent(position);
                 break;
             case R.id.stalk:
-                open(position);
+                Intent intent = new Intent(this, CardOpen.class);
+                intent.putExtra("event", verticalViewPager.singleEventDetail);
+                startActivity(intent);
                 break;
 
         }
@@ -194,8 +208,6 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         String url = mItems.get(position).getLink();
         if (!url.startsWith("http://") && !url.startsWith("https://"))
             url = "http://" + url;
-//        if (url.startsWith("https"))
-//            url = url.replace("https://", "http://");
         CustomTabHelper mCustomTabHelper = new CustomTabHelper();
         if (mCustomTabHelper.getPackageName(this).size() != 0) {
             CustomTabsIntent customTabsIntent =
@@ -206,12 +218,6 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         } else {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
         }
-//        LinkInWebViewFragment fragment = LinkInWebViewFragment.newInstance(url);
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.container, fragment).addToBackStack(fragment.getTag()).commit();
-//        Intent i = new Intent(Intent.ACTION_VIEW);
-//        i.setData(Uri.parse(url));
-//        startActivity(i);
     }
 
     private void share(int position) {
@@ -263,7 +269,6 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
             obj.schedulealarm();
             Toast.makeText(getApplicationContext(), "Reminder scheduled successfully. " + str_date, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Log.e("Error", e.getMessage());
             Toast.makeText(this, "Unable to schedule alarms", Toast.LENGTH_SHORT).show();
         }
     }

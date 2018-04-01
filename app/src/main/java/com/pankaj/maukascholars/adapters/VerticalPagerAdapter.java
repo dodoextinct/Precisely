@@ -2,8 +2,11 @@ package com.pankaj.maukascholars.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.v4.view.PagerAdapter;
+import android.text.TextPaint;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +33,13 @@ public class VerticalPagerAdapter extends PagerAdapter {
 
     private Activity mContext;
     private LayoutInflater mLayoutInflater;
-    private List<EventDetails> cards;
+    public List<EventDetails> cards;
     private EventDetails singleEventDetail;
     DisplayMetrics displayMetrics = new DisplayMetrics();
-    int height;
+    public int height;
     int width;
-    private TextView title, description, name, deadline;
+    private TextView title, name, deadline;
+    public TextView description;
     private ImageView event_image;
 
     public VerticalPagerAdapter(Activity context, List<EventDetails> cards) {
@@ -78,7 +82,6 @@ public class VerticalPagerAdapter extends PagerAdapter {
         container.addView(itemView);
         return itemView;
     }
-
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {

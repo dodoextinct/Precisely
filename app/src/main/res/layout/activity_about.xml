@@ -62,7 +62,7 @@
                 android:id="@+id/button_website"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GO TO OUR WEBSITE "
+                android:text="VISIT OUR WEBSITE"
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:background="@drawable/image_border"

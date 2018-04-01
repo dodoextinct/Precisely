@@ -4,28 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <RelativeLayout
-        android:id="@+id/top_options"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#a5ffffff"
-        android:layout_alignParentTop="true"
-        android:visibility="gone"
-        >
-        <ImageView
-            android:id="@+id/refresh"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@mipmap/star"
-            />
-        <ImageView
-            android:id="@+id/top"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@mipmap/arrow"
-            android:rotation="90"
-            />
-    </RelativeLayout>
     <com.pankaj.maukascholars.holders.VerticalViewPager
         android:id="@+id/verticleViewPager"
         android:layout_width="match_parent"

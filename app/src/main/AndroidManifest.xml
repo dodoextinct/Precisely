@@ -71,12 +71,11 @@
         <activity android:name=".activity.Filters" />
         <activity android:name=".activity.CalendarActivity" />
         <activity android:name=".activity.VerticalViewPagerActivity" />
-        <activity android:name=".activity.VerticalViewPagerWithPageAdapterActivity" />
         <activity android:name=".util.alarm.AlarmActivity" />
         <activity android:name=".activity.About" />
         <activity android:name=".activity.SavedActivity" />
         <activity android:name=".activity.StarredActivity" />
-        <activity android:name=".activity.CardOpen"></activity>
+        <activity android:name=".activity.CardOpen" />
     </application>
 
 </manifest>

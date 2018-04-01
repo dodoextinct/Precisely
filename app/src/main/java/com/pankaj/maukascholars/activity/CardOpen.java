@@ -14,6 +14,8 @@ import com.pankaj.maukascholars.util.CustomTabHelper;
 import com.pankaj.maukascholars.util.EventDetails;
 import com.squareup.picasso.Picasso;
 
+import static com.pankaj.maukascholars.util.Constants.months;
+
 public class CardOpen extends AppCompatActivity {
     private TextView post_title, post_description, eligibility, requirements, benefits, deadline, link;
     ImageView post_image;
@@ -67,7 +69,9 @@ public class CardOpen extends AppCompatActivity {
         setDisplay(findViewById(R.id.requirements_wrapper), requirements, singleEventDetails.getRequirements());
         setDisplay(findViewById(R.id.benefit_wrapper), benefits, singleEventDetails.getBenifits());
         Picasso.with(this).load(singleEventDetails.getImage()).fit().error(R.mipmap.j_bezos).into(post_image);
-        deadline.setText(singleEventDetails.getDeadline());
+        String date = singleEventDetails.getDeadline();
+        String final_date =months[Integer.parseInt(date.substring(0, 2))-1] + "" + date.substring(2);
+        deadline.setText(final_date);
         link_url = singleEventDetails.getLink();
     }
 

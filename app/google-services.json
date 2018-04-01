@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "6171481669-b84qpkdudiuv5qh370as9sdqktrck3rn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wayneventures.precisely",
+            "certificate_hash": "215cfd2eac1c494d81e1ea907728b6074e9c3081"
+          }
+        },
+        {
           "client_id": "6171481669-3tv2pgvr44vrgvq0nmt24i0lu8a0f06p.apps.googleusercontent.com",
           "client_type": 3
         },

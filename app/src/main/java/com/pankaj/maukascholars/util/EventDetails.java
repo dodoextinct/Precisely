@@ -24,7 +24,7 @@ public class EventDetails implements Serializable{
     private String benefits;
     private String requirements;
 
-    public EventDetails(int id, String title, String description, String deadline, String name, String image, String icon, String link, String eligibility, String benefits, String requirements){
+    public EventDetails(int id, String title, String description, String deadline, String name, String image, String icon, String link, String eligibility, String requirements, String benefits){
         this.starred = starred;
         this.saved = saved;
         this.id = id;
