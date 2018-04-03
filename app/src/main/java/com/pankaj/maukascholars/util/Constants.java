@@ -11,10 +11,11 @@ import java.util.List;
 
 public class Constants {
 
-    public static String user_email = null;
+    public static String user_name = null;
     public static String user_id = null;
     public static String quote = "";
-
+    public static int count_nav_order = 1;
+    public static String toolbar_title = "Filter Your Opportunities";
 
     public static String url_signup = "https://www.lithics.in/apis/mauka/signup.php";
     public static String url_event_details = "https://www.lithics.in/apis/mauka/read_from_sheets.php";
@@ -22,6 +23,7 @@ public class Constants {
     public static String url_verify_user = "https://www.lithics.in/apis/mauka/verify.php";
     public static String url_get_filters = "https://www.lithics.in/apis/mauka/get_filters.php";
     public static String url_get_quote = "https://www.lithics.in/apis/mauka/get_quote.php";
+    public static String url_verify_coupon= "https://www.lithics.in/apis/mauka/verify_coupon.php";
 
     public static int[] imageResources = new int[]{
             R.mipmap.share,
@@ -51,6 +53,7 @@ public class Constants {
 
 
     public static List<String> filters = new ArrayList<>();
+    public static List<String> filters_image_urls = new ArrayList<>();
 
     public static List<Integer> clickedFilters = new ArrayList<>();
 

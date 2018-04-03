@@ -2,9 +2,12 @@ package com.pankaj.maukascholars.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.application.VolleyHandling;
 import com.pankaj.maukascholars.util.Constants;
+import com.pankaj.maukascholars.util.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,11 +43,10 @@ public class SplashScreen extends AppCompatActivity {
                 tv.setText(Constants.quote);
             }
             Constants.user_id = sp.getString("user_id", null);
+            Constants.user_name = sp.getString("user_name", null);
             checkIfExists();
         }else {
-            Intent intent = new Intent(SplashScreen.this, SignUp.class);
-            startActivity(intent);
-            finish();
+            loadActivity(SignUp.class);
         }
     }
 
@@ -55,15 +58,16 @@ public class SplashScreen extends AppCompatActivity {
                 if (status_code[0] == 200) {
                     if (response.contentEquals(Constants.user_id)){
                         getNewQuote();
-                    }else{
+                    }else if(response.contains("UPDATE")){
+                        Toast.makeText(SplashScreen.this, "Please UPDATE your app!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
                         Toast.makeText(SplashScreen.this, "Couldn't verify ID. Please login again", Toast.LENGTH_SHORT).show();
                         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(SplashScreen.this);
                         SharedPreferences.Editor editor = sp.edit();
                         editor.remove("signed_in");
                         editor.apply();
-                        Intent intent = new Intent(SplashScreen.this, SignUp.class);
-                        startActivity(intent);
-                        finish();
+                        loadActivity(SignUp.class);
                     }
                 }else{
                     Toast.makeText(SplashScreen.this, "Couldn't verify ID. Please try again!", Toast.LENGTH_SHORT).show();
@@ -79,6 +83,15 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
+                int version = 0;
+                try {
+                    PackageInfo pInfo = null;
+                    pInfo = SplashScreen.this.getPackageManager().getPackageInfo(getPackageName(), 0);
+                    version = pInfo.versionCode;
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+                params.put("versionCode", String.valueOf(version));
                 params.put("id", Constants.user_id);
                 return params;
             }
@@ -135,31 +148,19 @@ public class SplashScreen extends AppCompatActivity {
                     try {
                         if (response.contains("[\""))
                             response = response.substring(response.indexOf("[\""));
+                        String filter_text = response.substring(0, response.indexOf("]")+1);
+                        String filter_image_url = response.substring(response.indexOf("]")+1);
                         Constants.filters.clear();
-                        JSONArray jA = new JSONArray(response);
-                        for (int i = 0; i < jA.length(); i++){
-                            Constants.filters.add(jA.getString(i));
+                        Constants.filters_image_urls.clear();
+                        JSONArray jA_text = new JSONArray(filter_text);
+                        JSONArray jA_url = new JSONArray(filter_image_url);
+                        for (int i = 0; i < jA_text.length(); i++){
+                            Constants.filters.add(jA_text.getString(i));
+                            Constants.filters_image_urls.add(jA_url.getString(i));
                         }
-//                        if (sp.contains(key)) {
-//                            try {
-//                                JSONArray jO = new JSONArray(sp.getString(key, ""));
-//                                Constants.clickedFilters.clear();
-//                                for (int i = 0; i < jO.length(); i++)
-//                                    Constants.clickedFilters.add(jO.getInt(i));
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                            Intent intent = new Intent(SplashScreen.this, VerticalViewPagerActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                        }else{
-                            Intent intent = new Intent(SplashScreen.this, Filters.class);
-                            startActivity(intent);
-                            finish();
-//                        }
+                       loadActivity(Filters.class);
                     } catch (JSONException e) {
                         Toast.makeText(SplashScreen.this, "Couldn't retrieve content. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
                     }
                 }else
                     Toast.makeText(SplashScreen.this, "Please Try Again after sometime", Toast.LENGTH_SHORT).show();
@@ -179,5 +180,10 @@ public class SplashScreen extends AppCompatActivity {
         };
 
         VolleyHandling.getInstance().addToRequestQueue(request, "signin");
+    }
+
+    private void loadActivity(Class activity){
+        Utils.loadActivity(this, activity);
+        finish();
     }
 }

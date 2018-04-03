@@ -1,47 +1,47 @@
 {
   "project_info": {
-    "project_number": "992158978236",
-    "firebase_url": "https://fir-spot-on-opportunities.firebaseio.com",
-    "project_id": "firebase-spot-on-opportunities",
-    "storage_bucket": "firebase-spot-on-opportunities.appspot.com"
+    "project_number": "6171481669",
+    "firebase_url": "https://precisely-1522447729786.firebaseio.com",
+    "project_id": "precisely-1522447729786",
+    "storage_bucket": "precisely-1522447729786.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:992158978236:android:90add660f8993b17",
+        "mobilesdk_app_id": "1:6171481669:android:98a64ed8fc38347e",
         "android_client_info": {
-          "package_name": "com.pankaj.maukascholars"
+          "package_name": "com.wayneventures.precisely"
         }
       },
       "oauth_client": [
         {
-          "client_id": "992158978236-ai4rgkflrr59ft2utt6cm6q17n7j6flj.apps.googleusercontent.com",
+          "client_id": "6171481669-b84qpkdudiuv5qh370as9sdqktrck3rn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pankaj.maukascholars",
-            "certificate_hash": "253bf9c345c9ec78145d1bf50f9ac28d3fccb217"
+            "package_name": "com.wayneventures.precisely",
+            "certificate_hash": "215cfd2eac1c494d81e1ea907728b6074e9c3081"
           }
         },
         {
-          "client_id": "992158978236-7vi189kcs0d24su96202ej42h5c50da4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pankaj.maukascholars",
-            "certificate_hash": "417290b9c25cbc96c422a1b4f38e044926d35884"
-          }
-        },
-        {
-          "client_id": "992158978236-b5pk6a3gb25p12gartatalpdjeov3iv3.apps.googleusercontent.com",
+          "client_id": "6171481669-3tv2pgvr44vrgvq0nmt24i0lu8a0f06p.apps.googleusercontent.com",
           "client_type": 3
         },
         {
-          "client_id": "992158978236-pl2hqmde16dvjnn4gm02e6393ttgj9ui.apps.googleusercontent.com",
+          "client_id": "6171481669-ncltau554ghonhk2pofoee645evf854a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wayneventures.precisely",
+            "certificate_hash": "7ca068a813228b4e7c3687ca7ba3d76416502d22"
+          }
+        },
+        {
+          "client_id": "6171481669-nepahdq2k03bq1b7jd9srkghqd0qieib.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCJa4wl-IczGHJyIHL_TtAqjlxrE2H4gvQ"
+          "current_key": "AIzaSyBooRXTJZYI-JgLESecQtEqypLtVNFzPgo"
         }
       ],
       "services": {
@@ -52,7 +52,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "992158978236-b5pk6a3gb25p12gartatalpdjeov3iv3.apps.googleusercontent.com",
+              "client_id": "6171481669-3tv2pgvr44vrgvq0nmt24i0lu8a0f06p.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

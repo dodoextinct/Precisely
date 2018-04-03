@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<Button android:id="@+id/filter_button"
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_filter_wrapper"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#ffffff"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:layout_marginLeft="4dp"
-    android:layout_marginRight="4dp"
-    />
+    android:layout_marginBottom="@dimen/text_margin"
+    android:layout_marginLeft="@dimen/nav_header_vertical_spacing"
+    android:layout_marginRight="@dimen/nav_header_vertical_spacing"
+    android:padding="3dp"
+    >
+
+    <ImageView
+        android:id="@+id/filter_image"
+        android:layout_width="96dp"
+        android:layout_height="113dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/abc"
+        />
+    <TextView
+        android:id="@+id/filter_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/filter_image"
+        android:layout_alignRight="@+id/filter_image"
+        android:layout_marginTop="95dp"
+        android:textSize="12sp"
+        android:gravity="center_horizontal"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        />
+
+</RelativeLayout>

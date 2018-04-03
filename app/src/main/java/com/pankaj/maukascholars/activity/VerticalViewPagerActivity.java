@@ -1,9 +1,13 @@
 package com.pankaj.maukascholars.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -49,10 +53,14 @@ import java.util.TimeZone;
  */
 public class VerticalViewPagerActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private List<EventDetails> mItems = new ArrayList<>();
     RelativeLayout loading;
     ProgressView progress;
     VerticalViewPager verticalViewPager;
+    BroadcastReceiver receiver = null;
+    private List<EventDetails> mItems = new ArrayList<>();
+    private int page = 0;
+    VerticalPagerAdapter adapter;
+    boolean updating = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +73,40 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         getData();
     }
 
+
+
     private void init() {
 
         verticalViewPager = findViewById(R.id.verticleViewPager);
-        VerticalPagerAdapter adapter = new VerticalPagerAdapter(this, mItems);
+        adapter = new VerticalPagerAdapter(this, mItems);
         verticalViewPager.setAdapter(adapter);
+        verticalViewPager.singleEventDetail = mItems.get(0);
+        verticalViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                verticalViewPager.singleEventDetail = mItems.get(position);
+                if (position + 3> mItems.size() && !updating) {
+                    updating = true;
+                    page++;
+                    getData();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         LinearLayout share, star, save, send;
         share = findViewById(R.id.share);
         star = findViewById(R.id.star);
         save = findViewById(R.id.save);
-        send= findViewById(R.id.stalk);
+        send = findViewById(R.id.stalk);
         share.setOnClickListener(this);
         star.setOnClickListener(this);
         save.setOnClickListener(this);
@@ -82,29 +114,44 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
 
         loading.setVisibility(View.GONE);
         progress.stop();
+        if (receiver == null) {
+            IntentFilter filter = new IntentFilter("PreciselyReceiver");
+            receiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    getData();
+                }
+            };
+            registerReceiver(receiver, filter);
+        }
     }
 
-    void getData(){
+    void getData() {
         StringRequest request = new StringRequest(Request.Method.POST, Constants.url_event_details, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.length() > 0){
+                if (response.length() > 0) {
+                    updating = false;
                     try {
                         if (response.contains("[[\""))
                             response = response.substring(response.indexOf("[[\""));
-//                        response = removeEscapeChars(response);
                         JSONArray jA = new JSONArray(response);
-                        for (int i = 0; i < jA.length(); i++){
-                            mItems.add(new EventDetails(Integer.parseInt(jA.getJSONArray(i).get(0).toString()), jA.getJSONArray(i).get(1).toString(), jA.getJSONArray(i).get(2).toString(), jA.getJSONArray(i).get(3).toString(), jA.getJSONArray(i).get(4).toString(), jA.getJSONArray(i).get(5).toString(), jA.getJSONArray(i).get(6).toString(), jA.getJSONArray(i).get(7).toString()));
+                        //    0, 1, 2, 7, 12, 8, 13, 9, 3, 4, 5
+                        for (int i = 0; i < jA.length(); i++) {
+                            mItems.add(new EventDetails(Integer.parseInt(jA.getJSONArray(i).get(0).toString()), jA.getJSONArray(i).get(1).toString(), jA.getJSONArray(i).get(2).toString(), jA.getJSONArray(i).get(7).toString(), jA.getJSONArray(i).get(12).toString(), jA.getJSONArray(i).get(8).toString(), jA.getJSONArray(i).get(13).toString(), jA.getJSONArray(i).get(9).toString(), jA.getJSONArray(i).get(3).toString(), jA.getJSONArray(i).get(4).toString(), jA.getJSONArray(i).get(5).toString()));
                         }
-                        init();
+                        if (page == 0)
+                            init();
+                        else{
+                            adapter.cards = mItems;
+                            adapter.notifyDataSetChanged();
+                        }
                     } catch (JSONException e) {
                         loading.setVisibility(View.GONE);
                         progress.stop();
-                        Toast.makeText(VerticalViewPagerActivity.this, "ERRORORROROR", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
+                        Toast.makeText(VerticalViewPagerActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                } else {
                     loading.setVisibility(View.GONE);
                     progress.stop();
                     Toast.makeText(VerticalViewPagerActivity.this, "Server is no longer speaking to you", Toast.LENGTH_SHORT).show();
@@ -117,16 +164,16 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
                 error.printStackTrace();
                 getData();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
+                Map<String, String> params = new HashMap<>();
                 JSONArray jO = new JSONArray();
-                for (int i = 0; i < Constants.clickedFilters.size(); i++){
+                for (int i = 0; i < Constants.clickedFilters.size(); i++) {
                     jO.put(Constants.filters.get(Constants.clickedFilters.get(i)));
                 }
                 params.put("id", Constants.user_id);
-                params.put("page", "0");
+                params.put("page", String.valueOf(page));
                 params.put("tags", jO.toString());
                 return params;
             }
@@ -138,7 +185,7 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
     @Override
     public void onClick(View view) {
         int position = verticalViewPager.getCurrentItem();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.share:
                 share(position);
                 break;
@@ -149,7 +196,9 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
                 saveEvent(position);
                 break;
             case R.id.stalk:
-                open(position);
+                Intent intent = new Intent(this, CardOpen.class);
+                intent.putExtra("event", verticalViewPager.singleEventDetail);
+                startActivity(intent);
                 break;
 
         }
@@ -159,8 +208,6 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         String url = mItems.get(position).getLink();
         if (!url.startsWith("http://") && !url.startsWith("https://"))
             url = "http://" + url;
-//        if (url.startsWith("https"))
-//            url = url.replace("https://", "http://");
         CustomTabHelper mCustomTabHelper = new CustomTabHelper();
         if (mCustomTabHelper.getPackageName(this).size() != 0) {
             CustomTabsIntent customTabsIntent =
@@ -171,12 +218,6 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         } else {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
         }
-//        LinkInWebViewFragment fragment = LinkInWebViewFragment.newInstance(url);
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.container, fragment).addToBackStack(fragment.getTag()).commit();
-//        Intent i = new Intent(Intent.ACTION_VIEW);
-//        i.setData(Uri.parse(url));
-//        startActivity(i);
     }
 
     private void share(int position) {
@@ -189,9 +230,9 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
 
     private void starEvent(int position) {
         DBHandler db = new DBHandler(this);
-        if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getStarred() == 1){
+        if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getStarred() == 1) {
             Toast.makeText(this, "Already starred!", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             if (db.getEvent(mItems.get(position).getId()) != null)
                 mItems.get(position).setSaved(1);
             mItems.get(position).setStarred(1);
@@ -201,10 +242,9 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         }
     }
 
-    void scheduleReminder(String str_date, String title)
-    {
+    void scheduleReminder(String str_date, String title) {
         str_date += " 18:00:00";
-        try{
+        try {
             DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
             Date date = formatter.parse(str_date);
 
@@ -228,19 +268,16 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
             ScheduleAlarm obj = new ScheduleAlarm(getApplicationContext());
             obj.schedulealarm();
             Toast.makeText(getApplicationContext(), "Reminder scheduled successfully. " + str_date, Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e)
-        {
-            Log.e("Error",e.getMessage());
+        } catch (Exception e) {
             Toast.makeText(this, "Unable to schedule alarms", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void saveEvent(int position) {
         DBHandler db = new DBHandler(this);
-        if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getSaved() == 1){
+        if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getSaved() == 1) {
             Toast.makeText(this, "Already saved!", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             if (db.getEvent(mItems.get(position).getId()) != null)
                 mItems.get(position).setStarred(1);
             mItems.get(position).setSaved(1);
@@ -249,4 +286,32 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, Filters.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter("PreciselyReceiver");
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                getData();
+            }
+        };
+        registerReceiver(receiver, filter);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (receiver!=null)
+        unregisterReceiver(receiver);
+    }
 }

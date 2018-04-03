@@ -1,5 +1,9 @@
 package com.pankaj.maukascholars.adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,24 +11,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pankaj.maukascholars.R;
-import com.pankaj.maukascholars.fragments.SavedFragment.OnListFragmentInteractionListener;
+import com.pankaj.maukascholars.util.CustomTabHelper;
 import com.pankaj.maukascholars.util.EventDetails;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link EventDetails} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class SavedEventsAdapter extends RecyclerView.Adapter<SavedEventsAdapter.ViewHolder> {
 
     private final List<EventDetails> mValues;
-    private final OnListFragmentInteractionListener mListener;
 
-    public SavedEventsAdapter(List<EventDetails> items, OnListFragmentInteractionListener listener) {
+    private Context ctx;
+
+    public SavedEventsAdapter(List<EventDetails> items, Context ctx) {
         mValues = items;
-        mListener = listener;
+        this.ctx = ctx;
     }
 
     @Override
@@ -35,19 +35,9 @@ public class SavedEventsAdapter extends RecyclerView.Adapter<SavedEventsAdapter.
     }
 
     @Override
-    public void onBindViewHolder(final SavedEventsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final SavedEventsAdapter.ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
-        holder.title.setText(mValues.get(position).getTitle());
-        holder.description.setText(mValues.get(position).getDescription());
-        holder.deadline.setText(mValues.get(position).getDeadline());
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
+        holder.bind(position);
     }
 
     @Override
@@ -69,7 +59,34 @@ public class SavedEventsAdapter extends RecyclerView.Adapter<SavedEventsAdapter.
             description = view.findViewById(R.id.description);
             deadline = view.findViewById(R.id.deadline);
         }
+
+        private void bind(final int position){
+            title.setText(mValues.get(position).getTitle());
+            description.setText(mValues.get(position).getDescription());
+            deadline.setText(mValues.get(position).getDeadline());
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    open(mValues.get(position).getLink(), ctx);
+                }
+            });
+        }
+    }
+
+    private void open(String url, Context ctx) {
+        if (!url.startsWith("http://") && !url.startsWith("https://"))
+            url = "http://" + url;
+//        if (url.startsWith("https"))
+//            url = url.replace("https://", "http://");
+        CustomTabHelper mCustomTabHelper = new CustomTabHelper();
+        if (mCustomTabHelper.getPackageName(ctx).size() != 0) {
+            CustomTabsIntent customTabsIntent =
+                    new CustomTabsIntent.Builder()
+                            .build();
+            customTabsIntent.intent.setPackage(mCustomTabHelper.getPackageName(ctx).get(0));
+            customTabsIntent.launchUrl(ctx, Uri.parse(url));
+        } else {
+            ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        }
     }
 }
-
-

@@ -5,8 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -14,9 +12,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/logomauka123"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logomauka123"
         android:supportsRtl="true"
-        android:theme="@style/NoActionAppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -46,14 +44,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".firebase.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".firebase.MyFirebaseInstanceIDService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/logomauka123" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
         <activity android:name=".activity.SignUp" />
         <activity android:name=".activity.Filters" />
-        <activity android:name=".activity.Cards" />
         <activity android:name=".activity.CalendarActivity" />
-        <activity android:name=".activity.ProfileActivity" />
-        <activity android:name=".activity.VerticalViewPagerActivity"/>
-        <activity android:name=".activity.VerticalViewPagerWithPageAdapterActivity"/>
+        <activity android:name=".activity.VerticalViewPagerActivity" />
         <activity android:name=".util.alarm.AlarmActivity" />
+        <activity android:name=".activity.About" />
+        <activity android:name=".activity.SavedActivity" />
+        <activity android:name=".activity.StarredActivity" />
+        <activity android:name=".activity.CardOpen" />
     </application>
 
 </manifest>

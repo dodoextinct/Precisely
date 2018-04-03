@@ -1,5 +1,7 @@
 package com.pankaj.maukascholars.util;
 
+import java.io.Serializable;
+
 /**
  * Project Name: 	<Visual Perception For The Visually Impaired>
  * Author List: 		Pankaj Baranwal
@@ -7,7 +9,7 @@ package com.pankaj.maukascholars.util;
  * Functions: 		<>
  * Global Variables:	<>
  */
-public class EventDetails {
+public class EventDetails implements Serializable{
     private int id = 0;
     private int starred = 0;
     private int saved = 0;
@@ -18,8 +20,25 @@ public class EventDetails {
     private String image;
     private String icon;
     private String link = "http://www.iida.org/content.cfm/student-design-competition";
+    private String eligibility;
+    private String benefits;
+    private String requirements;
 
-    public EventDetails(){
+    public EventDetails(int id, String title, String description, String deadline, String name, String image, String icon, String link, String eligibility, String requirements, String benefits){
+        this.starred = starred;
+        this.saved = saved;
+        this.id = id;
+        this.title = title;
+        this.deadline = deadline;
+        this.description = description;
+        this.name = name;
+        this.deadline = deadline;
+        this.image = image;
+        this.icon = icon;
+        this.link = link;
+        this.eligibility = eligibility;
+        this.benefits = benefits;
+        this.requirements = requirements;
 
     }
 
@@ -37,6 +56,7 @@ public class EventDetails {
         this.link = link;
     }
 
+//    0, 1, 2, 7, 12, 8, 13, 9
     public EventDetails(int id, String title, String description, String deadline, String name, String image, String icon, String link){
         this.id = id;
         this.title = title;
@@ -127,5 +147,29 @@ public class EventDetails {
 
     public void setStarred(int starred) {
         this.starred = starred;
+    }
+
+    public String getEligibility() {
+        return eligibility;
+    }
+
+    public void setEligibility(String eligibility) {
+        this.eligibility = eligibility;
+    }
+
+    public String getBenifits() {
+        return benefits;
+    }
+
+    public void setBenifits(String benefits) {
+        this.benefits = benefits;
+    }
+
+    public String getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(String requirements) {
+        this.requirements = requirements;
     }
 }

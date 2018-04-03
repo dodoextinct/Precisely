@@ -2,18 +2,19 @@ package com.pankaj.maukascholars.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -35,7 +36,6 @@ import com.google.android.gms.tasks.Task;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.application.VolleyHandling;
 import com.pankaj.maukascholars.util.Constants;
-import com.pankaj.maukascholars.util.MyVideoView;
 import com.rey.material.widget.ProgressView;
 
 import org.json.JSONException;
@@ -56,31 +56,75 @@ public class SignUp extends AppCompatActivity {
     CallbackManager callbackManager;
     RelativeLayout loading;
     ProgressView progress;
-    MyVideoView videoview;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        setDimension();
+        init();
         setUpFacebook();
         setupGoogle();
     }
 
-    private void setDimension() {
-        // Adjust the size of the video
-        // so it fits on the screen
-        videoview = findViewById(R.id.videoView);
-//        videoview.setAudioFocusRequest(AUDIOFOCUS_NONE);
-        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.o_o_gif);
-        videoview.setVideoURI(uri);
-        videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+    private void init() {
+        final EditText coupon_text = findViewById(R.id.coupon_edit);
+        Button apply = findViewById(R.id.apply_button);
+        apply.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.setLooping(true);
+            public void onClick(View v) {
+                if (coupon_text.getText().toString().length() == 0){
+                    Toast.makeText(SignUp.this, "Please enter a coupon code!", Toast.LENGTH_SHORT).show();
+                }else{
+                    verifyCouponCode(coupon_text.getText().toString());
+                }
             }
         });
-        videoview.start();
+    }
+
+    private void verifyCouponCode(final String text) {
+        loading = findViewById(R.id.progress_rl);
+        progress = findViewById(R.id.progress);
+        progress.start();
+        loading.setVisibility(View.VISIBLE);
+        final int[] status_code = new int[1];
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.url_verify_coupon, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                loading.setVisibility(View.GONE);
+                progress.stop();
+                if (status_code[0] == 200) {
+                    if (response.contentEquals(text)){
+                        Toast.makeText(SignUp.this, "Coupon code applied!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(SignUp.this, "Please enter correct coupon code", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(SignUp.this, "Couldn't verify ID. Please try again!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.setVisibility(View.GONE);
+                progress.stop();
+                Toast.makeText(SignUp.this, "Couldn't connect to server", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("coupon_code", text);
+                return params;
+            }
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                status_code[0] = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        VolleyHandling.getInstance().addToRequestQueue(request, "coupon_verify");
     }
 
     // setupGoogle()
@@ -89,6 +133,7 @@ public class SignUp extends AppCompatActivity {
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
@@ -144,18 +189,23 @@ public class SignUp extends AppCompatActivity {
                         if (response != null && response.getError() == null){
                             try {
                                 String user_id;
+                                if (response.getJSONObject().has("name")){
+                                    Constants.user_name = response.getJSONObject().getString("name");
+                                }else{
+                                    Constants.user_name = "Anonymous User";
+                                }
                                 if (response.getJSONObject().has("email")) {
-                                    Constants.user_email = response.getJSONObject().getString("email");
-                                    user_id = Constants.user_email;
+                                    user_id = response.getJSONObject().getString("email");
                                 }
                                 else {
-                                    Constants.user_email = null;
                                     user_id = response.getJSONObject().getString("id");
                                 }
                                 submitData(user_id);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                        }else{
+                            Toast.makeText(SignUp.this, "Couldn't submit response", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -181,15 +231,14 @@ public class SignUp extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Constants.user_email = account.getEmail();
-            submitData(account.getEmail());
+            Constants.user_name = account.getDisplayName();
+            submitData(account.getId());
         } catch (ApiException e) {
-            Log.e("Google SignIn Error", e + "");
             Toast.makeText(this, "Google behaving weirdly!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    void submitData(final String username){
+    void submitData(final String user_id){
         loading = findViewById(R.id.progress_rl);
         progress = findViewById(R.id.progress);
         progress.start();
@@ -202,6 +251,7 @@ public class SignUp extends AppCompatActivity {
                     final SharedPreferences.Editor editor = sp.edit();
                     editor.putBoolean("signed_in", true);
                     editor.putString("user_id", response);
+                    editor.putString("user_name", Constants.user_name);
                     editor.apply();
                     Constants.user_id = response;
                     loading.setVisibility(View.GONE);
@@ -227,7 +277,8 @@ public class SignUp extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("user_name", username);
+                params.put("user_id", user_id);
+                params.put("user_name", Constants.user_name);
                 params.put("image", "Coming soon!");
                 return params;
             }

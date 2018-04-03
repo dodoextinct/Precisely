@@ -4,81 +4,59 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <RelativeLayout
-        android:id="@+id/top_options"
+    <com.pankaj.maukascholars.holders.VerticalViewPager
+        android:id="@+id/verticleViewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#a5ffffff"
-        android:layout_alignParentTop="true"
-        android:visibility="gone"
-        >
-        <ImageView
-            android:id="@+id/refresh"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@mipmap/star"
-            />
-        <ImageView
-            android:id="@+id/top"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@mipmap/arrow"
-            android:rotation="90"
-            />
-    </RelativeLayout>
-<com.pankaj.maukascholars.holders.VerticalViewPager android:id="@+id/verticleViewPager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_above="@+id/options_ll"
-    />
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_above="@+id/options_ll"
+        />
     <LinearLayout
         android:id="@+id/options_ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:background="#000"
         android:baselineAligned="false">
         <LinearLayout
-            android:id="@+id/share"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:elevation="4dp"
+            android:id="@+id/share"
             >
+
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@mipmap/share"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SHARE"
-                android:textColor="#fff"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_share_black_24dp"
+                android:layout_marginTop="12dp"
                 />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/star"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:elevation="4dp"
             >
+
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@mipmap/star"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="STAR"
-                android:textColor="#fff"
-                />
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_star_border_black_24dp"
+            />
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="STAR"-->
+            <!--android:textColor="#fff"-->
+            <!--/>-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/save"
@@ -87,18 +65,21 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:elevation="4dp"
+
             >
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@mipmap/save"
+                android:src="@drawable/ic_bookmark_border_black_24dp"
+                android:layout_marginTop="12dp"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SAVE"
-                android:textColor="#fff"
-                />
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="SAVE"-->
+                <!--android:textColor="#fff"-->
+                <!--/>-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/stalk"
@@ -107,17 +88,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            >
+            android:elevation="4dp">
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@mipmap/reply"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="STALK"
-                android:textColor="#fff"
+                android:src="@drawable/ic_arrow_forward_black_24dp"
+                android:layout_marginTop="12dp"
                 />
         </LinearLayout>
     </LinearLayout>
