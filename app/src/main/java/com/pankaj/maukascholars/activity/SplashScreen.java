@@ -2,6 +2,8 @@ package com.pankaj.maukascholars.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +58,10 @@ public class SplashScreen extends AppCompatActivity {
                 if (status_code[0] == 200) {
                     if (response.contentEquals(Constants.user_id)){
                         getNewQuote();
-                    }else{
+                    }else if(response.contains("UPDATE")){
+                        Toast.makeText(SplashScreen.this, "Please UPDATE your app!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
                         Toast.makeText(SplashScreen.this, "Couldn't verify ID. Please login again", Toast.LENGTH_SHORT).show();
                         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(SplashScreen.this);
                         SharedPreferences.Editor editor = sp.edit();
@@ -78,6 +83,15 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
+                int version = 0;
+                try {
+                    PackageInfo pInfo = null;
+                    pInfo = SplashScreen.this.getPackageManager().getPackageInfo(getPackageName(), 0);
+                    version = pInfo.versionCode;
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+                params.put("versionCode", String.valueOf(version));
                 params.put("id", Constants.user_id);
                 return params;
             }

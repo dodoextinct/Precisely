@@ -31,6 +31,10 @@
                 android:icon="@drawable/ic_tablet_android_black_24dp"
                 android:title="About Us" />
             <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_rate_review_black_24dp"
+                android:title="Feedback" />
+            <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_reply_black_24dp"
                 android:title="Logout" />

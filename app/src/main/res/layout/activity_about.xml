@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Precisely is an intelligent opportunity curation app. A plethora of opportunities are available across all disciplines which can help young people grow and develop themselves but due to lack of visibility and targeted marketing very few people know about them and avail their benefits. This platform aims to connect the maximum number of youth and talent to any opportunity."
+                android:text="Precisely is a platform which helps you discover the latest academic and professional opportunities, personalized for you! We cover latest jobs, internships, scholarships, conferences, competitions, fellowships and much more."
                 android:textAlignment="center"
                 android:padding="15dp"
                 android:textColor="#000000"

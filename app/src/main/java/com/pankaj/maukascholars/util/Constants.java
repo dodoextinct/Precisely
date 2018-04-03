@@ -17,7 +17,6 @@ public class Constants {
     public static int count_nav_order = 1;
     public static String toolbar_title = "Filter Your Opportunities";
 
-
     public static String url_signup = "https://www.lithics.in/apis/mauka/signup.php";
     public static String url_event_details = "https://www.lithics.in/apis/mauka/read_from_sheets.php";
     public static String url_event_deletion = "https://www.lithics.in/apis/mauka/delete_event.php";

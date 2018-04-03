@@ -2,8 +2,6 @@
     <string name="app_name">Precisely</string>
     <string name="facebook_app_id">154504251970063</string>
     <string name="fb_login_protocol_scheme">fb154504251970063</string>
-    <string name="default_web_client_id">6171481669-3tv2pgvr44vrgvq0nmt24i0lu8a0f06p.apps.googleusercontent.com</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

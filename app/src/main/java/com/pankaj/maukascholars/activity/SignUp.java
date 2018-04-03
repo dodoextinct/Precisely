@@ -96,7 +96,7 @@ public class SignUp extends AppCompatActivity {
                     if (response.contentEquals(text)){
                         Toast.makeText(SignUp.this, "Coupon code applied!", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(SignUp.this, "Please enter current coupon code", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUp.this, "Please enter correct coupon code", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     Toast.makeText(SignUp.this, "Couldn't verify ID. Please try again!", Toast.LENGTH_SHORT).show();
@@ -108,7 +108,6 @@ public class SignUp extends AppCompatActivity {
                 loading.setVisibility(View.GONE);
                 progress.stop();
                 Toast.makeText(SignUp.this, "Couldn't connect to server", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
             }
         }){
             @Override
@@ -120,8 +119,6 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                loading.setVisibility(View.GONE);
-                progress.stop();
                 status_code[0] = response.statusCode;
                 return super.parseNetworkResponse(response);
             }

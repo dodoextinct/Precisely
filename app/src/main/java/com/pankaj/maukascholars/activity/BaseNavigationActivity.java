@@ -91,6 +91,10 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
             share();
             mDrawerLayout.closeDrawers();
             return true;
+        } else if (id == R.id.nav_feedback) {
+            openPlayStore();
+            mDrawerLayout.closeDrawers();
+            return true;
         } else if (id == R.id.nav_logout) {
             Constants.count_nav_order = 0;
             logout();
@@ -102,6 +106,14 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void openPlayStore() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.wayneventures.precisely")));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.wayneventures.precisely")));
+        }
     }
 
     private void logout() {
