@@ -21,7 +21,7 @@ public class Language_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard__actitvity);
+        setContentView(R.layout.activity_language);
 
 
         recyclerView = findViewById(R.id.languages_rv);
