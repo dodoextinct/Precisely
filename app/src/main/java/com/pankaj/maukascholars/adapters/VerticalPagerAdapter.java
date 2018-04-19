@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pankaj.maukascholars.R;
+import com.pankaj.maukascholars.activity.VerticalViewPagerActivity;
 import com.pankaj.maukascholars.util.EventDetails;
 import com.squareup.picasso.Picasso;
 
@@ -77,8 +78,10 @@ public class VerticalPagerAdapter extends PagerAdapter {
         name.setText(singleEventDetail.getName());
         Picasso.with(mContext).load(singleEventDetail.getImage()).fit().error(R.mipmap.j_bezos).into(event_image);
         String date = singleEventDetail.getDeadline();
-        String final_date ="Deadline: " + months[Integer.parseInt(date.substring(0, 2))-1] + "" + date.substring(2);
+        String final_date ="Deadline: " + date.substring(0, 4) + " - " + months[Integer.parseInt(date.substring(5, 7))-1] + " - " + date.substring(8);
         deadline.setText(final_date);
+//        if (singleEventDetail.getSaved()==1)
+//            ((VerticalViewPagerActivity)mContext).
         container.addView(itemView);
         return itemView;
     }

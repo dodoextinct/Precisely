@@ -1,6 +1,7 @@
 package com.pankaj.maukascholars.util;
 
 import java.io.Serializable;
+import java.util.IllegalFormatCodePointException;
 
 /**
  * Project Name: 	<Visual Perception For The Visually Impaired>
@@ -94,6 +95,8 @@ public class EventDetails implements Serializable{
     }
 
     public String getName() {
+        if (name.length() == 0)
+            name = "Curated by Precisely";
         return name;
     }
 

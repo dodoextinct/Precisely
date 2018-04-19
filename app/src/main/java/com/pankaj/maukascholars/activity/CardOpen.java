@@ -70,7 +70,7 @@ public class CardOpen extends AppCompatActivity {
         setDisplay(findViewById(R.id.benefit_wrapper), benefits, singleEventDetails.getBenifits());
         Picasso.with(this).load(singleEventDetails.getImage()).fit().error(R.mipmap.j_bezos).into(post_image);
         String date = singleEventDetails.getDeadline();
-        String final_date =months[Integer.parseInt(date.substring(0, 2))-1] + "" + date.substring(2);
+        String final_date = date.substring(0, 5) + months[Integer.parseInt(date.substring(5, 7))-1] + date.substring(7);
         deadline.setText(final_date);
         link_url = singleEventDetails.getLink();
     }

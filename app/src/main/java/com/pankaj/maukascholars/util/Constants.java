@@ -16,14 +16,17 @@ public class Constants {
     public static String quote = "";
     public static int count_nav_order = 1;
     public static String toolbar_title = "Filter Your Opportunities";
+    public static String language_id = "1";
 
     public static String url_signup = "https://www.lithics.in/apis/mauka/signup.php";
-    public static String url_event_details = "https://www.lithics.in/apis/mauka/read_from_sheets.php";
+    public static String url_event_details = "https://www.lithics.in/apis/mauka/getOpportunities.php";
     public static String url_event_deletion = "https://www.lithics.in/apis/mauka/delete_event.php";
     public static String url_verify_user = "https://www.lithics.in/apis/mauka/verify.php";
     public static String url_get_filters = "https://www.lithics.in/apis/mauka/get_filters.php";
     public static String url_get_quote = "https://www.lithics.in/apis/mauka/get_quote.php";
     public static String url_verify_coupon= "https://www.lithics.in/apis/mauka/verify_coupon.php";
+    public static String url_get_languages= "https://www.lithics.in/apis/mauka/get_languages.php";
+    public static String url_my_language= "https://www.lithics.in/apis/mauka/set_my_language.php";
 
     public static int[] imageResources = new int[]{
             R.mipmap.share,

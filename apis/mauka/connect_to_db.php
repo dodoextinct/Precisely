@@ -7,7 +7,7 @@
 	$db = 'precisely';
 
 	// ---------x---------
-	$dsn = 'mysql:host='.$dbhost.';dbname='.$db;
+	$dsn = 'mysql:host='.$dbhost.';dbname='.$db.';charset=utf8';
 	$options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
 
 // Now create the actual connection object and assign it to a variable
