@@ -32,6 +32,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="@drawable/recto2"
             >
 
             <ImageView
@@ -47,7 +48,7 @@
                 android:text="Precisely"
                 android:layout_gravity="center"
                 android:textSize="30dp"
-                android:textColor="#000000"/>
+                android:textColor="#ffffff"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +56,7 @@
                 android:text="Precisely is a platform which helps you discover the latest academic and professional opportunities, personalized for you! We cover latest jobs, internships, scholarships, conferences, competitions, fellowships and much more."
                 android:textAlignment="center"
                 android:padding="15dp"
-                android:textColor="#000000"
+                android:textColor="#ffffff"
                 android:layout_marginTop="60dp"/>
 
             <TextView
@@ -65,7 +66,7 @@
                 android:text="VISIT OUR WEBSITE"
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:background="@drawable/image_border"
+                android:background="@drawable/official_link_buttonbg"
                 android:padding="@dimen/activity_horizontal_margin"
                 />
 

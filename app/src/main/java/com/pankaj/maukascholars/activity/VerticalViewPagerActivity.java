@@ -11,6 +11,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -207,7 +208,6 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
                 saveEvent(position);
                 break;
             case R.id.stalk:
-                Log.e("TAG","SEEMORE");
                 Intent intent = new Intent(this, CardOpen.class);
                 intent.putExtra("event", verticalViewPager.singleEventDetail);
                 startActivity(intent);

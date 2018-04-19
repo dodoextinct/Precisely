@@ -24,7 +24,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
             android:gravity="center_vertical"
-            android:background="#ff4242"/>
+            android:background="@color/AppColorTheme"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/languages_rv"
