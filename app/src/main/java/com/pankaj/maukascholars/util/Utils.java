@@ -13,6 +13,22 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.pankaj.maukascholars.R;
+import com.pankaj.maukascholars.application.PreciselyApplication;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Created by froger_mcs on 05.11.14.
@@ -53,7 +69,7 @@ public class Utils {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
-    public static void makeToast(View view, String s) {
+    public static void makeToast(String s, View view) {
         Snackbar snackbar = Snackbar.make(view,
                 s, Snackbar.LENGTH_SHORT);
         snackbar.show();

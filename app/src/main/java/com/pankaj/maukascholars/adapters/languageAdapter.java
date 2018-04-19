@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pankaj.maukascholars.R;
+import com.pankaj.maukascholars.util.Constants;
 import com.pankaj.maukascholars.util.Language;
 
 import java.util.List;
@@ -53,23 +54,19 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Language language = LanguagesList.get(position);
-        holder.bindTo(language.getTitle());
+        final Language language = LanguagesList.get(position);
+        holder.bindTo(language.getLanguage());
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                position = holder.getAdapterPosition();
-
-                if (holder.imageView.getVisibility() == View.GONE)
-                {
-//                        Log.e("GEE", "INVISIBKLE");
-                    if (checkedIV!= null) {
-
-                        checkedIV.setVisibility(View.GONE);
-                    }
-                    holder.imageView.setVisibility(View.VISIBLE);
-                    checkedIV = holder.imageView;
-                }
+            if (holder.imageView.getVisibility() == View.GONE)
+            {
+                if (checkedIV!= null)
+                    checkedIV.setVisibility(View.GONE);
+                holder.imageView.setVisibility(View.VISIBLE);
+                Constants.language_id = language.getLanguage_id();
+                checkedIV = holder.imageView;
+            }
             }
         });
     }

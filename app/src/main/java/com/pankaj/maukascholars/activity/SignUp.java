@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +33,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.pankaj.maukascholars.R;
-import com.pankaj.maukascholars.application.VolleyHandling;
+import com.pankaj.maukascholars.application.PreciselyApplication;
 import com.pankaj.maukascholars.util.Constants;
 import com.rey.material.widget.ProgressView;
 
@@ -124,7 +123,7 @@ public class SignUp extends AppCompatActivity {
             }
         };
 
-        VolleyHandling.getInstance().addToRequestQueue(request, "coupon_verify");
+        PreciselyApplication.getInstance().addToRequestQueue(request, "coupon_verify");
     }
 
     // setupGoogle()
@@ -284,7 +283,7 @@ public class SignUp extends AppCompatActivity {
             }
         };
 
-        VolleyHandling.getInstance().addToRequestQueue(request, "signin");
+        PreciselyApplication.getInstance().addToRequestQueue(request, "signin");
     }
 
     @Override

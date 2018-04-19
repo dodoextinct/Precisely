@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.pankaj.maukascholars.activity.CardOpen;
+import com.pankaj.maukascholars.activity.VerticalViewPagerActivity;
 import com.pankaj.maukascholars.adapters.VerticalPagerAdapter;
 import com.pankaj.maukascholars.util.EventDetails;
 
@@ -132,6 +133,7 @@ public class VerticalViewPager extends ViewPager {
     }
 
     private boolean isAClick(float startX, float endX, float startY, float endY) {
+
         float differenceX = Math.abs(startX - endX);
         float differenceY = Math.abs(startY - endY);
         return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);

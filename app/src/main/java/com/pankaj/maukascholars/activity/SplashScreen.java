@@ -1,13 +1,11 @@
 package com.pankaj.maukascholars.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.pankaj.maukascholars.R;
-import com.pankaj.maukascholars.application.VolleyHandling;
+import com.pankaj.maukascholars.application.PreciselyApplication;
 import com.pankaj.maukascholars.util.Constants;
 import com.pankaj.maukascholars.util.Utils;
 
@@ -103,7 +101,7 @@ public class SplashScreen extends AppCompatActivity {
             }
         };
 
-        VolleyHandling.getInstance().addToRequestQueue(request, "signin");
+        PreciselyApplication.getInstance().addToRequestQueue(request, "signin");
     }
 
     private void getNewQuote() {
@@ -136,7 +134,7 @@ public class SplashScreen extends AppCompatActivity {
             }
         };
 
-        VolleyHandling.getInstance().addToRequestQueue(request, "signin");
+        PreciselyApplication.getInstance().addToRequestQueue(request, "signin");
     }
 
     private void getFilters() {
@@ -158,7 +156,7 @@ public class SplashScreen extends AppCompatActivity {
                             Constants.filters.add(jA_text.getString(i));
                             Constants.filters_image_urls.add(jA_url.getString(i));
                         }
-                       loadActivity(Filters.class);
+                       loadActivity(Language_Activity.class);
                     } catch (JSONException e) {
                         Toast.makeText(SplashScreen.this, "Couldn't retrieve content. Please try again!", Toast.LENGTH_SHORT).show();
                     }
@@ -179,7 +177,7 @@ public class SplashScreen extends AppCompatActivity {
             }
         };
 
-        VolleyHandling.getInstance().addToRequestQueue(request, "signin");
+        PreciselyApplication.getInstance().addToRequestQueue(request, "filters");
     }
 
     private void loadActivity(Class activity){

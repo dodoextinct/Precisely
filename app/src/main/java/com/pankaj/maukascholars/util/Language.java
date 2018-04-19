@@ -5,21 +5,30 @@ package com.pankaj.maukascholars.util;
  */
 
 public class Language {
-    private String title;
+    private String language;
+    private String language_id;
 
     public Language() {
     }
 
-    public Language(String title) {
-        this.title = title;
+    public Language(String language, String language_id) {
+        this.language = language;
+        this.language_id = language_id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setTitle(String name) {
-        this.title = name;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
+    public String getLanguage_id() {
+        return language_id;
+    }
+
+    public void setLanguage_id(String language_id) {
+        this.language_id = language_id;
+    }
 }
