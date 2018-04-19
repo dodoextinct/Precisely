@@ -7,10 +7,13 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -51,7 +54,7 @@ import java.util.TimeZone;
  * Functions: 		<>
  * Global Variables:	<>
  */
-public class VerticalViewPagerActivity extends AppCompatActivity implements View.OnClickListener {
+public class VerticalViewPagerActivity extends BaseNavigationActivity implements View.OnClickListener {
 
     RelativeLayout loading;
     ProgressView progress;
@@ -65,6 +68,9 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Constants.toolbar_title = " ";
+
         setContentView(R.layout.inshorts);
         loading = findViewById(R.id.progress_rl);
         progress = findViewById(R.id.progress);
@@ -102,13 +108,14 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
 
             }
         });
-        LinearLayout share, star, save, send;
+        ImageView refresh, share, save;
+        Button send;
         share = findViewById(R.id.share);
-        star = findViewById(R.id.star);
+//        star = findViewById(R.id.star);
         save = findViewById(R.id.save);
         send = findViewById(R.id.stalk);
         share.setOnClickListener(this);
-        star.setOnClickListener(this);
+//        star.setOnClickListener(this);
         save.setOnClickListener(this);
         send.setOnClickListener(this);
 
@@ -189,13 +196,14 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
             case R.id.share:
                 share(position);
                 break;
-            case R.id.star:
-                starEvent(position);
-                break;
+//            case R.id.star:
+//                starEvent(position);
+//                break;
             case R.id.save:
                 saveEvent(position);
                 break;
             case R.id.stalk:
+                Log.e("TAG","SEEMORE");
                 Intent intent = new Intent(this, CardOpen.class);
                 intent.putExtra("event", verticalViewPager.singleEventDetail);
                 startActivity(intent);
@@ -305,6 +313,29 @@ public class VerticalViewPagerActivity extends AppCompatActivity implements View
             }
         };
         registerReceiver(receiver, filter);
+
+    }
+
+    public void ViewAppBarLay(){
+        AppBarLayout appBarLayout;
+        appBarLayout = findViewById(R.id.appBar_Layout);
+        if (appBarLayout.getVisibility() == View.GONE)
+        {
+            appBarLayout.setVisibility(View.VISIBLE);
+        }
+        else if(appBarLayout.getVisibility() == View.VISIBLE)
+        {
+            appBarLayout.setVisibility(View.GONE);
+        }
+    }
+
+    public void SwipeUpViewAppBar(){
+        AppBarLayout appBarLayout;
+        appBarLayout = findViewById(R.id.appBar_Layout);
+        if (appBarLayout.getVisibility() == View.VISIBLE)
+        {
+            appBarLayout.setVisibility(View.GONE);
+        }
 
     }
 

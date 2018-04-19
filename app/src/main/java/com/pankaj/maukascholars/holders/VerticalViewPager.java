@@ -2,13 +2,17 @@ package com.pankaj.maukascholars.holders;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toolbar;
 
+import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.activity.CardOpen;
+import com.pankaj.maukascholars.activity.VerticalViewPagerActivity;
 import com.pankaj.maukascholars.adapters.VerticalPagerAdapter;
 import com.pankaj.maukascholars.util.EventDetails;
 
@@ -23,14 +27,17 @@ public class VerticalViewPager extends ViewPager {
     float startX, startY;
     private int CLICK_ACTION_THRESHOLD = 10;
     public EventDetails singleEventDetail;
+    public Context context;
 
     public VerticalViewPager(Context context) {
         super(context);
+        this.context = context;
         init();
     }
 
     public VerticalViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         init();
     }
 
@@ -121,10 +128,12 @@ public class VerticalViewPager extends ViewPager {
             case MotionEvent.ACTION_UP:
                 float endX = ev.getX();
                 float endY = ev.getY();
+                ((VerticalViewPagerActivity)context).SwipeUpViewAppBar();
                 if (isAClick(startX, endX, startY, endY)) {
-                    Intent intent = new Intent(getContext(), CardOpen.class);
-                    intent.putExtra("event", singleEventDetail);
-                    getContext().startActivity(intent);
+                    ((VerticalViewPagerActivity)context).ViewAppBarLay();
+//                    appBar_Layout = findViewById(R.id.appBar_Layout);
+//                    appBar_Layout.setVisibility(View.VISIBLE);
+
                 }
                 break;
         }

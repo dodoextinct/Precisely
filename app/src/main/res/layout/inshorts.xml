@@ -1,102 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppBarOverlay"
+        android:visibility="gone">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/AppColorTheme"
+            app:popupTheme="@style/PopupOverlay"
+            >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:id="@+id/share"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_share_black_24dp"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:layout_marginRight="5dp"
+                />
+
+        <ImageView
+            android:id="@+id/save"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:src="@drawable/ic_bookmark_border_black_24dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="5dp"
+
+            />
+
+            <ImageView
+                android:id="@+id/refresh"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:src="@drawable/ic_refresh_black_24dp"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="10dp"
+                />
+
+        </LinearLayout>
+
+        </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
     <com.pankaj.maukascholars.holders.VerticalViewPager
         android:id="@+id/verticleViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_above="@+id/options_ll"
         />
-    <LinearLayout
-        android:id="@+id/options_ll"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:baselineAligned="false">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:elevation="4dp"
-            android:id="@+id/share"
-            >
-
-            <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_share_black_24dp"
-                android:layout_marginTop="12dp"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/star"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:elevation="4dp"
-            >
-
-            <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_star_border_black_24dp"
-            />
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
+    <!--<LinearLayout-->
+        <!--android:id="@+id/options_ll"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:baselineAligned="false">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
             <!--android:layout_height="wrap_content"-->
-            <!--android:text="STAR"-->
-            <!--android:textColor="#fff"-->
-            <!--/>-->
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/save"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:elevation="4dp"
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical"-->
+            <!--android:elevation="4dp"-->
+            <!--android:id="@+id/share"-->
+            <!--&gt;-->
 
-            >
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_bookmark_border_black_24dp"
-                android:layout_marginTop="12dp"
-                />
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="SAVE"-->
-                <!--android:textColor="#fff"-->
+            <!--<ImageView-->
+            <!--android:layout_width="32dp"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:src="@drawable/ic_share_black_24dp"-->
+                <!--android:layout_marginTop="12dp"-->
                 <!--/>-->
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/stalk"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:elevation="4dp">
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_arrow_forward_black_24dp"
-                android:layout_marginTop="12dp"
-                />
-        </LinearLayout>
-    </LinearLayout>
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+            <!--android:id="@+id/star"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical"-->
+            <!--android:elevation="4dp"-->
+            <!--&gt;-->
+
+            <!--<ImageView-->
+            <!--android:layout_width="32dp"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:src="@drawable/ic_star_border_black_24dp"-->
+            <!--/>-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="STAR"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="#fff"&ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+            <!--android:id="@+id/save"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical"-->
+            <!--android:elevation="4dp"-->
+
+            <!--&gt;-->
+            <!--<ImageView-->
+                <!--android:layout_width="32dp"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:src="@drawable/ic_bookmark_border_black_24dp"-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--/>-->
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="SAVE"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="#fff"&ndash;&gt;-->
+                <!--&lt;!&ndash;/>&ndash;&gt;-->
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+            <!--android:id="@+id/stalk"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical"-->
+            <!--android:elevation="4dp">-->
+            <!--<ImageView-->
+                <!--android:layout_width="32dp"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:src="@drawable/ic_arrow_forward_black_24dp"-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--/>-->
+        <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
     <RelativeLayout
         android:id="@+id/progress_rl"
         android:layout_width="match_parent"
@@ -132,4 +205,16 @@
         android:layout_height="match_parent">
 
     </RelativeLayout>
+
 </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_dashnav"
+        app:menu="@menu/precisely_nav_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

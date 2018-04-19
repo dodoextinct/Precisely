@@ -67,12 +67,17 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_filters_activity) {
+        if (id == R.id.nav_opportunities_activity) {
             Constants.count_nav_order = 1;
+            loadActivity(VerticalViewPagerActivity.class);
+            mDrawerLayout.closeDrawers();
+            return true;
+        } else if (id == R.id.nav_filters_activity) {
+            Constants.count_nav_order = 0;
             loadActivity(Filters.class);
             mDrawerLayout.closeDrawers();
             return true;
-        } else if (id == R.id.nav_saved_activity) {
+        }else if (id == R.id.nav_saved_activity) {
             Constants.count_nav_order = 0;
             loadActivity(SavedActivity.class);
             mDrawerLayout.closeDrawers();
