@@ -156,10 +156,10 @@ public class SplashScreen extends AppCompatActivity {
                             Constants.filters.add(jA_text.getString(i));
                             Constants.filters_image_urls.add(jA_url.getString(i));
                         }
-                        if (!sp.contains("language_id"))
+//                        if (!sp.contains("language_id"))
                             loadActivity(Language_Activity.class);
-                        else
-                            loadActivity(VerticalViewPagerActivity.class);
+//                        else
+//                            loadActivity(VerticalViewPagerActivity.class);
                     } catch (JSONException e) {
                         Toast.makeText(SplashScreen.this, "Couldn't retrieve content. Please try again!", Toast.LENGTH_SHORT).show();
                     }
