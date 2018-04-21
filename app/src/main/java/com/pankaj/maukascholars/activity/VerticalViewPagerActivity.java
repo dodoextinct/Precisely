@@ -35,6 +35,7 @@ import com.pankaj.maukascholars.util.EventDetails;
 import com.pankaj.maukascholars.util.alarm.ScheduleAlarm;
 import com.pankaj.maukascholars.util.alarm.databasehandling.DBManipulation;
 import com.rey.material.widget.ProgressView;
+import com.transitionseverywhere.TransitionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
