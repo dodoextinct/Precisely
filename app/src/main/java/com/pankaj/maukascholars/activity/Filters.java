@@ -35,16 +35,6 @@ public class Filters extends BaseNavigationActivity {
         super.onCreate(savedInstanceState);
         Constants.toolbar_title = "Filters";
         setContentView(R.layout.activity_filters);
-        if (sp.contains(key)) {
-            try {
-                JSONArray jO = new JSONArray(sp.getString(key, ""));
-                Constants.clickedFilters.clear();
-                for (int i = 0; i < jO.length(); i++)
-                    Constants.clickedFilters.add(jO.getInt(i));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
         setupFilters();
         proceed = findViewById(R.id.proceed);
 
@@ -52,6 +42,8 @@ public class Filters extends BaseNavigationActivity {
             @Override
             public void onClick(View view) {
                 if (clickedFilters.size() > 0) {
+                    editor.putBoolean("areFiltersSelected", true);
+                    editor.apply();
                     loadActivity(VerticalViewPagerActivity.class);
                 } else
                     Toast.makeText(Filters.this, "Please select at least one filter!", Toast.LENGTH_SHORT).show();

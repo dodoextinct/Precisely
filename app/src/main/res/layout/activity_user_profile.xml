@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="0dp">
-
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar_Layout"
             android:layout_width="match_parent"
@@ -22,7 +21,6 @@
             android:theme="@style/AppBarOverlay"
             android:elevation="0dp"
             >
-
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -31,19 +29,13 @@
                 app:popupTheme="@style/PopupOverlay"
                 android:elevation="0dp"
                 >
-
             </android.support.v7.widget.Toolbar>
-
         </android.support.design.widget.AppBarLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_below="@id/appBar_Layout">
-
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
@@ -62,7 +54,6 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,10 +63,6 @@
                 android:layout_below="@id/profile_image"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp" />
-
-
-
-
         </RelativeLayout>
 
         <LinearLayout
@@ -149,7 +136,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="The language you want to see your app in"
+                        android:text="The languageDetails you want to see your app in"
                         android:textSize="10dp"/>
 
                 </LinearLayout>

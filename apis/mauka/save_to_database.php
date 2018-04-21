@@ -2,10 +2,10 @@
     include  'connect_to_db.php';
     error_reporting(0);
 
-    $statement = $pdo->prepare("CREATE TABLE IF NOT EXISTS api_languages (id INT AUTO_INCREMENT, language VARCHAR(255), PRIMARY KEY(language), KEY(id));");
+    $statement = $pdo->prepare("CREATE TABLE IF NOT EXISTS api_languages (id INT AUTO_INCREMENT, languageDetails VARCHAR(255), PRIMARY KEY(languageDetails), KEY(id));");
     $statement->execute();
 
-    $statement = $pdo->prepare("SELECT language FROM api_languages");
+    $statement = $pdo->prepare("SELECT languageDetails FROM api_languages");
     $statement->execute();
 
     $languages = $statement->fetchAll();
@@ -18,9 +18,9 @@
         return $value;
     }
 
-    foreach($languages as $language){
-        $language = $language["language"];
-        $table_name = "opportunities_".$language;
+    foreach($languages as $languageDetails){
+        $languageDetails = $languageDetails["languageDetails"];
+        $table_name = "opportunities_".$languageDetails;
         $statement = $pdo->prepare("CREATE TABLE IF NOT EXISTS ".$table_name." (ID INT NOT NULL, HEADLINE TEXT, DESCRIPTION TEXT, ELIGIBILITY TEXT, REQUIREMENTS TEXT, BENEFITS TEXT, COST TEXT, DEADLINE DATE, IMAGE TEXT, LINK TEXT, TAGS TEXT, SUBTAGS TEXT, NAME TEXT, NAMELINK TEXT, PRIMARY KEY(ID)) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
         $statement->execute();
 
@@ -33,8 +33,8 @@
         else
             $id = $id["ID"];
 
-        $stmt = $pdo->prepare("SELECT location FROM api_regional_files WHERE language = ? LIMIT 1;");
-        $stmt->execute([$language]);
+        $stmt = $pdo->prepare("SELECT location FROM api_regional_files WHERE languageDetails = ? LIMIT 1;");
+        $stmt->execute([$languageDetails]);
         $sheets_url = $stmt->fetch();
         $sheets_url = $sheets_url["location"];
 

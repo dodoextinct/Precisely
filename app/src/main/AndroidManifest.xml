@@ -80,6 +80,7 @@
         <activity android:name=".activity.CardOpen" />
         <activity android:name=".activity.Language_Activity" />
         <activity android:name=".activity.UserProfileActivity"></activity>
+        <activity android:name=".activity.TutorialsActivity" />
     </application>
 
 </manifest>

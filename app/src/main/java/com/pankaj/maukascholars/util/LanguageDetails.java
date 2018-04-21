@@ -4,14 +4,14 @@ package com.pankaj.maukascholars.util;
  * Created by hitesh on 19/04/18.
  */
 
-public class Language {
+public class LanguageDetails {
     private String language;
     private String language_id;
 
-    public Language() {
+    public LanguageDetails() {
     }
 
-    public Language(String language, String language_id) {
+    public LanguageDetails(String language, String language_id) {
         this.language = language;
         this.language_id = language_id;
     }

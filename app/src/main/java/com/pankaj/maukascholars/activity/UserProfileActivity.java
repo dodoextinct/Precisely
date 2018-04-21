@@ -102,7 +102,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
         notification_toggle = findViewById(R.id.notification_toggle);
         notification_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     Toast.makeText(UserProfileActivity.this, "Now, we will notify you!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -111,7 +111,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
         email_toggle = findViewById(R.id.email_toggle);
         email_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     Toast.makeText(UserProfileActivity.this, "Now, we will remind you by emails", Toast.LENGTH_SHORT).show();
                 }
 
@@ -124,61 +124,50 @@ public class UserProfileActivity extends BaseNavigationActivity {
         try {
             PackageManager pm = getPackageManager();
             int hasPerm = pm.checkPermission(Manifest.permission.CAMERA, getPackageName());
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
 //            if (hasPerm == PackageManager.PERMISSION_GRANTED) {
                 new AlertDialog.Builder(UserProfileActivity.this)
 
                         .setIcon(R.drawable.ic_account_circle_black_24dp)
                         .setTitle("Upload Photo")
-                        .setNeutralButton("Cancel", new DialogInterface.OnClickListener()
-                        {
+                        .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
+                            public void onClick(DialogInterface dialog, int which) {
 
                             }
                         })
 
-                        .setPositiveButton("Take Photo", new DialogInterface.OnClickListener()
-                        {
+                        .setPositiveButton("Take Photo", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
+                            public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                 startActivityForResult(intent, PICK_IMAGE_CAMERA);
                             }
                         })
 
-                        .setNegativeButton("Choose from Gallery", new DialogInterface.OnClickListener()
-                        {
+                        .setNegativeButton("Choose from Gallery", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
+                            public void onClick(DialogInterface dialog, int which) {
                                 Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                 startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
                             }
                         })
                         .show();
-            } else
-            {
+            } else {
                 new AlertDialog.Builder(UserProfileActivity.this)
 
                         .setIcon(R.drawable.ic_account_circle_black_24dp)
                         .setTitle("Upload Photo")
-                        .setNeutralButton("Cancel", new DialogInterface.OnClickListener()
-                        {
+                        .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
+                            public void onClick(DialogInterface dialog, int which) {
 
                             }
                         })
 
-                        .setPositiveButton("Take Photo", new DialogInterface.OnClickListener()
-                        {
+                        .setPositiveButton("Take Photo", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
+                            public void onClick(DialogInterface dialog, int which) {
 //                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                                startActivityForResult(intent, PICK_IMAGE_CAMERA);
                                 String message = "You have not given your camera permissions to us";
@@ -199,11 +188,9 @@ public class UserProfileActivity extends BaseNavigationActivity {
                             }
                         })
 
-                        .setNegativeButton("Choose from Gallery", new DialogInterface.OnClickListener()
-                        {
+                        .setNegativeButton("Choose from Gallery", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
+                            public void onClick(DialogInterface dialog, int which) {
                                 Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                 startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
                             }
@@ -254,7 +241,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
                 e.printStackTrace();
             }
         } else if (requestCode == PICK_IMAGE_GALLERY) {
-            Log.e("TAG" , resultCode + "prep");
+            Log.e("TAG", resultCode + "prep");
             if (resultCode != 0) {
                 Uri selectedImage = data.getData();
                 try {
@@ -285,8 +272,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
-            case 1:
-            {
+            case 1: {
                 Map<String, Integer> perms = new HashMap<String, Integer>();
                 // Initial
                 perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
@@ -310,6 +296,5 @@ public class UserProfileActivity extends BaseNavigationActivity {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
 }
 

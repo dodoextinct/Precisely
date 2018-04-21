@@ -255,9 +255,15 @@ public class SignUp extends AppCompatActivity {
                     Constants.user_id = response;
                     loading.setVisibility(View.GONE);
                     progress.stop();
-                    Intent intent = new Intent(SignUp.this, SplashScreen.class);
-                    startActivity(intent);
-                    finish();
+                    if (sp.getBoolean("isFirstTime", true)) {
+                        Intent intent = new Intent(SignUp.this, TutorialsActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        Intent intent = new Intent(SignUp.this, SplashScreen.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }else{
                     loading.setVisibility(View.GONE);
                     progress.stop();

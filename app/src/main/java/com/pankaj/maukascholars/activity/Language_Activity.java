@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -20,7 +21,7 @@ import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.languageAdapter;
 import com.pankaj.maukascholars.application.PreciselyApplication;
 import com.pankaj.maukascholars.util.Constants;
-import com.pankaj.maukascholars.util.Language;
+import com.pankaj.maukascholars.util.LanguageDetails;
 import com.pankaj.maukascholars.util.Utils;
 
 import org.json.JSONArray;
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Language_Activity extends AppCompatActivity {
-    private List<Language> language_list = new ArrayList<>();
+    private List<LanguageDetails> language_Details_list = new ArrayList<>();
     private RecyclerView recyclerView;
     private languageAdapter mAdapter;
 
@@ -57,7 +58,7 @@ public class Language_Activity extends AppCompatActivity {
                         JSONArray languages_array = new JSONArray(response);
                         for (int i = 0; i < languages_array.length(); i++){
                             JSONObject jsonObject = languages_array.getJSONObject(i);
-                            language_list.add(new Language(jsonObject.getString("language"), jsonObject.getString("id")));
+                            language_Details_list.add(new LanguageDetails(jsonObject.getString("language"), jsonObject.getString("id")));
                         }
                         init();
                     } catch (JSONException e) {
@@ -69,6 +70,8 @@ public class Language_Activity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("TAGM", error.toString());
+                Log.e("TAG", Constants.user_id + "-User ID");
                 makeToast("Couldn't connect to server");
                 error.printStackTrace();
             }
@@ -93,7 +96,7 @@ public class Language_Activity extends AppCompatActivity {
     private void init() {
         recyclerView = findViewById(R.id.languages_rv);
 
-        mAdapter = new languageAdapter(language_list);
+        mAdapter = new languageAdapter(language_Details_list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -107,7 +110,7 @@ public class Language_Activity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("language_id", Constants.language_id);
                 editor.apply();
-                makeToast("Language preference SAVED!");
+                makeToast("LanguageDetails preference SAVED!");
                 updateLanguage(Constants.language_id);
             }
         });
@@ -119,7 +122,7 @@ public class Language_Activity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (status_code[0] == 200 && response.contentEquals("SUCCESS")) {
-                    loadActivity(Filters.class);
+                    loadActivity(SplashScreen.class);
                 }else
                     makeToast("Please Try Again after sometime");
             }

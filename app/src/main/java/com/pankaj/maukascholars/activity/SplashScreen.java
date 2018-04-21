@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.application.PreciselyApplication;
+import com.pankaj.maukascholars.holders.VerticalViewPager;
 import com.pankaj.maukascholars.util.Constants;
 import com.pankaj.maukascholars.util.Utils;
 
@@ -26,23 +28,29 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.pankaj.maukascholars.util.Constants.key;
+
 public class SplashScreen extends AppCompatActivity {
 
     SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        sp = PreciselyApplication.getSharedPreferences();
         if (sp.contains("signed_in")){
-            setContentView(R.layout.activity_splash_screen);
-            if (sp.contains("quote")){
-                TextView tv = findViewById(R.id.quote);
-                Constants.quote = sp.getString("quote", "If opportunities don't knock,\nBuild a door.").replace("\\", "");
-                tv.setText(Constants.quote);
+            if (!sp.contains("isFirstTime") || sp.getBoolean("isFirstTime", true)){
+                loadActivity(TutorialsActivity.class);
+            }else {
+                setContentView(R.layout.activity_splash_screen);
+                if (sp.contains("quote")) {
+                    TextView tv = findViewById(R.id.quote);
+                    Constants.quote = sp.getString("quote", "If opportunities don't knock,\nBuild a door.").replace("\\", "");
+                    tv.setText(Constants.quote);
+                }
+                Constants.user_id = sp.getString("user_id", null);
+                Constants.user_name = sp.getString("user_name", null);
+                checkIfExists();
             }
-            Constants.user_id = sp.getString("user_id", null);
-            Constants.user_name = sp.getString("user_name", null);
-            checkIfExists();
         }else {
             loadActivity(SignUp.class);
         }
@@ -146,33 +154,46 @@ public class SplashScreen extends AppCompatActivity {
                     try {
                         if (response.contains("[\""))
                             response = response.substring(response.indexOf("[\""));
-                        String filter_text = response.substring(0, response.indexOf("]")+1);
-                        String filter_image_url = response.substring(response.indexOf("]")+1);
+                        String filter_text = response.substring(0, response.indexOf("]") + 1);
+                        String filter_image_url = response.substring(response.indexOf("]") + 1);
                         Constants.filters.clear();
                         Constants.filters_image_urls.clear();
                         JSONArray jA_text = new JSONArray(filter_text);
                         JSONArray jA_url = new JSONArray(filter_image_url);
-                        for (int i = 0; i < jA_text.length(); i++){
+                        for (int i = 0; i < jA_text.length(); i++) {
                             Constants.filters.add(jA_text.getString(i));
                             Constants.filters_image_urls.add(jA_url.getString(i));
                         }
-//                        if (!sp.contains("language_id"))
+                        if (!sp.contains("language_id")) {
                             loadActivity(Language_Activity.class);
-//                        else
-//                            loadActivity(VerticalViewPagerActivity.class);
+                        } else {
+                            if (sp.contains(key)) {
+                                try {
+                                    JSONArray jO = new JSONArray(sp.getString(key, ""));
+                                    Constants.clickedFilters.clear();
+                                    for (int i = 0; i < jO.length(); i++)
+                                        Constants.clickedFilters.add(jO.getInt(i));
+                                    Log.e("KEY", Constants.clickedFilters.size()+"");
+                                    loadActivity(VerticalViewPagerActivity.class);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                loadActivity(Filters.class);
+                            }
+                        }
                     } catch (JSONException e) {
                         Toast.makeText(SplashScreen.this, "Couldn't retrieve content. Please try again!", Toast.LENGTH_SHORT).show();
                     }
-                }else
-                    Toast.makeText(SplashScreen.this, "Please Try Again after sometime", Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SplashScreen.this, "Couldn't connect to server", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
-            }
-        }){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SplashScreen.this, "Couldn't connect to server", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }){
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 status_code[0] = response.statusCode;

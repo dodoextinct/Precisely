@@ -15,7 +15,7 @@ Think of it as 'Spotify for Opportunities'
 - Simplistic UI (Every opportunity is represented in a card with all the relevant information including the deadline and eligibility)  
 - Intelligent (Will employ algorithms like collaborative filtering and Deep Neural Network (DNN) to provide the users with an intelligent recommendation system, which adapts and evolves seamlessly with the user's changing interests.  
 - Social (User can create their own collections of opportunities, share with others, follow other users, etc)  
-- Wholesome (Regional language support, offline reminders for saved opportunities, etc.)  
+- Wholesome (Regional languageDetails support, offline reminders for saved opportunities, etc.)
   
 # Contribution Guidelines  
 - You can help develop the frontend of the Android app.

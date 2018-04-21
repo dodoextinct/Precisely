@@ -1,6 +1,5 @@
 package com.pankaj.maukascholars.activity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,7 +9,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -24,8 +22,7 @@ import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.languageAdapter;
 import com.pankaj.maukascholars.application.PreciselyApplication;
 import com.pankaj.maukascholars.util.Constants;
-import com.pankaj.maukascholars.util.Language;
-import com.pankaj.maukascholars.util.Utils;
+import com.pankaj.maukascholars.util.LanguageDetails;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +39,7 @@ import java.util.Map;
 
 public class CustomDialogClass extends Dialog{
 
-    private List<Language> language_list = new ArrayList<>();
+    private List<LanguageDetails> language_Details_list = new ArrayList<>();
     private RecyclerView recyclerView;
     private languageAdapter mAdapter;
 
@@ -70,7 +67,7 @@ public class CustomDialogClass extends Dialog{
                         JSONArray languages_array = new JSONArray(response);
                         for (int i = 0; i < languages_array.length(); i++){
                             JSONObject jsonObject = languages_array.getJSONObject(i);
-                            language_list.add(new Language(jsonObject.getString("language"), jsonObject.getString("id")));
+                            language_Details_list.add(new LanguageDetails(jsonObject.getString("language"), jsonObject.getString("id")));
                         }
                         init();
                     } catch (JSONException e) {
@@ -106,7 +103,7 @@ public class CustomDialogClass extends Dialog{
     private void init() {
         recyclerView = findViewById(R.id.languages_rv);
 
-        mAdapter = new languageAdapter(language_list);
+        mAdapter = new languageAdapter(language_Details_list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -120,7 +117,7 @@ public class CustomDialogClass extends Dialog{
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("language_id", Constants.language_id);
                 editor.apply();
-                makeToast("Language preference SAVED!");
+                makeToast("LanguageDetails preference SAVED!");
                 updateLanguage(Constants.language_id);
             }
         });

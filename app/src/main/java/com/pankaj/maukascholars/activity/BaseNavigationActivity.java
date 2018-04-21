@@ -68,9 +68,13 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         int id = item.getItemId();
 
         if (id == R.id.nav_opportunities_activity) {
-            Constants.count_nav_order = 1;
-            loadActivity(VerticalViewPagerActivity.class);
-            mDrawerLayout.closeDrawers();
+            if (Constants.clickedFilters.size()>0) {
+                Constants.count_nav_order = 1;
+                loadActivity(VerticalViewPagerActivity.class);
+                mDrawerLayout.closeDrawers();
+            }else{
+                Toast.makeText(this, "Please select at least one filter!", Toast.LENGTH_SHORT).show();
+            }
             return true;
         } else if (id == R.id.nav_filters_activity) {
             Constants.count_nav_order = 0;
@@ -136,7 +140,10 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
         } else {
             if (Constants.count_nav_order == 0){
                 Constants.count_nav_order++;
-                loadActivity(Filters.class);
+                if (Constants.clickedFilters.size() > 0)
+                    loadActivity(VerticalViewPagerActivity.class);
+                else
+                    finish();
             }else if (Constants.count_nav_order == 1){
                 Constants.count_nav_order++;
                 Toast.makeText(this, "Press Back again to exit", Toast.LENGTH_SHORT).show();

@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.util.Constants;
-import com.pankaj.maukascholars.util.Language;
+import com.pankaj.maukascholars.util.LanguageDetails;
 
 import java.util.List;
 
 public class languageAdapter extends RecyclerView.Adapter<languageAdapter.MyViewHolder> {
 
-    private List<Language> LanguagesList;
+    private List<LanguageDetails> languagesList;
     private ImageView checkedIV = null;
 
 
@@ -40,8 +40,8 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.MyView
 
     }
 
-    public languageAdapter(List<Language> LanguagesList) {
-        this.LanguagesList = LanguagesList;
+    public languageAdapter(List<LanguageDetails> languagesList) {
+        this.languagesList = languagesList;
     }
 
     @Override
@@ -54,8 +54,8 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        final Language language = LanguagesList.get(position);
-        holder.bindTo(language.getLanguage());
+        final LanguageDetails languageDetails = languagesList.get(position);
+        holder.bindTo(languageDetails.getLanguage());
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +64,7 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.MyView
                 if (checkedIV!= null)
                     checkedIV.setVisibility(View.GONE);
                 holder.imageView.setVisibility(View.VISIBLE);
-                Constants.language_id = language.getLanguage_id();
+                Constants.language_id = languageDetails.getLanguage_id();
                 checkedIV = holder.imageView;
             }
             }
@@ -73,6 +73,6 @@ public class languageAdapter extends RecyclerView.Adapter<languageAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return LanguagesList.size();
+        return languagesList.size();
     }
 }
