@@ -2,6 +2,7 @@ package com.pankaj.maukascholars.holders;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -52,7 +53,7 @@ public class VerticalViewPager extends ViewPager {
     private class VerticalPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.75f;
         @Override
-        public void transformPage(View view, float position) {
+        public void transformPage(@NonNull View view, float position) {
 
             if (position < -1) { // [-Infinity,-1)
                 // This page is way off-screen to the left.
@@ -114,6 +115,7 @@ public class VerticalViewPager extends ViewPager {
 
     @Override
     public boolean performClick() {
+        ((VerticalViewPagerActivity)context).ViewAppBarLay();
         return super.performClick();
     }
 
@@ -130,7 +132,7 @@ public class VerticalViewPager extends ViewPager {
                 float endY = ev.getY();
                 ((VerticalViewPagerActivity)context).SwipeUpViewAppBar();
                 if (isAClick(startX, endX, startY, endY)) {
-                    ((VerticalViewPagerActivity)context).ViewAppBarLay();
+                    performClick();
 //                    appBar_Layout = findViewById(R.id.appBar_Layout);
 //                    appBar_Layout.setVisibility(View.VISIBLE);
 

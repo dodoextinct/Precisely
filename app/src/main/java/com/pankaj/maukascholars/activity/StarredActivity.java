@@ -27,14 +27,11 @@ public class StarredActivity extends BaseNavigationActivity {
     List<EventDetails> mItems;
     RecyclerView.Adapter adapter;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Constants.toolbar_title = "Starred Opportunities";
+        Constants.toolbar_title = "Saved Opportunities";
         setContentView(R.layout.activity_profile);
-
-        toolbar.setTitle("Starred Opportunities");
 
         RecyclerView recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

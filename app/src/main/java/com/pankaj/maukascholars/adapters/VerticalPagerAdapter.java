@@ -2,6 +2,7 @@ package com.pankaj.maukascholars.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.support.v4.view.PagerAdapter;
 import android.text.TextPaint;
@@ -10,11 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pankaj.maukascholars.R;
+import com.pankaj.maukascholars.activity.CardOpen;
 import com.pankaj.maukascholars.activity.VerticalViewPagerActivity;
 import com.pankaj.maukascholars.util.EventDetails;
 import com.squareup.picasso.Picasso;
@@ -42,6 +45,7 @@ public class VerticalPagerAdapter extends PagerAdapter {
     private TextView title, name, deadline;
     public TextView description;
     private ImageView event_image;
+    public Button stalk;
 
     public VerticalPagerAdapter(Activity context, List<EventDetails> cards) {
         this.cards = cards;
@@ -65,9 +69,18 @@ public class VerticalPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int i)
     {
-        singleEventDetail = cards.get(i);
         final View itemView = mLayoutInflater.inflate(R.layout.item_card_inshorts, container, false);
+        singleEventDetail = cards.get(i);
 //        cardView = itemView.findViewById(R.id.card_view);
+        stalk = itemView.findViewById(R.id.stalk);
+        stalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CardOpen.class);
+                intent.putExtra("event", singleEventDetail);
+                mContext.startActivity(intent);
+            }
+        });
         title = itemView.findViewById(R.id.event_title);
         description = itemView.findViewById(R.id.event_description);
         name = itemView.findViewById(R.id.name_poster);
@@ -80,8 +93,6 @@ public class VerticalPagerAdapter extends PagerAdapter {
         String date = singleEventDetail.getDeadline();
         String final_date ="Deadline: " + date.substring(0, 4) + " - " + months[Integer.parseInt(date.substring(5, 7))-1] + " - " + date.substring(8);
         deadline.setText(final_date);
-//        if (singleEventDetail.getSaved()==1)
-//            ((VerticalViewPagerActivity)mContext).
         container.addView(itemView);
         return itemView;
     }
