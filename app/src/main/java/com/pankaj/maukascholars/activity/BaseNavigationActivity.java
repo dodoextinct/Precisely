@@ -87,6 +87,11 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
             loadActivity(StarredActivity.class);
             mDrawerLayout.closeDrawers();
             return true;
+        } else if (id == R.id.nav_user_profile) {
+            Constants.count_nav_order = 0;
+            loadActivity(UserProfileActivity.class);
+            mDrawerLayout.closeDrawers();
+            return true;
         } else if (id == R.id.nav_about) {
             Constants.count_nav_order = 0;
             loadActivity(About.class);

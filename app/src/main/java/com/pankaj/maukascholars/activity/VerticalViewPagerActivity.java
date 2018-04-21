@@ -10,6 +10,7 @@ import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import com.pankaj.maukascholars.util.EventDetails;
 import com.pankaj.maukascholars.util.alarm.ScheduleAlarm;
 import com.pankaj.maukascholars.util.alarm.databasehandling.DBManipulation;
 import com.rey.material.widget.ProgressView;
+import com.transitionseverywhere.TransitionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
