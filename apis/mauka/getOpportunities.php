@@ -11,6 +11,8 @@
     $statement->execute();
     $statement = $pdo->prepare("CREATE TABLE IF NOT EXISTS api_languages (id INT AUTO_INCREMENT, language VARCHAR(255), PRIMARY KEY(language), KEY(id));");
     $statement->execute();
+    $statement = $pdo->prepare("CREATE TABLE IF NOT EXISTS api_post_viewed (id INT AUTO_INCREMENT, user_id VARCHAR(255), post_id VARCHAR(255), PRIMARY KEY(id), UNIQUE abc(user_id, post_id));");
+    $statement->execute();
     $statement = $pdo->prepare("SELECT language FROM api_languages WHERE id = ?");
     $statement->execute([$language_id]);
     $data = $statement->fetch(PDO::FETCH_ASSOC);
@@ -26,11 +28,18 @@
         }
     }
 
-    $query = "SELECT * FROM opportunities_".$language." WHERE DEADLINE >= CURDATE() AND ".$part_of_query.") AND ID NOT IN (SELECT event_id FROM api_deleted WHERE user_id = '$user_id') LIMIT $page, 15;";
+    $query = "SELECT * FROM opportunities_".$language." WHERE DEADLINE >= CURDATE() AND ".$part_of_query.") AND ID NOT IN (SELECT event_id FROM api_deleted WHERE user_id = '$user_id') AND ID NOT IN (SELECT post_id FROM api_post_viewed WHERE user_id = ?) LIMIT $page, 15;";
     
     $statement = $pdo->prepare($query);
-    $statement->execute();
+    $statement->execute([$user_id]);
 
     $spreadsheet_data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($spreadsheet_data)<15) {
+        $query = "SELECT * FROM (SELECT * FROM opportunities_".$language." WHERE DEADLINE >= CURDATE() AND ".$part_of_query.") AND ID NOT IN (SELECT event_id FROM api_deleted WHERE user_id = ?) AND ID NOT IN (SELECT post_id FROM api_post_viewed WHERE user_id = ?) UNION ALL SELECT * FROM opportunities_".$language." WHERE DEADLINE >= CURDATE() AND ".$part_of_query.") AND ID NOT IN (SELECT event_id FROM api_deleted WHERE user_id = ?) AND ID IN (SELECT post_id FROM api_post_viewed WHERE user_id = ?)) AS C LIMIT $page, 15;";
+        $statement = $pdo->prepare($query);
+        $statement->execute([$user_id, $user_id, $user_id, $user_id]);
+        $spreadsheet_data = $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
     echo json_encode($spreadsheet_data);
 ?>

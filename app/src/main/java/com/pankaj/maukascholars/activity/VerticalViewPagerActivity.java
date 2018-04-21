@@ -67,6 +67,13 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
     private int page = 0;
     VerticalPagerAdapter adapter;
     boolean updating = false;
+    AppBarLayout appBarLayout;
+    int previous_position = 0;
+    long time = System.currentTimeMillis();
+    DBHandler db;
+    boolean isVisible = false;
+
+    ImageView refresh, share, save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,48 +86,25 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
         progress = findViewById(R.id.progress);
         progress.start();
         loading.setVisibility(View.VISIBLE);
+        appBarLayout = findViewById(R.id.appBar_Layout);
         getData();
     }
 
 
 
     private void init() {
+        db = new DBHandler(this);
 
         verticalViewPager = findViewById(R.id.verticleViewPager);
         adapter = new VerticalPagerAdapter(this, mItems);
         verticalViewPager.setAdapter(adapter);
         verticalViewPager.singleEventDetail = mItems.get(0);
-        verticalViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                verticalViewPager.singleEventDetail = mItems.get(position);
-                if (position + 3> mItems.size() && !updating) {
-                    updating = true;
-                    page++;
-                    getData();
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        ImageView refresh, share, save;
-        Button send;
         share = findViewById(R.id.share);
 //        star = findViewById(R.id.star);
         save = findViewById(R.id.save);
-        send = findViewById(R.id.stalk);
         share.setOnClickListener(this);
 //        star.setOnClickListener(this);
         save.setOnClickListener(this);
-        send.setOnClickListener(this);
 
         loading.setVisibility(View.GONE);
         progress.stop();
@@ -134,6 +118,62 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
             };
             registerReceiver(receiver, filter);
         }
+        verticalViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getStarred() == 1){
+                    save.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_white_24dp_filled));
+                }else{
+                    save.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_border_black_24dp));
+                }
+                if (position - previous_position > 0) {
+                    if (System.currentTimeMillis() - time > 3000) {
+                        sendViewedInformation(position - 1);
+                    }
+                }
+                time = System.currentTimeMillis();
+                verticalViewPager.singleEventDetail = mItems.get(position);
+                if (position + 3> mItems.size() && !updating) {
+                    updating = true;
+                    page++;
+                    getData();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    private void sendViewedInformation(final int position) {
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.url_view_op, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("post_id", String.valueOf(position));
+                params.put("user_id", Constants.user_id);
+                return params;
+            }
+        };
+
+        PreciselyApplication.getInstance().addToRequestQueue(request, "user_viewed");
     }
 
     void getData() {
@@ -193,7 +233,7 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
             }
         };
 
-        PreciselyApplication.getInstance().addToRequestQueue(request, "signin");
+        PreciselyApplication.getInstance().addToRequestQueue(request, "dashboard_data");
     }
 
     @Override
@@ -203,16 +243,8 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
             case R.id.share:
                 share(position);
                 break;
-//            case R.id.star:
-//                starEvent(position);
-//                break;
             case R.id.save:
-                saveEvent(position);
-                break;
-            case R.id.stalk:
-                Intent intent = new Intent(this, CardOpen.class);
-                intent.putExtra("event", verticalViewPager.singleEventDetail);
-                startActivity(intent);
+                starEvent(position);
                 break;
 
         }
@@ -245,13 +277,18 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
     private void starEvent(int position) {
         DBHandler db = new DBHandler(this);
         if (db.getEvent(mItems.get(position).getId()) != null && db.getEvent(mItems.get(position).getId()).getStarred() == 1) {
-            Toast.makeText(this, "Already starred!", Toast.LENGTH_SHORT).show();
+            save.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_border_black_24dp));
+            if (db.getEvent(mItems.get(position).getId()).getSaved() == 1)
+                mItems.get(position).setSaved(1);
+            mItems.get(position).setStarred(0);
+            db.addEvent(mItems.get(position));
         } else {
+            save.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_white_24dp_filled));
             if (db.getEvent(mItems.get(position).getId()) != null)
                 mItems.get(position).setSaved(1);
             mItems.get(position).setStarred(1);
             db.addEvent(mItems.get(position));
-            Toast.makeText(this, "Event Starred!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Event saved!", Toast.LENGTH_SHORT).show();
             scheduleReminder(mItems.get(position).getDeadline(), mItems.get(position).getTitle() + "\n" + mItems.get(position).getLink());
         }
     }
@@ -259,7 +296,7 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
     void scheduleReminder(String str_date, String title) {
         str_date += " 18:00:00";
         try {
-            DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = formatter.parse(str_date);
 
             long alarmOffset = date.getTime();
@@ -323,14 +360,14 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
     }
 
     public void ViewAppBarLay(){
-        AppBarLayout appBarLayout;
-        appBarLayout = findViewById(R.id.appBar_Layout);
-        if (appBarLayout.getVisibility() == View.GONE)
+        if (!isVisible)
         {
+            isVisible = true;
             appBarLayout.setVisibility(View.VISIBLE);
         }
-        else if(appBarLayout.getVisibility() == View.VISIBLE)
+        else
         {
+            isVisible = false;
             appBarLayout.setVisibility(View.GONE);
         }
     }
