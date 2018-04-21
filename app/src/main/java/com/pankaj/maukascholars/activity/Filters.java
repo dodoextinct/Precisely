@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ import static com.pankaj.maukascholars.util.Constants.key;
 
 public class Filters extends BaseNavigationActivity {
 
-    FloatingActionButton proceed;
+    Button proceed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

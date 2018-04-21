@@ -82,12 +82,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
             loadActivity(SavedActivity.class);
             mDrawerLayout.closeDrawers();
             return true;
-        } else if (id == R.id.nav_starred_activity) {
-            Constants.count_nav_order = 0;
-            loadActivity(StarredActivity.class);
-            mDrawerLayout.closeDrawers();
-            return true;
-        } else if (id == R.id.nav_user_profile) {
+        }  else if (id == R.id.nav_user_profile) {
             Constants.count_nav_order = 0;
             loadActivity(UserProfileActivity.class);
             mDrawerLayout.closeDrawers();

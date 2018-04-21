@@ -31,8 +31,6 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
     private ImageView filter_image;
     private TextView filter_text;
     private RelativeLayout ll_wrapper;
-    GradientDrawable border = new GradientDrawable();
-    GradientDrawable border2 = new GradientDrawable();
 
     public FiltersViewHolder(View itemView) {
         super(itemView);
@@ -40,10 +38,6 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
         filter_image = itemView.findViewById(R.id.filter_image);
         filter_text = itemView.findViewById(R.id.filter_text);
         ll_wrapper = itemView.findViewById(R.id.ll_filter_wrapper);
-        border.setColor(0xFFFFFFFF);
-        border.setStroke(14, 0xFF000000);
-        border2.setColor(0xFFFFFFFF);
-        border2.setStroke(14, 0xFFFFFFFF);
 
 
 
@@ -53,13 +47,14 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
                 if (clickedFilters.contains(getAdapterPosition())){
                     clickedFilters.remove(Integer.valueOf(getAdapterPosition()));
 //                    filter_text.setBackgroundColor(0xFFFFFFFF);
-                    filter_text.setTextColor(0xFF000000);
-                    ll_wrapper.setBackground(border2);
+                    filter_text.setTextColor(0xFF37474F);
+                    ll_wrapper.setBackgroundColor(0xFFFFFFFF);
+
 
                 }else{
                     clickedFilters.add(getAdapterPosition());
                     filter_text.setTextColor(0xFFFFFFFF);
-                    ll_wrapper.setBackground(border);
+                    ll_wrapper.setBackgroundColor(0xFFFF7F7F);
 
                 }
             }
@@ -77,7 +72,7 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
         Picasso.with(ctx).load(url).fit().error(R.mipmap.j_bezos).into(filter_image);
         if (clickedFilters.contains(position)){
             filter_text.setTextColor(0xFFFFFFFF);
-            ll_wrapper.setBackground(border);
+            ll_wrapper.setBackgroundColor(0xFFFF7F7F);
         }
 
         filter_text.setText(filter);

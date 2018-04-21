@@ -20,26 +20,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/proceed"
+            />
 
-            />
-        <com.rey.material.widget.FloatingActionButton
+        <Button
             android:id="@+id/proceed"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:fab_iconSize="32dp"
-            app:fab_radius="24dp"
-            app:fab_iconSrc="@drawable/ic_keyboard_arrow_right_black_24dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            />
+            android:text="Proceed"
+            android:textColor="#ffffff"
+            android:background="#00B0FF"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"/>
+
 
 
     </RelativeLayout>
