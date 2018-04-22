@@ -60,71 +60,71 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        init();
+//        init();
         setUpFacebook();
         setupGoogle();
     }
 
-    private void init() {
-        final EditText coupon_text = findViewById(R.id.coupon_edit);
-        Button apply = findViewById(R.id.apply_button);
-        apply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (coupon_text.getText().toString().length() == 0){
-                    Toast.makeText(SignUp.this, "Please enter a coupon code!", Toast.LENGTH_SHORT).show();
-                }else{
-                    verifyCouponCode(coupon_text.getText().toString());
-                }
-            }
-        });
-    }
+//    private void init() {
+////        final EditText coupon_text = findViewById(R.id.coupon_edit);
+//        Button apply = findViewById(R.id.apply_button);
+//        apply.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (coupon_text.getText().toString().length() == 0){
+//                    Toast.makeText(SignUp.this, "Please enter a coupon code!", Toast.LENGTH_SHORT).show();
+//                }else{
+//                    verifyCouponCode(coupon_text.getText().toString());
+//                }
+//            }
+//        });
+//    }
 
-    private void verifyCouponCode(final String text) {
-        loading = findViewById(R.id.progress_rl);
-        progress = findViewById(R.id.progress);
-        progress.start();
-        loading.setVisibility(View.VISIBLE);
-        final int[] status_code = new int[1];
-        StringRequest request = new StringRequest(Request.Method.POST, Constants.url_verify_coupon, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                loading.setVisibility(View.GONE);
-                progress.stop();
-                if (status_code[0] == 200) {
-                    if (response.contentEquals(text)){
-                        Toast.makeText(SignUp.this, "Coupon code applied!", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(SignUp.this, "Please enter correct coupon code", Toast.LENGTH_SHORT).show();
-                    }
-                }else{
-                    Toast.makeText(SignUp.this, "Couldn't verify ID. Please try again!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                loading.setVisibility(View.GONE);
-                progress.stop();
-                Toast.makeText(SignUp.this, "Couldn't connect to server", Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("coupon_code", text);
-                return params;
-            }
-
-            @Override
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                status_code[0] = response.statusCode;
-                return super.parseNetworkResponse(response);
-            }
-        };
-
-        PreciselyApplication.getInstance().addToRequestQueue(request, "coupon_verify");
-    }
+//    private void verifyCouponCode(final String text) {
+//        loading = findViewById(R.id.progress_rl);
+//        progress = findViewById(R.id.progress);
+//        progress.start();
+//        loading.setVisibility(View.VISIBLE);
+//        final int[] status_code = new int[1];
+//        StringRequest request = new StringRequest(Request.Method.POST, Constants.url_verify_coupon, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                loading.setVisibility(View.GONE);
+//                progress.stop();
+//                if (status_code[0] == 200) {
+//                    if (response.contentEquals(text)){
+//                        Toast.makeText(SignUp.this, "Coupon code applied!", Toast.LENGTH_SHORT).show();
+//                    }else{
+//                        Toast.makeText(SignUp.this, "Please enter correct coupon code", Toast.LENGTH_SHORT).show();
+//                    }
+//                }else{
+//                    Toast.makeText(SignUp.this, "Couldn't verify ID. Please try again!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                loading.setVisibility(View.GONE);
+//                progress.stop();
+//                Toast.makeText(SignUp.this, "Couldn't connect to server", Toast.LENGTH_SHORT).show();
+//            }
+//        }){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("coupon_code", text);
+//                return params;
+//            }
+//
+//            @Override
+//            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+//                status_code[0] = response.statusCode;
+//                return super.parseNetworkResponse(response);
+//            }
+//        };
+//
+//        PreciselyApplication.getInstance().addToRequestQueue(request, "coupon_verify");
+//    }
 
     // setupGoogle()
     private void setupGoogle() {

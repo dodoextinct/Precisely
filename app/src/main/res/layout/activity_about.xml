@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:background="@drawable/recto2"
+            android:background="@drawable/vgv"
             >
 
             <ImageView
@@ -48,16 +48,16 @@
                 android:text="Precisely"
                 android:layout_gravity="center"
                 android:textSize="30dp"
-                android:textColor="#ffffff"/>
+                android:textColor="#000000"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Precisely is a platform which helps you discover the latest academic and professional opportunities, personalized for you! We cover latest jobs, internships, scholarships, conferences, competitions, fellowships and much more."
+                android:text="Precisely helps you discover the latest academic and professional opportunities. It intuitively learns your interests and brings you a personalized feed of the latest jobs, internships, scholarships, conferences, conferences, competitions, fellowships and much more."
                 android:textAlignment="center"
-                android:padding="15dp"
-                android:textColor="#ffffff"
-                android:layout_marginTop="60dp"/>
+                android:padding="30dp"
+                android:textColor="#000000"
+                android:layout_marginTop="0dp"/>
 
             <TextView
                 android:id="@+id/button_website"
@@ -68,6 +68,7 @@
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:background="@drawable/official_link_buttonbg"
                 android:padding="@dimen/activity_horizontal_margin"
+                android:textColor="#ffffff"
                 />
 
 
@@ -82,7 +83,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_dashnav"
-        app:menu="@menu/precisely_nav_drawer" />
+        app:menu="@menu/precisely_nav_drawer"
+        android:visibility="gone"/>
 
 
 

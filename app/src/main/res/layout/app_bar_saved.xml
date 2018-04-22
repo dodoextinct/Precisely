@@ -41,7 +41,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Oh, that's odd.\nI couldn't find any event matching this section"
+                android:text="Oh, that’s odd.
+                                 \n You have not saved any opportunities. I wonder why?"
                 android:fontFamily="sans-serif-thin"
                 android:textColor="#000000"
                 android:textSize="24sp"

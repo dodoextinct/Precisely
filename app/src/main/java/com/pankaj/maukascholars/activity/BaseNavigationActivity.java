@@ -162,7 +162,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
     private void share() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! Download this cool opportunity curation app! \nIt is so much better than anything out there!\n\nhttps://goo.gl/59gpAa");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! Download this cool app! \nIt will help you discover the latest academic and professional opportunities! \n Download here: http://bit.ly/preciselyapp ");
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
     }

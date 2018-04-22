@@ -288,7 +288,7 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
                 mItems.get(position).setSaved(1);
             mItems.get(position).setStarred(1);
             db.addEvent(mItems.get(position));
-            Toast.makeText(this, "Event saved!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Opportunity Saved!", Toast.LENGTH_SHORT).show();
             scheduleReminder(mItems.get(position).getDeadline(), mItems.get(position).getTitle() + "\n" + mItems.get(position).getLink());
         }
     }

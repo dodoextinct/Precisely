@@ -53,34 +53,7 @@
                 android:gravity="center"
                 android:layout_below="@+id/fb_login"
                 />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/google_login"
-                android:layout_marginTop="10dp"
-                android:layout_alignLeft="@+id/google_login"
-                android:layout_alignRight="@+id/google_login"
-                >
-                <EditText
-                    android:id="@+id/coupon_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/apply_button"
-                    android:textSize="12sp"
-                    android:textColor="#FFF"
-                    android:textColorHint="#FFF"
-                    android:hint="Enter coupon code"
-                    android:layout_alignBaseline="@+id/apply_button"
-                    android:paddingLeft="8dp"
-                    />
-                <Button
-                    android:id="@+id/apply_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="apply"
-                    />
-            </RelativeLayout>
+
         </RelativeLayout>
     <RelativeLayout
         android:id="@+id/progress_rl"

@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hitesh Gautam"
+                android:text="Username"
                 android:textColor="#ffffff"
                 android:textSize="17dp"
                 android:layout_below="@id/profile_image"
@@ -86,14 +86,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Credits Left"
+                    android:text="Credits"
                     android:textColor="#00AA8D"
                     android:textSize="15dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="The number of premium credits you have left"
+                        android:text="Number of premium credits you have"
                         android:textSize="10dp"/>
 
                 </LinearLayout>
@@ -133,11 +133,6 @@
                         android:textColor="#00AA8D"
                         android:textSize="15dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="The languageDetails you want to see your app in"
-                        android:textSize="10dp"/>
 
                 </LinearLayout>
 
@@ -172,14 +167,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Notification"
+                        android:text="Notifications"
                         android:textColor="#00AA8D"
                         android:textSize="15dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Get latest opportunities via notifications also"
+                        android:text="Enable to receive notifications for new opportunities"
                         android:textSize="10dp"/>
 
                 </LinearLayout>
@@ -213,14 +208,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Emails"
+                        android:text="E-mails"
                         android:textColor="#00AA8D"
                         android:textSize="15dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Get notified by email also about the opportunity you saved"
+                        android:text="Get your saved opportunities delivered to your inbox"
                         android:textSize="10dp"/>
 
                 </LinearLayout>
@@ -240,6 +235,7 @@
                 android:background="#CFD8DC"/>
 
             <LinearLayout
+                android:id="@+id/tutorials_goto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -257,12 +253,6 @@
                         android:text="Tutorials"
                         android:textColor="#00AA8D"
                         android:textSize="15dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Go to tutorials of the App"
-                        android:textSize="10dp"/>
 
                 </LinearLayout>
 

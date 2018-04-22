@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Proceed"
             android:textColor="#ffffff"
-            android:background="#00B0FF"
+            android:background="@color/AppColorTheme"
             android:layout_gravity="bottom"
             android:gravity="center"
             android:layout_alignParentBottom="true"/>

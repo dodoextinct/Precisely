@@ -54,7 +54,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
     private String imgPath = null;
     private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
     private LinearLayout credits_layout;
-    private LinearLayout language_layout;
+    private LinearLayout language_layout , tutorials_goto;
     private Switch notification_toggle;
     private Switch email_toggle;
     final Context context = this;
@@ -80,11 +80,11 @@ public class UserProfileActivity extends BaseNavigationActivity {
                 new AlertDialog.Builder(UserProfileActivity.this)
 
                         .setIcon(R.drawable.ic_star_border_black_24dp)
-                        .setTitle("Premium Membership")
-                        .setMessage("You are the premium member of precisely \n " +
-                                " \n " +
+                        .setTitle("Premium Membership \n")
+                        .setMessage("You are a Premium Member \n \n " +
+                                "You have access to:\n" +
                                 "1. Unlimited Opportunities \n" +
-                                "2. Access to premium Opportunities")
+                                "2. Premium Services")
                         .show();
             }
         });
@@ -103,7 +103,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
         notification_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Toast.makeText(UserProfileActivity.this, "Now, we will notify you!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserProfileActivity.this, "You will receive notifications for latest opportunities!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -112,9 +112,18 @@ public class UserProfileActivity extends BaseNavigationActivity {
         email_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Toast.makeText(UserProfileActivity.this, "Now, we will remind you by emails", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserProfileActivity.this, "We will deliver saved opportunities to your inbox!", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        tutorials_goto = findViewById(R.id.tutorials_goto);
+        tutorials_goto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tutorials = new Intent(UserProfileActivity.this, TutorialsActivity.class);
+                startActivity(tutorials);
             }
         });
 
@@ -170,8 +179,8 @@ public class UserProfileActivity extends BaseNavigationActivity {
                             public void onClick(DialogInterface dialog, int which) {
 //                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                                startActivityForResult(intent, PICK_IMAGE_CAMERA);
-                                String message = "You have not given your camera permissions to us";
-                                message = message + ", Press Ok to give the permissions";
+                                String message = "Press OK to give permissions";
+                                message = message + " ";
                                 new AlertDialog.Builder(UserProfileActivity.this)
                                         .setMessage(message)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
