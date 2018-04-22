@@ -88,7 +88,7 @@ public class VerticalPagerAdapter extends PagerAdapter {
         title.setText(singleEventDetail.getTitle());
         description.setText(singleEventDetail.getDescription());
         name.setText(singleEventDetail.getName());
-        Picasso.with(mContext).load(singleEventDetail.getImage()).fit().error(R.mipmap.j_bezos).into(event_image);
+        Picasso.with(mContext).load(singleEventDetail.getImage()).fit().error(R.drawable.card).into(event_image);
         String date = singleEventDetail.getDeadline();
         String final_date ="Deadline: " + date.substring(0, 4) + " - " + months[Integer.parseInt(date.substring(5, 7))-1] + " - " + date.substring(8);
         deadline.setText(final_date);
