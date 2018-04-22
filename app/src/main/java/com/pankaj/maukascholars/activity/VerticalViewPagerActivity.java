@@ -388,4 +388,8 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
         if (receiver!=null)
         unregisterReceiver(receiver);
     }
+
+    public EventDetails getCurrentItemDetails(){
+        return verticalViewPager.singleEventDetail;
+    }
 }

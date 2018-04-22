@@ -34,7 +34,6 @@ import static com.pankaj.maukascholars.util.Constants.months;
  * Global Variables:	<>
  */
 public class VerticalPagerAdapter extends PagerAdapter {
-
     private Activity mContext;
     private LayoutInflater mLayoutInflater;
     public List<EventDetails> cards;
@@ -77,7 +76,7 @@ public class VerticalPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CardOpen.class);
-                intent.putExtra("event", singleEventDetail);
+                intent.putExtra("event", ((VerticalViewPagerActivity)mContext).getCurrentItemDetails());
                 mContext.startActivity(intent);
             }
         });
@@ -94,6 +93,7 @@ public class VerticalPagerAdapter extends PagerAdapter {
         String final_date ="Deadline: " + date.substring(0, 4) + " - " + months[Integer.parseInt(date.substring(5, 7))-1] + " - " + date.substring(8);
         deadline.setText(final_date);
         container.addView(itemView);
+
         return itemView;
     }
 
