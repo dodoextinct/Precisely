@@ -269,7 +269,7 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
     private void share(int position) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! Found a great opportunity for you!\n" + mItems.get(position).getLink() + "\nThere are many more where this came from!\nVisit https://goo.gl/1RGidK now!");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! Found a great opportunity for you!\n" + mItems.get(position).getLink() + "\nThere are many more where this came from!\nVisit: http://bit.ly/preciselyapp now");
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
     }
