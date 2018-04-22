@@ -69,7 +69,7 @@ public class FiltersViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindTo(String filter, String url, int position, Context ctx) {
-        Picasso.with(ctx).load(url).fit().error(R.mipmap.j_bezos).into(filter_image);
+        Picasso.with(ctx).load(url).fit().error(R.drawable.card).into(filter_image);
         if (clickedFilters.contains(position)){
             filter_text.setTextColor(0xFFFFFFFF);
             ll_wrapper.setBackgroundColor(0xFFFF7F7F);
