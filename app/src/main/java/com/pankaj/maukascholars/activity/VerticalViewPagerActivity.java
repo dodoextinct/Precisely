@@ -4,8 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
@@ -24,6 +27,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.api.client.util.Sleeper;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.VerticalPagerAdapter;
 import com.pankaj.maukascholars.application.PreciselyApplication;
@@ -72,6 +76,8 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
     long time = System.currentTimeMillis();
     DBHandler db;
     boolean isVisible = false;
+    Handler handler = new Handler();
+
 
     ImageView refresh, share, save;
 
@@ -87,7 +93,24 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
         progress.start();
         loading.setVisibility(View.VISIBLE);
         appBarLayout = findViewById(R.id.appBar_Layout);
+
+        refresh = findViewById(R.id.refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                loading.setVisibility(View.VISIBLE);
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        loading.setVisibility(View.INVISIBLE);
+                    }
+                }, 500);
+
+            }
+        });
+
         getData();
+
     }
 
 
