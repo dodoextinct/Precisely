@@ -19,20 +19,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-
-            <com.rey.material.widget.Button
-                android:id="@+id/stalk"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:background="@drawable/read_more_buttonbg"
-                android:text="Read More"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:textColor="#ffffff"
-                android:layout_alignParentRight="true"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                >
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/stalk"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignBottom="@+id/stalk"
+                    >
+                    <LinearLayout
+                        android:id="@+id/tag_wrapper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal"
+                        android:layout_gravity="end"
+                        >
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+                <com.rey.material.widget.Button
+                    android:id="@+id/stalk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/read_more_buttonbg"
+                    android:text="Read More"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:textColor="#ffffff"
+                    android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/image_ll"

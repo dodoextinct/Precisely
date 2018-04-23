@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -197,7 +198,8 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
                         for (int i = 0; i < jA.length(); i++) {
                             JSONObject jO = jA.getJSONObject(i);
 //                                                                                                  int id, String title, String description, String deadline, String name, String image, String icon, String link, String eligibility, String requirements, String benefits
-                            mItems.add(new EventDetails(Integer.parseInt(jO.getString("ID")), jO.getString("HEADLINE"), jO.getString("DESCRIPTION"), jO.getString("DEADLINE"), jO.getString("NAME"), jO.getString("IMAGE"), jO.getString("NAMELINK"), jO.getString("LINK"), jO.getString("ELIGIBILITY"), jO.getString("REQUIREMENTS"), jO.getString("BENEFITS")));
+                            Log.e("TAGS", jO.getString("TAGS"));
+                            mItems.add(new EventDetails(Integer.parseInt(jO.getString("ID")), jO.getString("HEADLINE"), jO.getString("DESCRIPTION"), jO.getString("DEADLINE"), jO.getString("NAME"), jO.getString("IMAGE"), jO.getString("NAMELINK"), jO.getString("LINK"), jO.getString("ELIGIBILITY"), jO.getString("REQUIREMENTS"), jO.getString("BENEFITS"), jO.getString("TAGS")));
 //                            mItems.add(new EventDetails(Integer.parseInt(jA.getJSONArray(i).get(0).toString()), jA.getJSONArray(i).get(1).toString(), jA.getJSONArray(i).get(2).toString(), jA.getJSONArray(i).get(7).toString(), jA.getJSONArray(i).get(12).toString(), jA.getJSONArray(i).get(8).toString(), jA.getJSONArray(i).get(13).toString(), jA.getJSONArray(i).get(9).toString(), jA.getJSONArray(i).get(3).toString(), jA.getJSONArray(i).get(4).toString(), jA.getJSONArray(i).get(5).toString()));
                         }
                         if (page == 0)

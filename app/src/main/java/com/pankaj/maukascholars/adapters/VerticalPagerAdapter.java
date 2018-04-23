@@ -92,6 +92,24 @@ public class VerticalPagerAdapter extends PagerAdapter {
         String date = singleEventDetail.getDeadline();
         String final_date ="Deadline: " + date.substring(0, 4) + " - " + months[Integer.parseInt(date.substring(5, 7))-1] + " - " + date.substring(8);
         deadline.setText(final_date);
+        if (singleEventDetail.getTags().length()>0){
+            String tags = singleEventDetail.getTags();
+            LinearLayout tag_wrapper = itemView.findViewById(R.id.tag_wrapper);
+            while (tags.contains(",")){
+                TextView valueTV = new TextView(mContext);
+                valueTV.setBackgroundColor(0x33333333);
+                valueTV.setText(tags.substring(0, tags.indexOf(",")>0?tags.indexOf(","):tags.length()));
+                LinearLayout.LayoutParams params =new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMarginEnd(5);
+                params.setMarginStart(5);
+                valueTV.setLayoutParams(params);
+                valueTV.setPadding(5, 5, 5, 5);
+                tag_wrapper.addView(valueTV);
+                tags = tags.substring(tags.indexOf(",")+1);
+            }
+        }
         container.addView(itemView);
 
         return itemView;

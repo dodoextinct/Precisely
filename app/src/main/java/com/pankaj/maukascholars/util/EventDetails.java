@@ -24,8 +24,9 @@ public class EventDetails implements Serializable{
     private String eligibility;
     private String benefits;
     private String requirements;
+    private String tags;
 
-    public EventDetails(int id, String title, String description, String deadline, String name, String image, String icon, String link, String eligibility, String requirements, String benefits){
+    public EventDetails(int id, String title, String description, String deadline, String name, String image, String icon, String link, String eligibility, String requirements, String benefits, String tags){
         this.starred = starred;
         this.saved = saved;
         this.id = id;
@@ -40,6 +41,7 @@ public class EventDetails implements Serializable{
         this.eligibility = eligibility;
         this.benefits = benefits;
         this.requirements = requirements;
+        this.tags = tags;
 
     }
 
@@ -174,5 +176,13 @@ public class EventDetails implements Serializable{
 
     public void setRequirements(String requirements) {
         this.requirements = requirements;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }
