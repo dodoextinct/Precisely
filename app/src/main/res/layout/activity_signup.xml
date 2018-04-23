@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgbgbaspaf">
+    android:background="@drawable/loginbg">
         <ImageView
             android:id="@+id/logo"
             android:layout_width="100dp"
@@ -18,13 +18,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:text="PRECISELY"
         android:layout_below="@+id/logo"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:textSize="27dp"/>
+        android:textSize="27dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -82,5 +82,6 @@
         android:gravity="center_horizontal"
         android:layout_marginBottom="2dp"
         android:autoLink="web"
+        android:textColorLink="#E91E63"
         />
 </RelativeLayout>
