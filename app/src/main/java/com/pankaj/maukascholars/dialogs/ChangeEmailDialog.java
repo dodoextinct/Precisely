@@ -44,7 +44,7 @@ public class ChangeEmailDialog extends Dialog {
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("user_email", email).apply();
                 }
-                makeToast("This feature is not yet available in your area");
+                makeToast("E-mail address saved!");
                 dismiss();
 
             }

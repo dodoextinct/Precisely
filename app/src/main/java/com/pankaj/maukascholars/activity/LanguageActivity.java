@@ -109,7 +109,7 @@ public class LanguageActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("language_id", Constants.language_id);
                 editor.apply();
-                makeToast("Language preference SAVED!");
+                makeToast("Language Preference Saved!");
                 updateLanguage(Constants.language_id);
             }
         });
