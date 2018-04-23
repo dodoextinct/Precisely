@@ -18,18 +18,19 @@
             android:id="@+id/nav_saved_activity"
             android:icon="@drawable/ic_bookmark_black_24dp"
             android:title="Saved Opportunities" />
+        <item
+            android:id="@+id/nav_user_profile"
+            android:icon="@drawable/ic_account_circle_white_24dp"
+            android:title="Profile"/>
 
     </group>
 
-    <item android:title="Misc">
+    <item android:title="Misc.">
         <menu>
-            <item
-                android:id="@+id/nav_user_profile"
-                android:icon="@drawable/ic_account_circle_white_24dp"
-                android:title="Profile"/>
+
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_share_black_24dp"
                 android:title="Share" />
             <item
                 android:id="@+id/nav_about"
