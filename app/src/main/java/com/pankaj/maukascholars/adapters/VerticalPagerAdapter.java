@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.v4.view.PagerAdapter;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
@@ -97,7 +99,7 @@ public class VerticalPagerAdapter extends PagerAdapter {
             LinearLayout tag_wrapper = itemView.findViewById(R.id.tag_wrapper);
             while (tags.contains(",")){
                 TextView valueTV = new TextView(mContext);
-                valueTV.setBackgroundColor(0x33333333);
+                valueTV.setBackgroundResource(R.drawable.tag_button_bg);
                 valueTV.setText(tags.substring(0, tags.indexOf(",")>0?tags.indexOf(","):tags.length()));
                 LinearLayout.LayoutParams params =new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -105,10 +107,25 @@ public class VerticalPagerAdapter extends PagerAdapter {
                 params.setMarginEnd(5);
                 params.setMarginStart(5);
                 valueTV.setLayoutParams(params);
-                valueTV.setPadding(5, 5, 5, 5);
+                valueTV.setPadding(15, 5, 15, 5);
+                valueTV.setTextColor(0xFFFFFFFF);
+                valueTV.setTextSize(12);
                 tag_wrapper.addView(valueTV);
                 tags = tags.substring(tags.indexOf(",")+1);
             }
+            TextView valueTV = new TextView(mContext);
+            valueTV.setBackgroundResource(R.drawable.tag_button_bg);
+            valueTV.setText(tags.substring(0, tags.indexOf(",")>0?tags.indexOf(","):tags.length()));
+            LinearLayout.LayoutParams params =new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMarginEnd(5);
+            params.setMarginStart(5);
+            valueTV.setLayoutParams(params);
+            valueTV.setTextColor(0xFFFFFFFF);
+            valueTV.setPadding(10, 5, 10, 5);
+            valueTV.setTextSize(12);
+            tag_wrapper.addView(valueTV);
         }
         container.addView(itemView);
 

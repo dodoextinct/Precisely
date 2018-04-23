@@ -12,22 +12,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="0dp">
+        android:layout_height="match_parent">
+
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppBarOverlay"
-            android:elevation="0dp"
             >
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#00AA8D"
-                app:popupTheme="@style/PopupOverlay"
-                android:elevation="0dp"
+                app:popupTheme="@style/AppBarOverlay"
                 >
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
@@ -288,7 +286,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_dashnav"
-        app:menu="@menu/precisely_nav_drawer"
-        android:visibility="gone"/>
+        app:menu="@menu/precisely_nav_drawer"/>
 
 </android.support.v4.widget.DrawerLayout>
