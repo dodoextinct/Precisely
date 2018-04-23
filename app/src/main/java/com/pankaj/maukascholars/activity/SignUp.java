@@ -233,7 +233,7 @@ public class SignUp extends AppCompatActivity {
             Constants.user_name = account.getDisplayName();
             submitData(account.getId());
         } catch (ApiException e) {
-            Toast.makeText(this, "Google behaving weirdly!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Google Error Code: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
         }
     }
 

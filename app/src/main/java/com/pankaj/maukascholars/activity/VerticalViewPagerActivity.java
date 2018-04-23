@@ -4,21 +4,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -79,7 +71,7 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
     Handler handler = new Handler();
 
 
-    ImageView refresh, share, save;
+    com.rey.material.widget.ImageView refresh, share, save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,21 +86,6 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
         loading.setVisibility(View.VISIBLE);
         appBarLayout = findViewById(R.id.appBar_Layout);
 
-        refresh = findViewById(R.id.refresh);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                loading.setVisibility(View.VISIBLE);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        loading.setVisibility(View.INVISIBLE);
-                    }
-                }, 500);
-
-            }
-        });
-
         getData();
 
     }
@@ -121,13 +98,17 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
         verticalViewPager = findViewById(R.id.verticleViewPager);
         adapter = new VerticalPagerAdapter(this, mItems);
         verticalViewPager.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         verticalViewPager.singleEventDetail = mItems.get(0);
+        refresh = findViewById(R.id.refresh);
+
         share = findViewById(R.id.share);
 //        star = findViewById(R.id.star);
         save = findViewById(R.id.save);
         share.setOnClickListener(this);
 //        star.setOnClickListener(this);
         save.setOnClickListener(this);
+        refresh.setOnClickListener(this);
 
         loading.setVisibility(View.GONE);
         progress.stop();
@@ -154,18 +135,19 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
                 }else{
                     save.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_border_black_24dp));
                 }
-                if (position - previous_position > 0) {
-                    if (System.currentTimeMillis() - time > 3000) {
-                        sendViewedInformation(position - 1);
-                    }
-                }
-                time = System.currentTimeMillis();
                 verticalViewPager.singleEventDetail = mItems.get(position);
                 if (position + 3> mItems.size() && !updating) {
                     updating = true;
                     page++;
                     getData();
                 }
+                if (position - previous_position > 0) {
+                    if (System.currentTimeMillis() - time > 3000) {
+                        time = System.currentTimeMillis();
+                        sendViewedInformation(previous_position++, mItems.get(previous_position-1).getId());
+                    }
+                }
+                time = System.currentTimeMillis();
             }
 
             @Override
@@ -175,7 +157,7 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
         });
     }
 
-    private void sendViewedInformation(final int position) {
+    private void sendViewedInformation(final int position, final int post_id) {
         StringRequest request = new StringRequest(Request.Method.POST, Constants.url_view_op, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -190,7 +172,7 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("post_id", String.valueOf(position));
+                params.put("post_id", String.valueOf(post_id));
                 params.put("user_id", Constants.user_id);
                 return params;
             }
@@ -208,6 +190,8 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
                     try {
                         if (response.contains("[{\""))
                             response = response.substring(response.indexOf("[{\""));
+                        if (page == 0)
+                            mItems.clear();
                         JSONArray jA = new JSONArray(response);
                         //    0, 1, 2, 7, 12, 8, 13, 9, 3, 4, 5
                         for (int i = 0; i < jA.length(); i++) {
@@ -263,6 +247,12 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
     public void onClick(View view) {
         int position = verticalViewPager.getCurrentItem();
         switch (view.getId()) {
+            case R.id.refresh:
+                page = 0;
+                loading.setVisibility(View.VISIBLE);
+                progress.start();
+                getData();
+                break;
             case R.id.share:
                 share(position);
                 break;
@@ -358,14 +348,6 @@ public class VerticalViewPagerActivity extends BaseNavigationActivity implements
             db.addEvent(mItems.get(position));
             Toast.makeText(this, "Event Saved!", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(this, Filters.class);
-        startActivity(intent);
-        finish();
     }
 
     @Override

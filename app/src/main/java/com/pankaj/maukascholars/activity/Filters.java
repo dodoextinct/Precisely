@@ -86,11 +86,15 @@ public class Filters extends BaseNavigationActivity {
     }
 
     private void saveClickedToSharedPreferences() {
-        JSONArray jO = new JSONArray();
-        for (int i = 0; i < Constants.clickedFilters.size(); i++)
-            jO.put(Constants.clickedFilters.get(i));
-        editor.remove(key).apply();
-        editor.putString(key, jO.toString());
-        editor.apply();
+        if (Constants.clickedFilters.size()>0) {
+            JSONArray jO = new JSONArray();
+            for (int i = 0; i < Constants.clickedFilters.size(); i++)
+                jO.put(Constants.clickedFilters.get(i));
+            editor.remove(key).apply();
+            editor.putString(key, jO.toString());
+            editor.apply();
+        }else{
+            editor.remove(key).apply();
+        }
     }
 }

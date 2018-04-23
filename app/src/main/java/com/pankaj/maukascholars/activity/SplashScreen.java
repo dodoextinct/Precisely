@@ -1,12 +1,15 @@
 package com.pankaj.maukascholars.activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +21,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.application.PreciselyApplication;
-import com.pankaj.maukascholars.holders.VerticalViewPager;
 import com.pankaj.maukascholars.util.Constants;
 import com.pankaj.maukascholars.util.Utils;
 
@@ -65,7 +67,20 @@ public class SplashScreen extends AppCompatActivity {
                     if (response.contentEquals(Constants.user_id)){
                         getNewQuote();
                     }else if(response.contains("UPDATE")){
-                        Toast.makeText(SplashScreen.this, "Please UPDATE your app!", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(SplashScreen.this)
+                                .setTitle("Incompatible Version \n")
+                                .setMessage("Your version of the app is too old.\n\nPlease update the app from playstore")
+                                .setNeutralButton("Proceed", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                            try {
+                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.wayneventures.precisely")));
+                                            } catch (android.content.ActivityNotFoundException anfe) {
+                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.wayneventures.precisely")));
+                                            }
+                                    }
+                                })
+                                .show();
                     }
                     else{
                         Toast.makeText(SplashScreen.this, "Couldn't verify ID. Please login again", Toast.LENGTH_SHORT).show();
@@ -165,7 +180,7 @@ public class SplashScreen extends AppCompatActivity {
                             Constants.filters_image_urls.add(jA_url.getString(i));
                         }
                         if (!sp.contains("language_id")) {
-                            loadActivity(Language_Activity.class);
+                            loadActivity(LanguageActivity.class);
                         } else {
                             if (sp.contains(key)) {
                                 try {
@@ -173,7 +188,7 @@ public class SplashScreen extends AppCompatActivity {
                                     Constants.clickedFilters.clear();
                                     for (int i = 0; i < jO.length(); i++)
                                         Constants.clickedFilters.add(jO.getInt(i));
-                                    Log.e("KEY", Constants.clickedFilters.size()+"");
+//                                    Log.e("KEY", Constants.clickedFilters.size()+"");
                                     loadActivity(VerticalViewPagerActivity.class);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

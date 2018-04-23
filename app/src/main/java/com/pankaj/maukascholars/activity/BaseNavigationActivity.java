@@ -143,7 +143,7 @@ public class BaseNavigationActivity extends AppCompatActivity implements Navigat
                 if (Constants.clickedFilters.size() > 0)
                     loadActivity(VerticalViewPagerActivity.class);
                 else
-                    finish();
+                    loadActivity(Filters.class);
             }else if (Constants.count_nav_order == 1){
                 Constants.count_nav_order++;
                 Toast.makeText(this, "Press Back again to exit", Toast.LENGTH_SHORT).show();

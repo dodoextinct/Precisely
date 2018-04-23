@@ -2,10 +2,10 @@
     include  'connect_to_db.php';
     error_reporting(0);
 
-    $statement = $pdo->prepare("CREATE TABLE IF NOT EXISTS api_languages (id INT AUTO_INCREMENT, languageDetails VARCHAR(255), PRIMARY KEY(languageDetails), KEY(id));");
+    $statement = $pdo->prepare("CREATE TABLE IF NOT EXISTS api_languages (id INT AUTO_INCREMENT, language VARCHAR(255), PRIMARY KEY(language), KEY(id));");
     $statement->execute();
 
-    $statement = $pdo->prepare("SELECT languageDetails FROM api_languages");
+    $statement = $pdo->prepare("SELECT language FROM api_languages");
     $statement->execute();
 
     $languages = $statement->fetchAll();
@@ -18,9 +18,9 @@
         return $value;
     }
 
-    foreach($languages as $languageDetails){
-        $languageDetails = $languageDetails["languageDetails"];
-        $table_name = "opportunities_".$languageDetails;
+    foreach($languages as $language){
+        $language = $language["language"];
+        $table_name = "opportunities_".$language;
         $statement = $pdo->prepare("CREATE TABLE IF NOT EXISTS ".$table_name." (ID INT NOT NULL, HEADLINE TEXT, DESCRIPTION TEXT, ELIGIBILITY TEXT, REQUIREMENTS TEXT, BENEFITS TEXT, COST TEXT, DEADLINE DATE, IMAGE TEXT, LINK TEXT, TAGS TEXT, SUBTAGS TEXT, NAME TEXT, NAMELINK TEXT, PRIMARY KEY(ID)) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
         $statement->execute();
 
@@ -32,11 +32,13 @@
             $id = 1;
         else
             $id = $id["ID"];
+        // echo $id."\n";
 
-        $stmt = $pdo->prepare("SELECT location FROM api_regional_files WHERE languageDetails = ? LIMIT 1;");
-        $stmt->execute([$languageDetails]);
+        $stmt = $pdo->prepare("SELECT location FROM api_regional_files WHERE language = ? LIMIT 1;");
+        $stmt->execute([$language]);
         $sheets_url = $stmt->fetch();
         $sheets_url = $sheets_url["location"];
+        // echo $sheets_url."\n";
 
         $obj = new SplFileObject($sheets_url);
         $obj->setFlags(SplFileObject::READ_CSV);
@@ -49,11 +51,14 @@
         // $spreadsheet_data = array();
         foreach ($limit as $data)
         {
-            if (strlen($data[1])==0){
-                break;
-            }
-            $stmt = $pdo->prepare("INSERT INTO ".$table_name." (ID, HEADLINE, DESCRIPTION, ELIGIBILITY, REQUIREMENTS, BENEFITS, COST, DEADLINE, IMAGE, LINK, TAGS, SUBTAGS, NAME, NAMELINK) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            // echo $data[0];
+            // if (strlen($data[1])==0){
+            //     echo $data[1];
+            //     break;
+            // }
+            $stmt = $pdo->prepare("INSERT IGNORE INTO ".$table_name." (ID, HEADLINE, DESCRIPTION, ELIGIBILITY, REQUIREMENTS, BENEFITS, COST, DEADLINE, IMAGE, LINK, TAGS, SUBTAGS, NAME, NAMELINK) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             // print_r(strtotime($data[7]));
+            // echo $data[7];
             $stmt->execute([$data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $data[6], date_create_from_format("m-d-Y", $data[7])->format('Y-m-d'), $data[8], $data[9], $data[10], $data[11], $data[12], $data[13]]);
         }
 

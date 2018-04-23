@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +19,7 @@ import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.activity.CardOpen;
 import com.pankaj.maukascholars.activity.VerticalViewPagerActivity;
 import com.pankaj.maukascholars.util.EventDetails;
+import com.rey.material.widget.Button;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.pankaj.maukascholars.activity;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,19 +15,17 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pankaj.maukascholars.R;
+import com.pankaj.maukascholars.dialogs.ChangeEmailDialog;
+import com.pankaj.maukascholars.dialogs.LanguageDialog;
 import com.pankaj.maukascholars.util.Constants;
 
 import java.io.ByteArrayOutputStream;
@@ -64,6 +61,18 @@ public class UserProfileActivity extends BaseNavigationActivity {
         super.onCreate(savedInstanceState);
         Constants.toolbar_title = "User Profile";
         setContentView(R.layout.activity_user_profile);
+        TextView username = findViewById(R.id.user_name);
+        if (Constants.user_name!=null && Constants.user_name.length()>0) {
+            String[] strArray = Constants.user_name.split(" ");
+            StringBuilder builder = new StringBuilder();
+            for (String s : strArray) {
+                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                builder.append(cap).append(" ");
+            }
+            username.setText(builder.toString());
+        }
+        else
+            username.setText("User Name");
 
         circleImageView = findViewById(R.id.profile_image);
         circleImageView.setOnClickListener(new View.OnClickListener() {
@@ -80,11 +89,10 @@ public class UserProfileActivity extends BaseNavigationActivity {
                 new AlertDialog.Builder(UserProfileActivity.this)
 
                         .setIcon(R.drawable.ic_star_border_black_24dp)
-                        .setTitle("Premium Membership \n")
-                        .setMessage("You are a Premium Member \n \n " +
-                                "You have access to:\n" +
-                                "1. Unlimited Opportunities \n" +
-                                "2. Premium Services")
+                        .setTitle("Premium Subscription \n")
+                        .setMessage("You have access to:\n" +
+                                "    1. Unlimited Opportunities \n" +
+                                "    2. Premium services coming soon")
                         .show();
             }
         });
@@ -93,7 +101,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
         language_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDialogClass cdd = new CustomDialogClass(UserProfileActivity.this);
+                LanguageDialog cdd = new LanguageDialog(UserProfileActivity.this);
                 cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 cdd.show();
             }
@@ -112,7 +120,9 @@ public class UserProfileActivity extends BaseNavigationActivity {
         email_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Toast.makeText(UserProfileActivity.this, "We will deliver saved opportunities to your inbox!", Toast.LENGTH_SHORT).show();
+                    ChangeEmailDialog dialog = new ChangeEmailDialog(UserProfileActivity.this);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                    dialog.show();
                 }
 
             }
@@ -226,7 +236,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
 
-                Log.e("Activity", "Pick from Camera::>>> ");
+//                Log.e("Activity", "Pick from Camera::>>> ");
 
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
                 destination = new File(Environment.getExternalStorageDirectory() + "/" +
@@ -250,7 +260,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
                 e.printStackTrace();
             }
         } else if (requestCode == PICK_IMAGE_GALLERY) {
-            Log.e("TAG", resultCode + "prep");
+//            Log.e("TAG", resultCode + "prep");
             if (resultCode != 0) {
                 Uri selectedImage = data.getData();
                 try {
