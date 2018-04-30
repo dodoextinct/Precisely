@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF7043">
+    android:background="#20d2bb">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:id="@+id/screens"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/screen1"
+            android:src="@drawable/screenlang"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="50dp"
             android:layout_marginTop="35dp"
