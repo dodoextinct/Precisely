@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.dialogs.ChangeEmailDialog;
+import com.pankaj.maukascholars.dialogs.ConnectWithAlexaDialog;
 import com.pankaj.maukascholars.dialogs.LanguageDialog;
 import com.pankaj.maukascholars.util.Constants;
 
@@ -50,7 +51,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
     private InputStream inputStreamImg;
     private String imgPath = null;
     private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
-    private LinearLayout credits_layout;
+    private LinearLayout credits_layout, alexa_layout;
     private LinearLayout language_layout , tutorials_goto;
     private Switch notification_toggle;
     private Switch email_toggle;
@@ -134,6 +135,16 @@ public class UserProfileActivity extends BaseNavigationActivity {
             public void onClick(View v) {
                 Intent tutorials = new Intent(UserProfileActivity.this, TutorialsActivity.class);
                 startActivity(tutorials);
+            }
+        });
+
+        alexa_layout = findViewById(R.id.alexa_layout);
+        alexa_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConnectWithAlexaDialog dialog = new ConnectWithAlexaDialog(UserProfileActivity.this);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                dialog.show();
             }
         });
 

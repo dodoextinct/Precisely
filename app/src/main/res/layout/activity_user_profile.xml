@@ -29,11 +29,15 @@
                 >
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_below="@id/appBar_Layout">
+            android:layout_below="@id/appBar_Layout"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
@@ -67,8 +71,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            >
 
             <LinearLayout
                 android:id="@+id/credits_layout"
@@ -270,10 +275,50 @@
                 android:layout_height="1dp"
                 android:background="#CFD8DC"/>
 
+            <LinearLayout
+                android:id="@+id/alexa_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Connect with Alexa"
+                        android:textColor="#00AA8D"
+                        android:textSize="15dp" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not Connected"
+                    android:textSize="13dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="20dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CFD8DC"
+                />
+
 
         </LinearLayout>
 
         </LinearLayout>
+        </ScrollView>
 
     </RelativeLayout>
 
@@ -286,6 +331,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_dashnav"
-        app:menu="@menu/precisely_nav_drawer"/>
+        app:menu="@menu/precisely_nav_drawer"
+        android:visibility="gone"
+        />
 
 </android.support.v4.widget.DrawerLayout>
