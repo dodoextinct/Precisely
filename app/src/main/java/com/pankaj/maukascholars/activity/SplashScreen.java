@@ -135,7 +135,7 @@ public class SplashScreen extends AppCompatActivity {
                 if (status_code[0] == 200) {
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(SplashScreen.this);
                     SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("quote", response);
+                    editor.putString(Constants.sp_quote, response);
                     editor.apply();
                     getFilters();
                 }else{

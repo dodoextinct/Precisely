@@ -42,7 +42,7 @@ public class Filters extends BaseNavigationActivity {
             @Override
             public void onClick(View view) {
                 if (clickedFilters.size() > 0) {
-                    editor.putBoolean("areFiltersSelected", true);
+                    editor.putBoolean(Constants.sp_areFiltersSelected, true);
                     editor.apply();
                     loadActivity(VerticalViewPagerActivity.class);
                 } else

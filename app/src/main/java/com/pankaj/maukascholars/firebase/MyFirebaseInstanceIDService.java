@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.pankaj.maukascholars.util.Constants;
 
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
@@ -24,7 +25,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         //Displaying token on logcat
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("token", refreshedToken);
+        editor.putString(Constants.sp_token, refreshedToken);
         editor.apply();
     }
 }

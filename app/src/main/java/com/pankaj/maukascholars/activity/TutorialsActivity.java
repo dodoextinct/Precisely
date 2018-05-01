@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.adapters.PrefManager;
 import com.pankaj.maukascholars.application.PreciselyApplication;
+import com.pankaj.maukascholars.util.Constants;
 
 
 public class TutorialsActivity extends AppCompatActivity {
@@ -126,7 +127,7 @@ public class TutorialsActivity extends AppCompatActivity {
     private void launchHomeScreen() {
         SharedPreferences sp = PreciselyApplication.getSharedPreferences();
         SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean("isFirstTime", false);
+        editor.putBoolean(Constants.sp_isFirstTime, false);
         editor.apply();
         startActivity(new Intent(TutorialsActivity.this, SplashScreen.class));
         finish();

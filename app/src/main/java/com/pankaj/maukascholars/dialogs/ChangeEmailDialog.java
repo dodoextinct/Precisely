@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.application.PreciselyApplication;
+import com.pankaj.maukascholars.util.Constants;
 import com.rey.material.widget.Button;
 
 /**
@@ -42,7 +43,7 @@ public class ChangeEmailDialog extends Dialog {
                 String email = email_edit.getText().toString();
                 if (email.length()>0 && email.contains(".com") && email.contains("@")){
                     SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("user_email", email).apply();
+                    editor.putString(Constants.sp_user_email, email).apply();
                 }
                 makeToast("E-mail address saved!");
                 dismiss();

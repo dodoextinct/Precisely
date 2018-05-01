@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pankaj.maukascholars.R;
+import com.pankaj.maukascholars.application.PreciselyApplication;
 import com.pankaj.maukascholars.dialogs.ChangeEmailDialog;
 import com.pankaj.maukascholars.dialogs.ConnectWithAlexaDialog;
 import com.pankaj.maukascholars.dialogs.LanguageDialog;
@@ -56,6 +58,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
     private Switch notification_toggle;
     private Switch email_toggle;
     final Context context = this;
+    private TextView language_status, alexa_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,12 @@ public class UserProfileActivity extends BaseNavigationActivity {
         }
         else
             username.setText("User Name");
+        language_status= findViewById(R.id.language_status);
+        alexa_status = findViewById(R.id.alexa_status);
+
+        final SharedPreferences sp = PreciselyApplication.getSharedPreferences();
+        if (sp.contains(Constants.sp_alexacode))
+            alexa_status.setText(sp.getString(Constants.sp_alexacode, ""));
 
         circleImageView = findViewById(R.id.profile_image);
         circleImageView.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +152,13 @@ public class UserProfileActivity extends BaseNavigationActivity {
             @Override
             public void onClick(View v) {
                 ConnectWithAlexaDialog dialog = new ConnectWithAlexaDialog(UserProfileActivity.this);
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        if (sp.contains(Constants.sp_alexacode))
+                            alexa_status.setText(sp.getString(Constants.sp_alexacode, ""));
+                    }
+                });
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dialog.show();
             }

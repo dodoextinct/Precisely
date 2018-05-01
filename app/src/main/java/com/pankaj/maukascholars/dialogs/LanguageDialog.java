@@ -115,7 +115,7 @@ public class LanguageDialog extends Dialog{
             public void onClick(View v) {
                 SharedPreferences sp = PreciselyApplication.getSharedPreferences();
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putString("language_id", Constants.language_id);
+                editor.putString(Constants.sp_language_id, Constants.language_id);
                 editor.apply();
                 makeToast("Language preference SAVED!");
                 updateLanguage(Constants.language_id);

@@ -36,6 +36,7 @@ public class StarredActivity extends BaseNavigationActivity {
         RecyclerView recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DBHandler db = new DBHandler(this);
+
         mItems = db.getAllStarredEvents();
         if (mItems.size() == 0) {
             RelativeLayout empty_layout = findViewById(R.id.empty_layout);

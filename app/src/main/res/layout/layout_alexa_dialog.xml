@@ -1,8 +1,7 @@
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -48,6 +47,23 @@
             android:layout_below="@+id/code_edittext"
             />
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/progress_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#38222222"
+        android:visibility="gone"
+        >
+        <com.rey.material.widget.ProgressView
+            android:id="@+id/progress"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            app:pv_circular="true"
+            app:pv_progressStyle="@style/rainbow"
+            app:pv_progressMode="indeterminate"
+            />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

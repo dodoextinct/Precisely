@@ -22,6 +22,7 @@ public class Constants {
     public static String url_event_details = "https://www.lithics.in/apis/mauka/getOpportunities.php";
     public static String url_event_deletion = "https://www.lithics.in/apis/mauka/delete_event.php";
     public static String url_verify_user = "https://www.lithics.in/apis/mauka/verify.php";
+    public static String url_verify_alexa_code = "https://www.lithics.in/apis/mauka/verify_alexa_code.php";
     public static String url_get_filters = "https://www.lithics.in/apis/mauka/get_filters.php";
     public static String url_get_quote = "https://www.lithics.in/apis/mauka/get_quote.php";
     public static String url_verify_coupon= "https://www.lithics.in/apis/mauka/verify_coupon.php";
@@ -66,4 +67,15 @@ public class Constants {
     public static String[] months = new String[]{
             "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
     };
+
+    public static String sp_token = "token";
+    public static String sp_isFirstTime = "isFirstTime";
+    public static String sp_language_id = "language_id";
+    public static String sp_signed_in = "signed_in";
+    public static String sp_user_id = "user_id";
+    public static String sp_user_name = "user_name";
+    public static String sp_quote = "quote";
+    public static String sp_alexacode = "alexa_code";
+    public static String sp_areFiltersSelected = "areFiltersSelected";
+    public static String sp_user_email = "user_email";
 }

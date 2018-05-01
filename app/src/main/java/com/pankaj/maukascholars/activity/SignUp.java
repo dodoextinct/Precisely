@@ -248,9 +248,9 @@ public class SignUp extends AppCompatActivity {
                 if (response.length() > 0){
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(SignUp.this);
                     final SharedPreferences.Editor editor = sp.edit();
-                    editor.putBoolean("signed_in", true);
-                    editor.putString("user_id", response);
-                    editor.putString("user_name", Constants.user_name);
+                    editor.putBoolean(Constants.sp_signed_in, true);
+                    editor.putString(Constants.sp_user_id, response);
+                    editor.putString(Constants.sp_user_name, Constants.user_name);
                     editor.apply();
                     Constants.user_id = response;
                     loading.setVisibility(View.GONE);
