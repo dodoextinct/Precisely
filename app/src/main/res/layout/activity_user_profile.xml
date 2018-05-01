@@ -104,9 +104,10 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/credits_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$15"
+                    android:text="15"
                     android:textSize="13dp"
                     android:layout_gravity="center_vertical"
                     android:paddingRight="20dp"/>

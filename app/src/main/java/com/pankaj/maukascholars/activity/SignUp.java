@@ -86,7 +86,7 @@ public class SignUp extends AppCompatActivity {
         progress.start();
         loading.setVisibility(View.VISIBLE);
         final int[] status_code = new int[1];
-        StringRequest request = new StringRequest(Request.Method.POST, Constants.url_verify_coupon, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.url_apply_coupon, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 loading.setVisibility(View.GONE);
@@ -112,6 +112,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
+                params.put("user_id", Constants.user_id);
                 params.put("coupon_code", text);
                 return params;
             }

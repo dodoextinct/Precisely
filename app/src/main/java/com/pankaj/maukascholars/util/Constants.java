@@ -25,10 +25,11 @@ public class Constants {
     public static String url_verify_alexa_code = "https://www.lithics.in/apis/mauka/verify_alexa_code.php";
     public static String url_get_filters = "https://www.lithics.in/apis/mauka/get_filters.php";
     public static String url_get_quote = "https://www.lithics.in/apis/mauka/get_quote.php";
-    public static String url_verify_coupon= "https://www.lithics.in/apis/mauka/verify_coupon.php";
+    public static String url_apply_coupon= "https://www.lithics.in/apis/mauka/apply_coupon.php";
     public static String url_get_languages= "https://www.lithics.in/apis/mauka/get_languages.php";
     public static String url_my_language= "https://www.lithics.in/apis/mauka/set_my_language.php";
     public static String url_view_op = "https://www.lithics.in/apis/mauka/set_user_viewed.php";
+    public static String url_get_credits = "https://www.lithics.in/apis/mauka/get_credits.php";
 
     public static int[] imageResources = new int[]{
             R.mipmap.share,

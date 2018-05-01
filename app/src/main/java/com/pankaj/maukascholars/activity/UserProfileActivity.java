@@ -11,12 +11,12 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -24,6 +24,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.application.PreciselyApplication;
 import com.pankaj.maukascholars.dialogs.ChangeEmailDialog;
@@ -65,6 +71,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
         super.onCreate(savedInstanceState);
         Constants.toolbar_title = "User Profile";
         setContentView(R.layout.activity_user_profile);
+        getCredits();
         TextView username = findViewById(R.id.user_name);
         if (Constants.user_name!=null && Constants.user_name.length()>0) {
             String[] strArray = Constants.user_name.split(" ");
@@ -164,6 +171,45 @@ public class UserProfileActivity extends BaseNavigationActivity {
             }
         });
 
+    }
+
+    private void getCredits(){
+        final int[] status_code = new int[1];
+        StringRequest request = new StringRequest(Request.Method.GET, Constants.url_get_credits, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (status_code[0] == 200) {
+                    TextView credit_status = findViewById(R.id.credits_status);
+                    if (response.length()<5)
+                        credit_status.setText(response);
+                    else
+                        Toast.makeText(context, "No credits found", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(UserProfileActivity.this, "Didn't get correct response!'", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(UserProfileActivity.this, "Couldn't connect to server", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", Constants.user_id);
+                return params;
+            }
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                status_code[0] = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        PreciselyApplication.getInstance().addToRequestQueue(request, "credits");
     }
 
     private void selectImage() {
