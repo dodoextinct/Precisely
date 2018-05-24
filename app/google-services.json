@@ -1,47 +1,31 @@
 {
   "project_info": {
-    "project_number": "6171481669",
-    "firebase_url": "https://precisely-1522447729786.firebaseio.com",
-    "project_id": "precisely-1522447729786",
-    "storage_bucket": "precisely-1522447729786.appspot.com"
+    "project_number": "250090461270",
+    "firebase_url": "https://precisely-a55cc.firebaseio.com",
+    "project_id": "precisely-a55cc",
+    "storage_bucket": "precisely-a55cc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:6171481669:android:98a64ed8fc38347e",
+        "mobilesdk_app_id": "1:250090461270:android:98a64ed8fc38347e",
         "android_client_info": {
           "package_name": "com.wayneventures.precisely"
         }
       },
       "oauth_client": [
         {
-          "client_id": "6171481669-b84qpkdudiuv5qh370as9sdqktrck3rn.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.wayneventures.precisely",
-            "certificate_hash": "215cfd2eac1c494d81e1ea907728b6074e9c3081"
-          }
-        },
-        {
-          "client_id": "6171481669-3tv2pgvr44vrgvq0nmt24i0lu8a0f06p.apps.googleusercontent.com",
+          "client_id": "250090461270-rtnq0plqtp3rdptbm8jgbi29h25o8joe.apps.googleusercontent.com",
           "client_type": 3
         },
         {
-          "client_id": "6171481669-ncltau554ghonhk2pofoee645evf854a.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.wayneventures.precisely",
-            "certificate_hash": "7ca068a813228b4e7c3687ca7ba3d76416502d22"
-          }
-        },
-        {
-          "client_id": "6171481669-nepahdq2k03bq1b7jd9srkghqd0qieib.apps.googleusercontent.com",
+          "client_id": "250090461270-rtnq0plqtp3rdptbm8jgbi29h25o8joe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBooRXTJZYI-JgLESecQtEqypLtVNFzPgo"
+          "current_key": "AIzaSyDikj69l6AwPOgzAH8hTnyyCKNEP4vNPCk"
         }
       ],
       "services": {
@@ -49,13 +33,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "6171481669-3tv2pgvr44vrgvq0nmt24i0lu8a0f06p.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
