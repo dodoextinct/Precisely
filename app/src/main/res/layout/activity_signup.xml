@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="APPLY"
-                    android:background="@drawable/com_facebook_button_login_silver_background"
+                    android:gravity="center"
                     />
             </RelativeLayout>
 

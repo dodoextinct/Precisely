@@ -34,6 +34,7 @@ import com.pankaj.maukascholars.R;
 import com.pankaj.maukascholars.application.PreciselyApplication;
 import com.pankaj.maukascholars.dialogs.ChangeEmailDialog;
 import com.pankaj.maukascholars.dialogs.ConnectWithAlexaDialog;
+import com.pankaj.maukascholars.dialogs.CreditsDialog;
 import com.pankaj.maukascholars.dialogs.LanguageDialog;
 import com.pankaj.maukascholars.util.Constants;
 
@@ -65,6 +66,7 @@ public class UserProfileActivity extends BaseNavigationActivity {
     private Switch email_toggle;
     final Context context = this;
     private TextView language_status, alexa_status;
+    public String credits="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,14 +105,17 @@ public class UserProfileActivity extends BaseNavigationActivity {
         credits_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(UserProfileActivity.this)
-
-                        .setIcon(R.drawable.ic_star_border_black_24dp)
-                        .setTitle("Premium Subscription \n")
-                        .setMessage("You have access to:\n" +
-                                "    1. Unlimited Opportunities \n" +
-                                "    2. Premium services coming soon")
-                        .show();
+                CreditsDialog dialog = new CreditsDialog(UserProfileActivity.this);
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        TextView credit_status = findViewById(R.id.credits_status);
+                        if (credits.length()<5)
+                            credit_status.setText("$ " + (credits.contentEquals("0")?0:credits));
+                    }
+                });
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                dialog.show();
             }
         });
 
@@ -181,17 +186,12 @@ public class UserProfileActivity extends BaseNavigationActivity {
                 if (status_code[0] == 200) {
                     TextView credit_status = findViewById(R.id.credits_status);
                     if (response.length()<5)
-                        credit_status.setText(response);
-                    else
-                        Toast.makeText(context, "No credits found", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(UserProfileActivity.this, "Didn't get correct response!'", Toast.LENGTH_SHORT).show();
+                        credit_status.setText("$ " + (response.contentEquals("0")?0:response));
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(UserProfileActivity.this, "Couldn't connect to server", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         }) {

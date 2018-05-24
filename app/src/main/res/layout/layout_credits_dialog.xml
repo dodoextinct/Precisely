@@ -1,0 +1,90 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:text="Enter Coupon Code"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="17dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:background="@color/AppColorTheme"/>
+        <TextView
+            android:id="@+id/message_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:text="Premium Subscription"
+            android:textColor="#000"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            />
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/message_title"
+            android:text="You have access to:\n1. Unlimited Opportunities \n2. Premium services coming soon"
+            android:textColor="#000"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            />
+
+
+        <EditText
+            android:id="@+id/code_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ABCXYX"
+            android:layout_below="@+id/message"
+            android:paddingLeft="@dimen/appIntroDefaultPaddingLeft"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/dots_height"
+            android:layout_marginBottom="@dimen/dots_height"
+            />
+
+        <com.rey.material.widget.Button
+            android:id="@+id/proceed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proceed"
+            android:textColor="#ffffff"
+            android:background="@color/AppColorTheme"
+            android:gravity="center"
+            android:layout_below="@+id/code_edittext"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/progress_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#38222222"
+        android:visibility="gone"
+        >
+        <com.rey.material.widget.ProgressView
+            android:id="@+id/progress"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            app:pv_circular="true"
+            app:pv_progressStyle="@style/rainbow"
+            app:pv_progressMode="indeterminate"
+            />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

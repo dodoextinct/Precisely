@@ -55,6 +55,7 @@ public class SignUp extends AppCompatActivity {
     CallbackManager callbackManager;
     RelativeLayout loading;
     ProgressView progress;
+    String coupon_code;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,13 +75,14 @@ public class SignUp extends AppCompatActivity {
                 if (coupon_text.getText().toString().length() == 0){
                     Toast.makeText(SignUp.this, "Please enter a coupon code!", Toast.LENGTH_SHORT).show();
                 }else{
-                    verifyCouponCode(coupon_text.getText().toString());
+                    coupon_code = coupon_text.getText().toString();
+                    Toast.makeText(SignUp.this, "Login to apply coupon!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void verifyCouponCode(final String text) {
+    private void verifyCouponCode() {
         loading = findViewById(R.id.progress_rl);
         progress = findViewById(R.id.progress);
         progress.start();
@@ -89,11 +91,21 @@ public class SignUp extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, Constants.url_apply_coupon, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(SignUp.this);
                 loading.setVisibility(View.GONE);
                 progress.stop();
                 if (status_code[0] == 200) {
-                    if (response.contentEquals(text)){
+                    if (response.contentEquals(coupon_code)){
                         Toast.makeText(SignUp.this, "Coupon code applied!", Toast.LENGTH_SHORT).show();
+                        if (sp.getBoolean("isFirstTime", true)) {
+                            Intent intent = new Intent(SignUp.this, TutorialsActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Intent intent = new Intent(SignUp.this, SplashScreen.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }else{
                         Toast.makeText(SignUp.this, "Please enter correct coupon code", Toast.LENGTH_SHORT).show();
                     }
@@ -113,7 +125,7 @@ public class SignUp extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
                 params.put("user_id", Constants.user_id);
-                params.put("coupon_code", text);
+                params.put("coupon_code", coupon_code);
                 return params;
             }
 
@@ -254,17 +266,7 @@ public class SignUp extends AppCompatActivity {
                     editor.putString(Constants.sp_user_name, Constants.user_name);
                     editor.apply();
                     Constants.user_id = response;
-                    loading.setVisibility(View.GONE);
-                    progress.stop();
-                    if (sp.getBoolean("isFirstTime", true)) {
-                        Intent intent = new Intent(SignUp.this, TutorialsActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }else{
-                        Intent intent = new Intent(SignUp.this, SplashScreen.class);
-                        startActivity(intent);
-                        finish();
-                    }
+                    verifyCouponCode();
                 }else{
                     loading.setVisibility(View.GONE);
                     progress.stop();
